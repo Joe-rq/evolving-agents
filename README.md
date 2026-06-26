@@ -6,7 +6,7 @@
 12-factor agents tells you how to build **reliable** agents.
 This project tells you how to build agents that **evolve** — that get better at *searching* by remembering what failed, instead of starting from zero every run.
 
-> ⚠️ **WIP** — hackathon scaffold (2026-06-26). Core engine + full factor docs in progress.
+> ⚠️ **WIP** — hackathon build (2026-06). Core engine runnable on a mock domain; one real domain validated privately.
 
 ## The thesis
 
@@ -14,7 +14,13 @@ Most "agentic" search loops don't actually learn. They either:
 - start fresh every run (same dead ends re-explored), or
 - dump history into a prompt and hope (RAG-style recall — which we've empirically found adds zero on routine cases).
 
-The agents that *do* keep getting better do something different: **they score the search strategy itself, learn failure *modes* not single failures, and pivot structure when stuck.** This project names those mechanisms.
+The agents that *do* keep getting better do something different: **they score the search strategy itself, learn failure *modes* not single failures, and pivot structure when stuck.** This project names those mechanisms, implements them as a domain-agnostic engine, and validates the architecture on one real domain.
+
+## What's here — three legs
+
+1. **The engine** (`core/`) — a domain-agnostic self-evolution loop: memory, rules, meta-learner, evolver, novelty, orchestrated by `engine.py`. Runs standalone with a mock adapter.
+2. **A real domain** (private) — a quantitative factor-mining host implements the 5 adapter protocols against real data. This is where the mechanisms were observed, not constructed. Sanitized evidence → [case study](examples/case-study-pond-switch.md).
+3. **Honest disclosure** — every claim is bounded. We say what the mechanisms did, and openly what we could *not* prove. → [Honest Claims Boundary](content/honest-boundary.md)
 
 ## The 5 Factors
 
@@ -31,12 +37,22 @@ The agents that *do* keep getting better do something different: **they score th
 ## Repo layout
 
 ```
-content/    # 5 factor docs (CC BY-SA 4.0)
-core/       # domain-agnostic engine: memory / meta-learner / evolver / novelty (Apache 2.0)
-adapters/   # domain adapters implementing the 5 protocols (e.g. quant)
-examples/   # cold-vs-warm control experiments
+content/    # 5 factor docs + honest-boundary (CC BY-SA 4.0)
+core/       # domain-agnostic engine (Apache 2.0):
+            #   protocols · memory · rules · meta_learner · evolver · novelty · engine
+adapters/   # reference mock adapter (toy domain); real adapters live in private host repos
+examples/   # sanitized case studies
 img/        # diagrams
 ```
+
+## Positioning (and what this is *not*)
+
+Self-evolving agents is a crowded space — [EvoMap/evolver](https://github.com/EvoMap/evolver), [AgentEvolver](https://github.com/modelscope/AgentEvolver), ExpeL, Reflexion, Voyager all touch it. This project does not claim a novel mechanism.
+
+What it offers instead:
+- **An engine, not a platform.** EvoMap is an A2A cross-node experience-sharing *platform* (we've used its memory layer). evolving-agents is a local, embeddable *engine* — a different abstraction layer, simpler and teachable in five named factors.
+- **Auditable rules.** Each penalty a candidate receives traces to concrete past failures (`evidence_ids`), not a black-box "the agent learned."
+- **Bounded honesty.** We do not market a learning curve we can't control. The honest boundary *is* the differentiator — most "self-evolving" demos cannot answer "is this evolution or in-context learning?"
 
 ## Status & honest boundary
 
