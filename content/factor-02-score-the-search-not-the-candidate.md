@@ -1,39 +1,39 @@
-# Factor 2: Score the search, not the candidate
+# Factor 2：给搜索打分，不是给候选打分
 
-> Don't just evaluate how good each candidate is — evaluate *which direction is worth searching next*. Score the strategy, not the solution.
+> 别只评估每个候选好不好——评估*哪个方向值得继续搜*。给策略打分，不是给解打分。
 
-## Motivation
+## 动机
 
-Standard optimization (Bayesian Optimization included) scores candidates and picks the best one. It never learns *"technical factors have the lowest pass rate here — search profitability first."* The durable knowledge in a search loop is meta: which families, dimensions, and structures actually pay off. Capturing that is meta-learning over strategy space — a level above candidate scoring.
+标准优化（含贝叶斯优化）给候选打分、挑最好的。它永远学不到*"这里 technical 因子通过率最低——先搜 profitability。"* 搜索循环里持久的知识是 meta 的：哪些 family、维度、结构真的有回报。捕获它就是策略空间上的元学习——比候选打分高一个层次。
 
-This is the factor that makes the difference between an agent that runs and an agent that *improves at running*. Candidate scoring tells you what to try; search-strategy scoring tells you where to look.
+这是区分"一个会跑的 agent"和"一个越跑越好的 agent"的 factor。候选打分告诉你试什么；搜索策略打分告诉你往哪看。
 
-## Case (real domain, sanitized)
+## 案例（真实领域，脱敏）
 
-`score_families` ranks economic families by `0.5·hit_rate + 0.2·recency + 0.3·freshness`, with a strike rule (≥ N tries, zero candidates → score −1, excluded entirely). `technical` empirically has the lowest pass rate, so cold-start ordering puts it last automatically — without anyone hard-coding "avoid technical." The agent learns the ordering from its own ledger.
+`score_families` 按 `0.5·命中率 + 0.2·近期性 + 0.3·新鲜度` 给经济族排序，带 strike 规则（≥ N 次尝试、零 candidate → 分数 −1，整体排除）。`technical` 经验上通过率最低，所以冷启动排序自动把它放最后——没有任何人硬编码"避开 technical"。agent 从自己的账本学到这个顺序。
 
-## Core primitive
+## 核心原语
 
-`MetaLearner.score_families` (`core/meta_learner.py`) — scores search branches from the `Memory` ledger and steers generation toward high-EV directions.
+`MetaLearner.score_families`（`core/meta_learner.py`）——从 `Memory` 账本给搜索分支打分，把生成导向高 EV 方向。
 
 ```python
 from core.meta_learner import MetaLearner
 
 ml = MetaLearner(strike_threshold=5)
 scores = ml.score_families(mem, universe="TOP3000", known_families=["technical", "profitability", ...])
-# {'profitability': 0.61, 'analyst': 0.55, ..., 'technical': -1.0}  ← struck, stop searching
+# {'profitability': 0.61, 'analyst': 0.55, ..., 'technical': -1.0}  ← struck，停止搜索
 ```
 
-The struck branch (−1.0) is excluded by the engine before any candidate in it is even generated — search budget is spent on high-EV directions.
+被 strike 的分支（−1.0）在引擎生成任何候选之前就被排除——搜索预算花在高 EV 方向上。
 
-## Anti-pattern
+## 反模式
 
-Score-only optimization keeps re-entering low-yield regions because it has no memory of yield-by-direction; every run looks like the first. A candidate-scoring-only loop is "smart per item, dumb overall."
+只给候选打分的优化反复进入低产区域，因为它没有"按方向的产出"记忆；每次运行都像第一次。一个只打分候选的循环是"逐个聪明、整体犯傻"。
 
-## Cross-domain
+## 跨领域
 
-Test-case generation: score which *property categories* (boundary / equivalence / error-path) have found bugs, not just which individual test is good. Hyperparameter search: score which *model families* (GBM / DNN / linear) pay off on this dataset class. The meta-level is always "which branch is worth more samples."
+测试用例生成：给哪些*属性类别*（边界 / 等价 / 错误路径）找到过 bug 打分，不只是哪个单个测试好。超参搜索：给哪些*模型族*（GBM / DNN / 线性）在这类数据集上有回报打分。meta 层永远是"哪个分支值得更多样本"。
 
-## Honest value layer
+## 诚实价值层
 
-**Observed, not controlled.** Improving search *quality* is real in practice, but its measured lift must be isolated from in-context learning via a control we could not run. We claim correlation (the family ordering tracked empirical pass rates), not causation.
+**已观察，未对照。** 提升搜索*质量*在实践中是真的，但它的可测收益必须用一个我们跑不了的对照来和 in-context learning 隔离。我们 claim 相关性（family 排序跟踪了经验通过率），不 claim 因果。

@@ -1,41 +1,41 @@
-# Honest Claims Boundary
+# 诚实声明边界
 
-> What this project can and cannot claim about self-evolution — and why we disclose the limit openly.
+> 这个项目对自进化能 claim 什么、不能 claim 什么——以及我们为什么公开披露这个边界。
 
-This is the most important doc in the repo. Every demo, pitch, and factor doc must stay inside this boundary.
+这是 repo 里最重要的文档。每份 demo、pitch、factor 文档都必须守在这个边界内。
 
-## What we claim
+## 我们 claim 的
 
-1. **The 5 mechanisms are implemented.** Memory, MetaLearner, failure-mode penalty, structural pivot, novelty guard — all exist as code and ran on a real workload (quantitative factor mining).
+1. **5 个机制都实现了。** Memory、MetaLearner、失败模式惩罚、结构 pivot、新颖性防护——都作为代码存在，且在一个真实负载上跑过（量化因子挖掘）。
 
-2. **Real evolving behavior was observed.** Most concretely: the same factor expression that **failed** in TOP3000 (large-cap, self_corr 0.7844 FAIL) was **resurrected** in TOP1000 (small-cap, Sharpe 2.15, self_corr 0.6768 PASS) after the agent proposed switching ponds. A real pivot-structure event with commit history — not a constructed demo.
+2. **观察到过真实的进化行为。** 最具体的：同一条因子表达式在 TOP3000（大盘，self_corr 0.78 FAIL）**失败**，在 agent 提议换池塘后在 TOP1000（中小盘，Sharpe 2.15，self_corr 0.68 PASS）**复活**。一次真实的换结构事件，有 commit 历史——不是构造出来的 demo。
 
-3. **Some learning is agent-authored from the ledger**, not purely hand-written rules (e.g. the close-yield motif class penalty, commit `3a38a52`).
+3. **部分学习是 agent 从账本自作的**，不纯粹是手写规则（比如 close-yield motif 类惩罚，commit `3a38a52`）。
 
-## What we do NOT claim
+## 我们不 claim 的
 
-1. **No controlled proof of effectiveness.** We designed a cold-vs-warm control (amnesia version vs full-memory version, same task). **It could not run**: the evolution mechanisms went live 2026-06-24, leaving only ~2-3 days of post-evolution data against ~10 days of baseline (50 records total). Sample too small for any honest comparison.
+1. **没有有效性的对照证明。** 我们设计过一个失忆组 vs 完整组的对照（同一任务）。**它跑不了**：进化机制 2026-06-24 才上线，进化后数据只有约 2-3 天，对照 10 天基线（总共 50 条记录）。样本太小，做不了任何诚实的比较。
 
-2. **No quantified lift.** Without the control, we cannot say "evolution improved yield by X%." Any improvement curve is confounded with in-context learning and human-in-the-loop decisions.
+2. **没有量化的收益。** 没有对照，我们不能说"进化把产出提升了 X%"。任何改善曲线都和 in-context learning、人机协同决策混淆。
 
-3. **No cross-domain validation.** The mechanism ran on one domain (factor mining). Domain-agnostic is a *design intent*, not a tested claim.
+3. **没有跨领域验证。** 机制在一个领域（因子挖掘）上跑过。领域无关是*设计意图*，不是测过的 claim。
 
-## Why we disclose this openly
+## 我们为什么公开披露
 
-Several projects market "self-evolving agents" with three-day learning curves and spectacular counts, **without a control experiment and without disclosing the boundary**. Their "evolution" cannot be distinguished from in-context learning or cherry-picking.
+有几个项目营销"自进化 agent"，带三天学习曲线和 spectacular 计数，**却没有对照实验、也不披露边界**。它们的"进化"无法和 in-context learning 或 cherry-picking 区分。
 
-We believe the honest path — *mechanism + observed behavior + disclosed limit* — is more durable than an uncontrolled claim. Effectiveness validation is on our roadmap; it is not today's claim.
+我们相信诚实的路——*机制 + 观察到的行为 + 披露的边界*——比一个不受控的 claim 更持久。有效性验证在我们的 roadmap 上；它不是今天的 claim。
 
-## Implication for each factor
+## 对每个 factor 的含义
 
-| Factor | Mechanism | Observed behavior | Effectiveness |
+| Factor | 机制 | 观察到的行为 | 有效性 |
 |---|---|---|---|
-| 1 Remember failures | ✅ implemented (block tested bodies) | ✅ observed | not controlled |
-| 2 Score the search | ✅ implemented (family scoring) | ✅ observed | not controlled |
-| 3 Learn failure modes | ✅ implemented (motif penalty) | ✅ observed (`3a38a52`) | not controlled |
-| 4 Pivot structure | ✅ implemented (universe switch) | ✅ observed (TOP3000→TOP1000) | not controlled |
-| 5 Seek novelty | ✅ implemented (novelty + exploration lane) | ✅ observed | not controlled |
+| 1 记住失败 | ✅ 已实现（屏蔽已测 body） | ✅ 观察到 | 未对照 |
+| 2 给搜索打分 | ✅ 已实现（family 打分） | ✅ 观察到 | 未对照 |
+| 3 学失败模式 | ✅ 已实现（motif 惩罚） | ✅ 观察到（`3a38a52`） | 未对照 |
+| 4 换结构 | ✅ 已实现（universe 切换） | ✅ 观察到（TOP3000→TOP1000） | 未对照 |
+| 5 追新颖 | ✅ 已实现（新颖性 + 探索通道） | ✅ 观察到 | 未对照 |
 
-## The one-sentence pitch (inside boundary)
+## 边界内的一句话 pitch
 
-> "Five self-evolution mechanisms, all implemented, with one observed pivot-structure event where the agent proposed switching ponds to resurrect a dead factor. We disclose openly that controlled effectiveness proof is still roadmap — because the alternative is marketing."
+> "五个自进化机制，全部实现，有一次观察到的换结构事件——agent 提议换池塘去复活一个死因子。我们公开承认有效性的对照证明还在 roadmap 上——因为另一种选择是营销。"

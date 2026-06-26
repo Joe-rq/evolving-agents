@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>进化时间线 — agent 怎么学会换池塘</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --neutral: #6e7681;
+    --accent: #58a6ff;
+    --learn: #d2a8ff;
+    --memory: #79c0ff;
+    --pivot: #ffa657;
+    --win: #3fb950;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+  .card {
+    width: 100%;
+    max-width: 1080px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 48px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 26px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .lede { color: var(--dim); font-size: 15px; line-height: 1.7; margin-bottom: 40px; max-width: 780px; }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 9px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .node { position: relative; padding-bottom: 28px; }
+  .node:last-child { padding-bottom: 0; }
+  .node::before {
+    content: ''; position: absolute; left: -28px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--panel); border: 2px solid var(--neutral);
+  }
+  .node.learn::before { border-color: var(--learn); }
+  .node.memory::before { border-color: var(--memory); }
+  .node.pivot::before { border-color: var(--pivot); }
+  .node.win::before { border-color: var(--win); background: var(--win); }
+
+  .node-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+  .date {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--neutral); min-width: 84px;
+  }
+  .tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.05em;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .tag.learn { color: var(--learn); background: rgba(210, 168, 255, 0.1); }
+  .tag.memory { color: var(--memory); background: rgba(121, 192, 255, 0.1); }
+  .tag.pivot { color: var(--pivot); background: rgba(255, 166, 87, 0.1); }
+  .tag.win { color: var(--win); background: rgba(63, 185, 80, 0.1); }
+  .title { font-size: 15px; font-weight: 600; }
+  .commit {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: var(--neutral); margin-left: auto;
+  }
+  .desc { font-size: 13px; color: var(--dim); line-height: 1.6; padding-left: 98px; }
+
+  .legend {
+    display: flex; gap: 20px; margin-top: 36px; padding-top: 24px;
+    border-top: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--dim); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; }
+  .legend-dot.learn { border-color: var(--learn); }
+  .legend-dot.memory { border-color: var(--memory); }
+  .legend-dot.pivot { border-color: var(--pivot); }
+  .legend-dot.win { border-color: var(--win); background: var(--win); }
+
+  .footnote {
+    margin-top: 20px; font-size: 12px; color: var(--neutral);
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">agent 怎么走到这一步</div>
+    <h1>从盲搜，到"换池塘"。</h1>
+    <p class="lede">图 1 里那次换池塘不是碰运气。它是一条学习链的终点：积累失败 → 按池塘隔离记忆 → 让 agent 提议换结构。下面每个节点都是真实 commit；学习是 agent 自己做的，换池塘是 agent 提议、人批准的。</p>
+
+    <div class="timeline">
+      <div class="node learn">
+        <div class="node-head">
+          <span class="date">06-23</span>
+          <span class="tag learn">学习</span>
+          <span class="title">引擎上线</span>
+          <span class="commit">f85951a</span>
+        </div>
+        <div class="desc">加入 auto-miner + evolution + research-state。agent 开始无人值守跑，但还没有失败记忆——每次都是冷启动。</div>
+      </div>
+
+      <div class="node learn">
+        <div class="node-head">
+          <span class="date">06-24</span>
+          <span class="tag learn">学习</span>
+          <span class="title">不再重测已知死因子</span>
+          <span class="commit">f48c320</span>
+        </div>
+        <div class="desc">硬屏蔽已测过的表达式 + 规范化去重。agent 不再把评估配额烧在已经有结果的东西上。（Factor 1）</div>
+      </div>
+
+      <div class="node learn">
+        <div class="node-head">
+          <span class="date">06-24</span>
+          <span class="tag learn">学习</span>
+          <span class="title">降权整类失败模式</span>
+          <span class="commit">3a38a52</span>
+        </div>
+        <div class="desc">一次 self-corr 失败后，整个 close-yield motif 类被降权——不只屏蔽那一条。从账本投影出来的，不是人写的规则。（Factor 3）</div>
+      </div>
+
+      <div class="node memory">
+        <div class="node-head">
+          <span class="date">06-24</span>
+          <span class="tag memory">记忆</span>
+          <span class="title">按池塘隔离疤痕</span>
+          <span class="commit">e1937ed</span>
+        </div>
+        <div class="desc">universe 级记忆隔离：TOP3000 的失败不污染 TOP1000 的候选。"换池塘"这个动作才变得安全可考虑。（Factor 4 前提）</div>
+      </div>
+
+      <div class="node pivot">
+        <div class="node-head">
+          <span class="date">06-24</span>
+          <span class="tag pivot">换结构</span>
+          <span class="title">agent 提议换池塘</span>
+          <span class="commit">b38ce00</span>
+        </div>
+        <div class="desc">evolution action："别调窗口，换数据源。" agent 提议 TOP3000 → TOP1000，人批准。这就是图 1 里那个箭头。（Factor 4）</div>
+      </div>
+
+      <div class="node win">
+        <div class="node-head">
+          <span class="date">06-25</span>
+          <span class="tag win">突破</span>
+          <span class="title">死因子在新池塘复活</span>
+          <span class="commit">23ac8a1</span>
+        </div>
+        <div class="desc">在 TOP3000 失败的同一因子（self_corr 0.78），在 TOP1000 通过（self_corr 0.68）→ 已提交。结构松弛 + 探索通道收尾新框架。</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot learn"></span>学习 — agent 从失败积累</div>
+      <div class="legend-item"><span class="legend-dot memory"></span>记忆 — 隔离让换结构变安全</div>
+      <div class="legend-item"><span class="legend-dot pivot"></span>换结构 — agent 提议，人批准</div>
+      <div class="legend-item"><span class="legend-dot win"></span>突破 — 可观察的结果</div>
+    </div>
+
+    <div class="footnote">真实 commit 历史 · 学习是 agent 自作，换结构是人批准 · 数字已四舍五入</div>
+  </div>
+</body>
+</html>

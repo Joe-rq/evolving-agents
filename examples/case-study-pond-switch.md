@@ -1,63 +1,63 @@
-# Case Study: Pivot Structure — TOP3000 → TOP1000
+# 案例研究：换结构 — TOP3000 → TOP1000
 
-> A real pivot-structure event: the agent proposed switching ponds to rescue a factor that was dying of *crowding*, not of *quality*.
+> 一次真实的换结构事件：agent 提议换池塘，去救活一个因*拥挤*而非*质量*濒死的因子。
 
-This is the demo's single hardest piece of evidence. Every number is verified against the local scoreboard (50-record dataset, private host repo, 2026-06).
+这是 demo 唯一最硬的证据。每个数字都对照本地 scoreboard 核验过（50 条记录的数据集，私有宿主 repo，2026-06）。
 
-## The factor (one expression body)
+## 因子（一个表达式 body）
 
 ```
 0.5*group_rank(ts_rank(operating_income/close,126),industry)
 + 0.5*group_rank(ts_rank(free_cash_flow_reported_value/close,126),industry)
 ```
 
-## The two ponds
+## 两个池塘
 
-| pond | status | Sharpe | self_corr | outcome |
+| 池塘 | 状态 | Sharpe | self_corr | 结果 |
 |---|---|---|---|---|
-| TOP3000 (large-cap) | rejected | **2.15** | **0.7844** | SELF_CORR_FAIL |
-| TOP1000 (small-cap) | **submitted**  | **2.15** | **0.6768** | checks clear |
+| TOP3000（大盘） | rejected | **2.15** | **0.78** | SELF_CORR_FAIL |
+| TOP1000（中小盘） | **submitted** | **2.15** | **0.68** | checks clear |
 
-**The factor never changed. Sharpe never changed (2.15 in both). The only thing that moved was self_corr — the crowding metric — from 0.7844 (too crowded → fail) to 0.6768 (clear → pass).**
+**因子没变。Sharpe 没变（两边都 2.15）。唯一动的是 self_corr——拥挤度指标——从 0.78（太拥挤 → fail）到 0.68（clear → pass）。**
 
-That is the cleanest possible illustration of Factor 4: the problem was *the environment*, not *the factor*. Tuning decay/window/neutralization harder inside TOP3000 could never have fixed a crowding problem — the agent refused to try, and proposed switching ponds instead.
+这是 Factor 4 最干净的例证：问题是*环境*，不是*因子*。在 TOP3000 里更努力地调 decay/窗口/中性化永远修不好一个拥挤问题——agent 拒绝去试，转而提议换池塘。
 
-## Honest detail: TOP1000 wasn't "switch and it lives"
+## 诚实细节：TOP1000 不是"换了就活"
 
-The agent did **not** guess right on the first try. In TOP1000 it ran several variants of the same body:
+agent **没有**第一次就猜对。在 TOP1000 它跑了同一个 body 的几个变体：
 
-| variant | self_corr | outcome |
+| 变体 | self_corr | 结果 |
 |---|---|---|
-| A | 0.916 | SELF_CORR_FAIL |
-| B | 0.825 | SELF_CORR_FAIL |
-| C | **0.6768** | pass → submitted |
+| A | 0.92 | SELF_CORR_FAIL |
+| B | 0.83 | SELF_CORR_FAIL |
+| C | **0.68** | pass → submitted |
 
-Switching ponds *lowered the crowding baseline enough to make "pass" possible* — but only one specific variant cleared it. The agent still had to search within the new pond. We disclose this openly: it is not a fairy tale of "switch → resurrect."
+换池塘*把拥挤基线降到了让"通过"变得可能的程度*——但只有一个具体变体过了。agent 仍得在新池塘里搜。我们公开披露这点：这不是"换了就复活"的童话。
 
-## Who decided what (human-in-the-loop, disclosed)
+## 谁决定了什么（人机协同，已披露）
 
-- **Agent** accumulated the failure memory (yield / sentiment / growth all fail in TOP3000) and emitted the evolution action: *"don't just change windows — switch data source / economic family."*
-- **Agent** proposed the universe switch as the structural pivot.
-- **Human** approved the switch (commit `b38ce00`, 2026-06-24).
-- **Agent** then auto-applied structural relaxation for the new pond (commit `23ac8a1`: TOP1000 relaxes the leverage/ROA hard-blocks that TOP3000 enforced).
+- **agent** 积累失败记忆（yield / sentiment / growth 在 TOP3000 全 fail）并产出 evolution action：*"别只改窗口——换数据源 / 经济族。"*
+- **agent** 提议把 universe 切换作为结构性 pivot。
+- **人** 批准了切换（commit `b38ce00`，2026-06-24）。
+- **agent** 随后为新池塘自动应用结构松弛（commit `23ac8a1`：TOP1000 放松 TOP3000 强制的 leverage/ROA 硬屏蔽）。
 
-This is **agent-proposes / human-approves**, not autonomous. Disclosed openly.
+这是 **agent 提议 / 人批准**，不是自主的。公开披露。
 
-## Timeline (commit chain, 2026-06)
+## 时间线（commit 链，2026-06）
 
-| commit | what | actor |
+| commit | 做了什么 | 动作方 |
 |---|---|---|
-| `e1937ed` | universe-scoped memory (TOP3000 scars don't pollute TOP1000) | agent system |
-| `3a38a52` | close-yield motif soft-penalty after self-corr fail | agent-authored |
-| `b38ce00` | switch default universe TOP3000 → TOP1000 | **agent proposed, human approved** |
-| `23ac8a1` | TOP1000 structural relaxation + exploration lane | agent system |
-| 06-24 | factor clears in TOP1000 (self_corr 0.6768) → submitted | — |
+| `e1937ed` | universe 级记忆（TOP3000 疤痕不污染 TOP1000） | agent 系统 |
+| `3a38a52` | self-corr 失败后 close-yield motif 软惩罚 | agent 自作 |
+| `b38ce00` | 切换默认 universe TOP3000 → TOP1000 | **agent 提议，人批准** |
+| `23ac8a1` | TOP1000 结构松弛 + 探索通道 | agent 系统 |
+| 06-24 | 因子在 TOP1000 通过（self_corr 0.68）→ submitted | — |
 
-## What this proves / doesn't prove
+## 这证明了什么 / 没证明什么
 
-- ✅ **Proves**: a real pivot-structure event happened; the "switch environment, not tune parameters" insight was correct here; the factor's quality (Sharpe 2.15) was environment-independent.
-- ❌ **Doesn't prove**: that the evolution mechanism *caused* the win (no cold-vs-warm control — see [Honest Boundary](../content/honest-boundary.md)); that it generalizes beyond this one event.
+- ✅ **证明了**：一次真实的换结构事件发生了；"换环境、不调参数"这个洞察在这里是对的；因子的质量（Sharpe 2.15）和环境无关。
+- ❌ **没证明**：进化机制*导致*了这次胜利（没有失忆组 vs 完整组对照——见 [诚实边界](../content/honest-boundary.md)）；它在这一个事件之外能泛化。
 
-## Demo hook (the pitch line)
+## demo 钩子（pitch 那句）
 
-> "Same factor. Same Sharpe — 2.15. In TOP3000 it died: self_corr 0.78, too crowded. The agent didn't tell me to tune it harder. It told me to switch ponds. In TOP1000, self_corr dropped to 0.68, and it shipped. **The factor was never the problem. The pond was.**"
+> "同一条因子。同一个 Sharpe——2.15。在 TOP3000 它死了：self_corr 0.78，太拥挤。agent 没让我调得更狠，它让我换池塘。在 TOP1000，self_corr 降到 0.68，它上线了。**因子从来不是问题。池塘才是。**"
