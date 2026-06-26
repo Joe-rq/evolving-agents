@@ -6,7 +6,7 @@
 
 Pure exploitation converges to a local optimum — the cognitive-loop failure mode where successive iterations try similar directions with diminishing returns. A self-evolving search must actively avoid re-finding what it already has, and keep an exploration lane for structurally different candidates. Without this, Factors 1–3 (which are about *avoiding known bad*) would collapse the search into the first okay region it finds.
 
-## Case (alpha-mining, sanitized)
+## Case (real domain, sanitized)
 
 - **Novelty score** — a candidate's field-overlap with history; ~30% of its score, so a fully-explored direction decays naturally.
 - **Crowding penalty** — candidates whose motif has already shipped an ACTIVE alpha get penalized; re-finding a known winner is low value.

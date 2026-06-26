@@ -8,7 +8,7 @@ Standard optimization (Bayesian Optimization included) scores candidates and pic
 
 This is the factor that makes the difference between an agent that runs and an agent that *improves at running*. Candidate scoring tells you what to try; search-strategy scoring tells you where to look.
 
-## Case (alpha-mining, sanitized)
+## Case (real domain, sanitized)
 
 `score_families` ranks economic families by `0.5·hit_rate + 0.2·recency + 0.3·freshness`, with a strike rule (≥ N tries, zero candidates → score −1, excluded entirely). `technical` empirically has the lowest pass rate, so cold-start ordering puts it last automatically — without anyone hard-coding "avoid technical." The agent learns the ordering from its own ledger.
 

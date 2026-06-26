@@ -8,7 +8,7 @@ When a search stalls inside one frame, the decisive gain usually comes from corr
 
 This is the factor with the strongest narrative in the project — and, honestly, the one most entangled with human-in-the-loop judgment.
 
-## Case (alpha-mining, sanitized)
+## Case (real domain, sanitized)
 
 One factor expression body:
 

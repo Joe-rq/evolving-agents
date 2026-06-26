@@ -8,7 +8,7 @@ A pure-prompt agent starts from zero every run. It re-explores the same dead end
 
 This is the bedrock factor: Factors 2–5 all read from memory and write to it. No persistence, no learning.
 
-## Case (alpha-mining, sanitized)
+## Case (real domain, sanitized)
 
 `research_state` table persists per-family / per-field hit rates. `scl12_buzz` (Sharpe −0.73) and `sales_growth` (Sharpe −0.13) get recorded as dead and are never re-picked as a high-quality lead. `candidate_block_reason` hard-blocks any candidate body already tested, so evaluation quota is never re-burned on a known result.
 

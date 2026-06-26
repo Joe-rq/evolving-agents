@@ -6,7 +6,7 @@
 
 Blocking a single dead candidate is shallow: its siblings and variants keep burning budget. The durable lesson of a self-correlation failure is usually a property of the whole motif (e.g. "close-denominator yield signals are crowded"), not of one expression. Learning the class from a single instance is where real sample-efficiency comes from — one failure teaches you about a neighborhood.
 
-## Case (alpha-mining, sanitized)
+## Case (real domain, sanitized)
 
 After a self-correlation FAIL on a mixed `operating_income/close + FCF/close` factor, the entire close-yield motif class is penalized (`operating_cashflow_close_mix` −0.8, `cashflow_close_yield` −0.65, `operating_income_close_yield` −0.35), pushing orthogonal sentiment/growth probes ahead of crowded variants. The penalty is *projected from the ledger* by `strategy_memory.project_strategy_rules` — no hand-written rule, agent-authored from observed failures (commit `3a38a52`).
 

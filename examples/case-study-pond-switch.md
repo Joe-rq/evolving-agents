@@ -2,7 +2,7 @@
 
 > A real pivot-structure event: the agent proposed switching ponds to rescue a factor that was dying of *crowding*, not of *quality*.
 
-This is the demo's single hardest piece of evidence. Every number is verified against the local scoreboard (50-record dataset, alpha-mining private repo, 2026-06).
+This is the demo's single hardest piece of evidence. Every number is verified against the local scoreboard (50-record dataset, private host repo, 2026-06).
 
 ## The factor (one expression body)
 
@@ -16,7 +16,7 @@ This is the demo's single hardest piece of evidence. Every number is verified ag
 | pond | status | Sharpe | self_corr | outcome |
 |---|---|---|---|---|
 | TOP3000 (large-cap) | rejected | **2.15** | **0.7844** | SELF_CORR_FAIL |
-| TOP1000 (small-cap) | **submitted** (`RRp81Ev1`) | **2.15** | **0.6768** | checks clear |
+| TOP1000 (small-cap) | **submitted**  | **2.15** | **0.6768** | checks clear |
 
 **The factor never changed. Sharpe never changed (2.15 in both). The only thing that moved was self_corr — the crowding metric — from 0.7844 (too crowded → fail) to 0.6768 (clear → pass).**
 
