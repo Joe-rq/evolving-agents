@@ -2,8 +2,9 @@
 
 Factor 1/3 upgrade: instead of implicit scoring functions, the ledger is
 projected into explicit Rule objects carrying confidence + evidence
-traceability. This is the machine-readable strategy memory, ported from
-alpha-mining's strategy_memory.py with domain specifics stripped out.
+traceability. This is the machine-readable strategy memory; the projection
+machinery is domain-agnostic, the domain specifics (which motifs, which
+weights) are the adapter's job.
 
 Division of labor:
   - engine (this module): Rule / RuleSpec dataclasses, the confidence curve,

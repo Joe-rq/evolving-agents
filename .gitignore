@@ -1,3 +1,6 @@
+# === SSOT — internal state, never published ===
+state.md
+
 # === Secrets — domain credentials NEVER enter this repo ===
 .env
 .env.*

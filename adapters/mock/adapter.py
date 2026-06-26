@@ -4,9 +4,9 @@ Shows how a domain implements the 5 core protocols. Candidates are simple
 tagged objects; this exists so the engine has a runnable reference and so the
 demo/tests don't depend on any real domain.
 
-The real quantitative adapter (wq) lives in its **private host repo**
-(alpha-mining) and implements these same five methods against real BRAIN
-expressions — see examples/case-study-pond-switch.md for what it produced.
+The real quantitative adapter lives in a **private host repo** and implements
+these same five methods against a real domain — see
+examples/case-study-pond-switch.md for what it produced.
 evolving-agents itself stays domain-free.
 """
 from __future__ import annotations
