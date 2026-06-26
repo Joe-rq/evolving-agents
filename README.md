@@ -3,6 +3,8 @@
 > Principles for building agents that **learn from their own failures**.
 > *In the spirit of [12-factor agents](https://github.com/humanlayer/12-factor-agents).*
 
+> 中文版 → [README.zh.md](README.zh.md)
+
 12-factor agents tells you how to build **reliable** agents.
 This project tells you how to build agents that **evolve** — that get better at *searching* by remembering what failed, instead of starting from zero every run.
 
