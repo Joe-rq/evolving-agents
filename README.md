@@ -1,7 +1,10 @@
-# evolving-agents
+# 痕进 · evolving-agents
 
+> **失败留痕，凭痕而进。**
 > 造能**从自己的失败里学习**的 agent 的一组原则。
 > *致敬 [12-factor agents](https://github.com/humanlayer/12-factor-agents)。*
+
+> 参赛名 **痕进**（Scarforge）；仓库 evolving-agents 是其开源引擎。
 
 12-factor agents 讲的是怎么造**可靠**的 agent。
 这个项目讲的是怎么造会**进化**的 agent——靠记住什么失败了，在搜索这件事上越做越好，而不是每次都从零开始。
