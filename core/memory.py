@@ -5,9 +5,10 @@ queryable; isolation is per universe so scars from one environment don't
 pollute another — the mechanism behind TOP3000→TOP1000
 (see examples/case-study-pond-switch.md).
 
-The Memory stores Attempts whose outcome/family/motif/features were already
-classified by the adapter protocols (ResultEvaluator / CandidateClassifier /
-FailureMotifExtractor / FeatureExtractor). Memory itself is pure data.
+The Memory stores Attempts whose outcome/family/motif/features/evidence were
+already classified by the adapter protocols. Memory itself is pure data,
+plus a `project_rules` entry point that turns the ledger into auditable Rule
+objects (core/rules.py) — the Factor 1/3 upgrade.
 """
 from __future__ import annotations
 
@@ -24,6 +25,7 @@ class Attempt:
     family: str = ""                                     # strategy class (CandidateClassifier)
     features: list[str] = field(default_factory=list)    # (FeatureExtractor)
     motif: str = ""                                      # failure motif (FailureMotifExtractor)
+    evidence_kinds: set[str] = field(default_factory=set)  # domain failure tags for rule projection
     timestamp: str = ""                                  # caller-supplied (iso or monotonic)
 
 
@@ -76,6 +78,16 @@ class Memory:
             if a.motif:
                 counts[a.motif] = counts.get(a.motif, 0) + 1
         return counts
+
+    # --- Factor 1/3 upgrade: project the ledger into auditable Rule objects ---
+    def project_rules(self, specs: list, universe: str = "") -> list:
+        """Project this universe's attempts into Rule objects via domain RuleSpecs.
+
+        See core/rules.py. Rules carry confidence + evidence_ids, so the engine
+        can answer 'why was this candidate penalized?' with concrete failures.
+        """
+        from core.rules import project_rules as _project
+        return _project(self.attempts(universe), specs, scope=universe or "ALL")
 
     def __len__(self) -> int:
         return len(self._attempts)
