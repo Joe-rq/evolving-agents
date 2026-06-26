@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架构 — 引擎，不是平台</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --neutral: #6e7681;
+    --accent: #58a6ff;
+    --engine: #1f6feb;
+    --engine-bg: rgba(31, 111, 235, 0.08);
+    --adapter: #d2a8ff;
+    --adapter-bg: rgba(210, 168, 255, 0.08);
+    --domain: #ffa657;
+    --domain-bg: rgba(255, 166, 87, 0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+  .card {
+    width: 100%;
+    max-width: 1080px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 48px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 26px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .lede { color: var(--dim); font-size: 15px; line-height: 1.7; margin-bottom: 36px; max-width: 760px; }
+
+  .arch {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .layer {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .layer.engine { background: var(--engine-bg); border-color: rgba(31, 111, 235, 0.3); }
+  .layer.adapter { background: var(--adapter-bg); border-color: rgba(210, 168, 255, 0.3); }
+
+  .layer-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .layer-title { font-size: 14px; font-weight: 600; }
+  .layer-title.engine { color: var(--engine); }
+  .layer-title.adapter { color: var(--adapter); }
+  .layer-sub { font-size: 11px; color: var(--neutral); font-family: 'JetBrains Mono', monospace; }
+
+  .modules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .module {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .module .name { color: var(--text); font-weight: 600; }
+  .module .factor { color: var(--neutral); font-size: 10px; margin-top: 2px; }
+
+  .layer.adapter .modules { grid-template-columns: 1fr; }
+  .adapter-proto {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--adapter);
+    display: flex;
+    justify-content: space-between;
+  }
+  .adapter-proto .arrow { color: var(--neutral); }
+
+  .domain-bar {
+    border: 1px solid rgba(255, 166, 87, 0.3);
+    background: var(--domain-bg);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .domain-bar .label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--domain);
+  }
+  .domain-bar .desc { font-size: 13px; color: var(--dim); }
+
+  .flow-label {
+    text-align: center;
+    font-size: 11px;
+    color: var(--neutral);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+    margin: 4px 0;
+  }
+
+  .positioning {
+    margin-top: 8px;
+    padding: 20px 24px;
+    background: rgba(88, 166, 255, 0.04);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+  .positioning-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .pos-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .pos-row:last-child { margin-bottom: 0; }
+  .pos-key {
+    color: var(--text);
+    font-weight: 600;
+    min-width: 90px;
+  }
+  .pos-val { color: var(--dim); }
+
+  .footnote {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--neutral);
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">架构 · 引擎，不是平台</div>
+    <h1>一个领域无关的引擎，一个可插拔的适配器。</h1>
+    <p class="lede">通用核心实现五个 factor，不绑定任何领域。换领域只换适配器——适配器填领域知识（哪些 motif、哪些死路、什么算成功），引擎跑不变的进化循环。</p>
+
+    <div class="arch">
+      <div class="layer engine">
+        <div class="layer-head">
+          <span class="layer-title engine">core/ · 通用引擎</span>
+          <span class="layer-sub">Apache 2.0 · 领域无关</span>
+        </div>
+        <div class="modules">
+          <div class="module"><span class="name">memory</span><div class="factor">Factor 1 · 账本</div></div>
+          <div class="module"><span class="name">rules</span><div class="factor">Factor 1/3 · 可审计规则</div></div>
+          <div class="module"><span class="name">meta_learner</span><div class="factor">Factor 2/3 · 搜索打分</div></div>
+          <div class="module"><span class="name">evolver</span><div class="factor">Factor 4 · 换结构</div></div>
+          <div class="module"><span class="name">novelty</span><div class="factor">Factor 5 · 新颖性</div></div>
+          <div class="module"><span class="name">engine</span><div class="factor">编排 · 主循环</div></div>
+          <div class="module" style="grid-column: span 2"><span class="name">protocols</span><div class="factor">5 个适配器协议 · 领域接口</div></div>
+        </div>
+      </div>
+
+      <div class="layer adapter">
+        <div class="layer-head">
+          <span class="layer-title adapter">adapter · 领域适配器</span>
+          <span class="layer-sub">私有 · 填领域知识</span>
+        </div>
+        <div class="modules">
+          <div class="adapter-proto"><span>classify</span><span class="arrow">→ 候选→策略类</span></div>
+          <div class="adapter-proto"><span>extract</span><span class="arrow">→ 特征</span></div>
+          <div class="adapter-proto"><span>motif_of</span><span class="arrow">→ 失败模式</span></div>
+          <div class="adapter-proto"><span>dead_end_reason</span><span class="arrow">→ 已知死路</span></div>
+          <div class="adapter-proto"><span>is_success / is_weak</span><span class="arrow">→ 结果判定</span></div>
+          <div class="adapter-proto"><span>RuleSpec</span><span class="arrow">→ motif 权重（领域 IP）</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-label">↑ 引擎通过协议调用适配器 · 适配器填领域知识 ↓</div>
+
+    <div class="domain-bar">
+      <span class="label">真实领域</span>
+      <span class="desc">量化因子挖掘（私有）— 实现 5 协议 + RuleSpec，接真实数据。换领域 = 写新适配器，引擎不动。</span>
+    </div>
+
+    <div class="positioning">
+      <div class="positioning-title">和 EvoMap 的区别：抽象层不同</div>
+      <div class="pos-row">
+        <span class="pos-key">EvoMap</span>
+        <span class="pos-val">A2A 跨节点经验共享 <strong>平台</strong>（我们用过它的 memory 层）—— 平台级，重。</span>
+      </div>
+      <div class="pos-row">
+        <span class="pos-key">本引擎</span>
+        <span class="pos-val">本地、可嵌入的 <strong>引擎</strong>—— 不同抽象层，更简单，五个命名的 factor 可教。</span>
+      </div>
+      <div class="pos-row">
+        <span class="pos-key">换领域</span>
+        <span class="pos-val">只换适配器（填 5 协议 + RuleSpec），core/ 一行不改。</span>
+      </div>
+    </div>
+
+    <div class="footnote">core/ 7 模块 · 5 协议 · 已在量化领域验证架构成立（真实数据跑通）</div>
+  </div>
+</body>
+</html>

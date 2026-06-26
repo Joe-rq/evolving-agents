@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>可审计的规则 — 这条惩罚从哪来</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --neutral: #6e7681;
+    --accent: #58a6ff;
+    --block: #f85149;
+    --block-bg: rgba(248, 81, 73, 0.08);
+    --evidence: #d2a8ff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+  .card {
+    width: 100%;
+    max-width: 920px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 48px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 26px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .lede { color: var(--dim); font-size: 15px; line-height: 1.7; margin-bottom: 36px; max-width: 740px; }
+
+  .rule-card {
+    background: var(--block-bg);
+    border: 1px solid rgba(248, 81, 73, 0.3);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+  }
+  .rule-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .action-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--block);
+    background: rgba(248, 81, 73, 0.12);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .motif {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .scope {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--neutral);
+    margin-left: auto;
+  }
+  .rule-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .meta-cell {
+    border-left: 2px solid var(--border);
+    padding-left: 14px;
+  }
+  .meta-key {
+    font-size: 11px;
+    color: var(--neutral);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .meta-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .meta-val.block { color: var(--block); }
+  .meta-val.conf { color: var(--evidence); }
+  .reason {
+    font-size: 13px;
+    color: var(--dim);
+    font-style: italic;
+  }
+
+  .evidence-section {
+    margin-top: 24px;
+  }
+  .evidence-label {
+    font-size: 11px;
+    color: var(--neutral);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .evidence-label .count {
+    color: var(--evidence);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+  .evidence-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .evidence-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+  }
+  .evidence-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--evidence);
+    font-weight: 600;
+    min-width: 20px;
+  }
+  .evidence-expr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    overflow-x: auto;
+    white-space: nowrap;
+    flex: 1;
+  }
+  .evidence-tag {
+    font-size: 10px;
+    color: var(--block);
+    background: rgba(248, 81, 73, 0.1);
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .contrast {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: rgba(88, 166, 255, 0.04);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+  }
+  .contrast-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .contrast-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .contrast-cell .label {
+    font-size: 11px;
+    color: var(--neutral);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .contrast-cell .val { color: var(--dim); }
+  .contrast-cell.us .val { color: var(--text); }
+
+  .footnote {
+    margin-top: 24px;
+    font-size: 12px;
+    color: var(--neutral);
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="eyebrow">Factor 3 · 可审计的规则</div>
+    <h1>这条惩罚，从哪来？</h1>
+    <p class="lede">一个候选被屏蔽时，引擎能回答"为什么"——不是黑箱"agent 学到了"，而是追到具体哪几次失败。这是和只会吹学习曲线的系统之间的差别。</p>
+
+    <div class="rule-card">
+      <div class="rule-head">
+        <span class="action-badge">✗ block</span>
+        <span class="motif">cashflow_close_yield</span>
+        <span class="scope">scope: TOP3000</span>
+      </div>
+
+      <div class="rule-meta">
+        <div class="meta-cell">
+          <div class="meta-key">分数调整</div>
+          <div class="meta-val block">−0.65</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-key">置信度</div>
+          <div class="meta-val conf">0.75</div>
+        </div>
+        <div class="meta-cell">
+          <div class="meta-key">证据数</div>
+          <div class="meta-val conf">3</div>
+        </div>
+      </div>
+
+      <div class="reason">"crowded" — 这个 motif 产出的 alpha 和已有 ACTIVE 高度相关，继续挖是浪费配额。</div>
+
+      <div class="evidence-section">
+        <div class="evidence-label">
+          证据追溯 <span class="count">3 条失败 → 诱发此规则</span>
+        </div>
+        <div class="evidence-list">
+          <div class="evidence-row">
+            <span class="evidence-num">1.</span>
+            <span class="evidence-expr">group_rank(ts_rank(free_cash_flow_reported_value/close,252),industry)</span>
+            <span class="evidence-tag">SELF_CORR_FAIL</span>
+          </div>
+          <div class="evidence-row">
+            <span class="evidence-num">2.</span>
+            <span class="evidence-expr">group_rank(ts_rank(free_cash_flow_reported_value/close,126),industry)</span>
+            <span class="evidence-tag">SELF_CORR_FAIL</span>
+          </div>
+          <div class="evidence-row">
+            <span class="evidence-num">3.</span>
+            <span class="evidence-expr">group_rank(ts_rank(free_cash_flow_reported_value/close,126),industry)</span>
+            <span class="evidence-tag">SELF_CORR_FAIL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contrast">
+      <div class="contrast-title">这条规则是 agent 从账本投影出来的，不是人写的</div>
+      <div class="contrast-row">
+        <div class="contrast-cell us">
+          <div class="label">evolving-agents</div>
+          <div class="val">规则 = 账本投影，带 evidence_ids，可追溯。每条惩罚能答"因为这几条具体失败"。</div>
+        </div>
+        <div class="contrast-cell">
+          <div class="label">只会吹学习曲线的系统</div>
+          <div class="val">"agent 学会了避开拥挤" —— 然后呢？哪几次失败教的？无法回答，也无法和 in-context learning 区分。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footnote">真实规则投影 · 来自本地 scoreboard · evidence_ids 可追到具体失败表达式</div>
+  </div>
+</body>
+</html>
