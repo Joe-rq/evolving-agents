@@ -1,0 +1,6 @@
+# Day-1: implement the 5 adapter protocols + domain-agnostic engine here.
+#   protocols.py  — CandidateClassifier / FeatureExtractor / FailureMotifExtractor / DeadEndDetector / ResultEvaluator
+#   memory.py     — append-only ledger, universe-scoped
+#   meta_learner.py — score search branches, strike rule, class-level penalty
+#   evolver.py    — pivot policy
+#   novelty.py    — novelty score + crowding penalty + exploration lane
