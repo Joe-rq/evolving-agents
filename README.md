@@ -18,17 +18,15 @@ The agents that *do* keep getting better do something different: **they score th
 
 ## The 5 Factors
 
-| # | Factor | Value layer |
-|---|---|---|
-| 1 | [Remember your failures](content/factor-01-remember-your-failures.md) | 🟢 A stable |
-| 2 | [Score the search, not the candidate](content/factor-02-score-the-search-not-the-candidate.md) | 🟡 B conjectured |
-| 3 | [Learn failure modes, not single failures](content/factor-03-learn-failure-modes-not-single-failures.md) | 🟢 A stable |
-| 4 | [Pivot structure, not tactics](content/factor-04-pivot-structure-not-tactics.md) | 🟡 B conjectured |
-| 5 | [Seek novelty, avoid crowding](content/factor-05-seek-novelty-avoid-crowding.md) | 🟡 B conjectured |
+| # | Factor |
+|---|---|
+| 1 | [Remember your failures](content/factor-01-remember-your-failures.md) |
+| 2 | [Score the search, not the candidate](content/factor-02-score-the-search-not-the-candidate.md) |
+| 3 | [Learn failure modes, not single failures](content/factor-03-learn-failure-modes-not-single-failures.md) |
+| 4 | [Pivot structure, not tactics](content/factor-04-pivot-structure-not-tactics.md) |
+| 5 | [Seek novelty, avoid crowding](content/factor-05-seek-novelty-avoid-crowding.md) |
 
-**Honest layering** — not all factors are equally proven:
-- 🟢 **A (stable)** — Factor 1, 3: prevent known failures. Verified by cold-vs-warm control.
-- 🟡 **B (conjectured)** — Factor 2, 4, 5: improve search quality. Correlated in practice, causation under validation.
+**All five are implemented and produced observable evolving behavior — none has controlled effectiveness proof.** The cold-vs-warm control we designed could not run: mechanisms went live 2026-06-24, leaving only ~2-3 days of post-evolution data against ~10 days of baseline (50 records). We claim *mechanism + observed behavior*, not *proven lift*. Full disclosure → [Honest Claims Boundary](content/honest-boundary.md).
 
 ## Repo layout
 
