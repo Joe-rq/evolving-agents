@@ -26,6 +26,8 @@ build/
 # Local runs / data (keep repo clean of run artifacts)
 runs/
 output/
+experiments/_*.json
+experiments/_*.log
 *.sqlite
 *.db
 *.jsonl

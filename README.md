@@ -23,7 +23,7 @@
 
 1. **引擎**（`core/`）——领域无关的自进化循环：memory / rules / meta_learner / evolver / novelty，由 `engine.py` 编排。配 mock adapter 可独立跑通。
 2. **一个真实领域**（私有）——一个量化因子挖掘的宿主实现了 5 个 adapter 协议、对接真实数据。机制是在这里**观察到的**，不是构造出来的。脱敏证据 → [案例研究](examples/case-study-pond-switch.md)。
-3. **诚实披露**——每条 claim 都有边界。我们说机制做了什么，也公开说我们*证明不了*什么。→ [诚实声明边界](content/honest-boundary.md)
+3. **诚实披露 + 公开对照**——每条 claim 都有边界。我们说机制做了什么，也公开说我们*证明不了*什么；并在公开的 2048 领域跑了一个预注册的失忆组对照——结果 **null（p=0.079）**：机制可观察地工作，但增益未被统计证明。我们如实报告。→ [诚实声明边界](content/honest-boundary.md) · [2048 对照案例](examples/case-study-2048-ablation.md)
 
 ## 5 个 Factor
 
@@ -35,17 +35,19 @@
 | 4 | [换结构，不是调参数](content/factor-04-pivot-structure-not-tactics.md)（Pivot structure, not tactics） |
 | 5 | [追新颖，避拥挤](content/factor-05-seek-novelty-avoid-crowding.md)（Seek novelty, avoid crowding） |
 
-**五个机制都实现了，都产生了可观察的进化行为——但没有任何一个有对照实验的有效性证明。** 我们设计的"失忆组 vs 完整组"对照跑不了：进化机制 2026-06-24 才上线，进化后数据只有约 2-3 天，对照 10 天基线（共 50 条记录）。我们 claim 的是*机制 + 可观察行为*，不是*被证明的收益*。完整披露 → [诚实声明边界](content/honest-boundary.md)。
+**五个机制都实现了，都产生了可观察的进化行为。** 量化领域（私有）的失忆组对照因数据量太小跑不了；我们在公开的 2048 领域补上了它——**结果 null（p=0.079）**：机制作为代码可观察地工作（block / pivot / 规则全部触发，失忆组为零），但学习增益未被统计证明。我们区分「机制存在」与「机制有效」，如实报告 null。完整披露 → [诚实声明边界](content/honest-boundary.md)。
 
 ## 仓库布局
 
 ```
-content/    # 5 篇 factor 文档 + honest-boundary（CC BY-SA 4.0）
-core/       # 领域无关引擎（Apache 2.0）：
-            #   protocols · memory · rules · meta_learner · evolver · novelty · engine
-adapters/   # reference mock adapter（玩具领域）；真实 adapter 在私有宿主仓库
-examples/   # 脱敏案例研究
-img/        # 图
+content/      # 5 篇 factor 文档 + honest-boundary（CC BY-SA 4.0）
+core/         # 领域无关引擎（Apache 2.0）：
+              #   protocols · memory · rules · meta_learner · evolver · novelty · engine
+adapters/     # reference adapter：mock（玩具）+ game2048（公开对照领域）；真实量化 adapter 在私有宿主
+experiments/  # 2048 失忆组对照：ablation_runner + stats + 预注册（纯 stdlib）
+examples/     # 脱敏案例研究（换池塘 + 2048 对照）
+demo/         # demo 图（含 05 对照结果）
+img/          # 图
 ```
 
 ## 定位（以及它*不是*什么）
@@ -59,7 +61,7 @@ img/        # 图
 
 ## 状态与诚实边界
 
-在**一个领域**（量化因子挖掘，私有）上验证过。机制按设计是领域无关的；跨领域验证是 roadmap，不是 claim。
+在**两个领域**验证过：量化因子挖掘（私有，真实案例）+ 2048（公开，带失忆组对照）。2048 对照结果 null（p=0.079）——机制可观察地工作，但有效性增益未被统计证明。跨领域泛化仍是 roadmap，不是 claim。→ [诚实声明边界](content/honest-boundary.md)
 
 ## License
 
