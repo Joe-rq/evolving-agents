@@ -656,6 +656,72 @@
     max-width: 960px;
   }
 
+  .evolution-cases {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .evo-case {
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    background: var(--panel);
+    padding: 24px;
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .evo-case h3 {
+    margin: 12px 0 16px;
+    font-size: 22px;
+  }
+
+  .evo-chain {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    border-top: 1px solid rgba(82, 101, 125, 0.14);
+    border-bottom: 1px solid rgba(82, 101, 125, 0.14);
+    margin-bottom: 14px;
+  }
+
+  .evo-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .evo-r2 {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .r2-good { color: var(--green); }
+  .r2-mid { color: var(--orange); }
+
+  .evo-arrow {
+    color: var(--orange);
+    font-size: 14px;
+    font-family: Consolas, "Courier New", monospace;
+  }
+
+  .evo-case p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  #s5b .lead {
+    margin-top: 20px;
+    font-size: clamp(18px, 1.8vw, 23px);
+  }
+
+  #s5b .evo-case .mono {
+    font-size: 16px;
+    color: var(--text);
+  }
+
   .accent-blue { color: var(--blue); }
   .accent-orange { color: var(--orange); }
   .accent-green { color: var(--green); }
@@ -690,7 +756,7 @@
 <body>
   <nav class="deck-nav" aria-label="slides">
     <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a>
-    <a href="#s5"></a><a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
+    <a href="#s5"></a><a href="#s5b"></a><a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
   </nav>
 
   <section class="slide" id="s1">
@@ -708,7 +774,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 11</span></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 12</span></div>
       </div>
     </div>
   </section>
@@ -724,7 +790,7 @@
       <div class="hero-mark" aria-hidden="true"></div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 11</span></div>
+        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 12</span></div>
       </div>
     </div>
   </section>
@@ -747,7 +813,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 11</span></div>
+        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 12</span></div>
       </div>
     </div>
   </section>
@@ -768,7 +834,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 11</span></div>
+        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 12</span></div>
       </div>
     </div>
   </section>
@@ -798,7 +864,44 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 11</span></div>
+        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s5b">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">OBSERVABLE EVOLUTION · PUBLIC DOMAIN</div>
+        <h2>私有案例验证不了？<br>换成公开领域，让进化肉眼可见。</h2>
+        <p class="lead">换池塘是私有的、评委无法复现。我们在符号回归（猜公式）和正则合成（猜分类规则）两个公开领域补上了它——生成器从成功线索嫁接出新候选，每一轮的结构变化肉眼可见。</p>
+        <div class="evolution-cases">
+          <div class="evo-case">
+            <div class="case-tag">symreg</div>
+            <h3>猜公式画出目标曲线</h3>
+            <div class="evo-chain">
+              <div class="evo-step"><span class="evo-r2 r2-mid">0.37</span><span class="mono">(x*x)</span></div>
+              <div class="evo-arrow">→ 嫁接 ×2 →</div>
+              <div class="evo-step"><span class="evo-r2 r2-good">0.996</span><span class="mono">2*(x*x)</span></div>
+            </div>
+            <p>隐藏目标 y=2x²+1。蓝线（Agent）从乱码曲线，跃升到几乎与目标虚线重合。<strong>完整组守住，基线组崩盘。</strong></p>
+          </div>
+          <div class="evo-case">
+            <div class="case-tag">regex</div>
+            <h3>猜规则识别日期格式</h3>
+            <div class="evo-chain">
+              <div class="evo-step"><span class="evo-r2 r2-mid">0.58</span><span class="mono">.*</span></div>
+              <div class="evo-arrow">→ 收紧替换 →</div>
+              <div class="evo-step"><span class="evo-r2 r2-good">0.74</span><span class="mono">[0-9]+-[0-9]+</span></div>
+            </div>
+            <p>从"什么都框进来"（太宽）收紧到精确的三段数字序列。<strong>程序合成任务，进化方向相反：不是加性，是收紧。</strong></p>
+          </div>
+        </div>
+        <div class="bridge-note"><b>跨任务类型一致</b><span>公式发现（加性嫁接）+ 程序合成（收紧替换），同一套引擎，同一种"从成功里学"。现场动画 → <span class="mono">demo/08</span></span></div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · observable evolution, public & reproducible</span><span>06 / 12</span></div>
       </div>
     </div>
   </section>
@@ -824,7 +927,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>06 / 11</span></div>
+        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>07 / 12</span></div>
       </div>
     </div>
   </section>
@@ -834,7 +937,7 @@
       <div>
         <div class="kicker">PRODUCT SHAPE</div>
         <h2>它是一个可嵌入的进化层，<br>不是又一个 Agent 平台。</h2>
-        <p class="lead">你的 Agent 继续负责做事；痕进负责让它从失败中更新搜索方式。换领域时只换 adapter，进化循环留在 core。</p>
+        <p class="lead">你的 Agent 继续负责做事；痕进负责让它从失败中更新搜索方式。换领域时只换 adapter，进化循环留在 core——已经接了 4 个领域。</p>
         <div class="architecture">
           <div class="layer">
             <h3>core / universal loop</h3>
@@ -858,7 +961,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>07 / 11</span></div>
+        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>08 / 12</span></div>
       </div>
     </div>
   </section>
@@ -879,7 +982,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>08 / 11</span></div>
+        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>09 / 12</span></div>
       </div>
     </div>
   </section>
@@ -889,7 +992,7 @@
       <div>
         <div class="kicker">OPEN CONTROL · AMNESIC vs FULL</div>
         <h2>换个公开领域补上对照。<br>跑完了，结果 null。</h2>
-        <p class="lead">量化数据是私有的、跑不了对照。我们在公开的 2048 上做了预注册的失忆组 vs 完整组对照（M=30 配对）。唯一变量：Memory 是否跨 round 累积。结果 p=0.079——机制可观察地工作，增益没达统计显著。我们不藏这个结果。</p>
+        <p class="lead">量化数据是私有的、跑不了对照。我们在公开的 2048 上做了预注册的失忆组 vs 完整组对照（M=30 配对）。唯一变量：Memory 是否跨 round 累积。结果 p=0.079——机制可观察地工作，增益没达统计显著。我们不藏这个结果。符号回归和正则合成展示的是<strong>可观察的进化轨迹</strong>，但同样是种子化轨迹、非统计证明。</p>
         <div class="evidence-rule">
           <div class="rule-top">
             <span class="badge" style="color:var(--orange);background:rgba(228,123,44,0.12)">NULL · p≥0.05</span>
@@ -919,7 +1022,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>09 / 11</span></div>
+        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>10 / 12</span></div>
       </div>
     </div>
   </section>
@@ -936,14 +1039,15 @@
               <li>5 个机制都已实现。</li>
               <li>观察到一次真实换结构事件。</li>
               <li>部分学习来自账本投影，不是手写规则。</li>
+              <li>符号回归 + 正则合成：可观察的生成器进化，公开可复现。</li>
             </ul>
           </div>
           <div class="boundary-card">
             <h3 class="accent-orange">我们不 claim</h3>
             <ul>
-              <li>没有有效性的对照证明（2048 对照已跑，结果 null）。</li>
+              <li>没有有效性的统计证明（2048 对照已跑，结果 null）。</li>
               <li>没有量化收益曲线。</li>
-              <li>只有 2 个领域（量化 + 2048），2 ≠ 泛化证明。</li>
+              <li>4 个领域 ≠ 泛化证明（进化是种子化轨迹，非 M-复制对照）。</li>
             </ul>
           </div>
         </div>
@@ -951,7 +1055,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>10 / 11</span></div>
+        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>11 / 12</span></div>
       </div>
     </div>
   </section>
@@ -966,7 +1070,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>11 / 11</span></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>12 / 12</span></div>
       </div>
     </div>
   </section>
