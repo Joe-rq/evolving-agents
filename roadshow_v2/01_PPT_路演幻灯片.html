@@ -874,7 +874,7 @@
       <div>
         <div class="kicker">OBSERVABLE EVOLUTION · PUBLIC DOMAIN</div>
         <h2>同一套引擎，<br>四种任务，进化肉眼可见。</h2>
-        <p class="lead">在四个公开可复现的领域里，生成器从成功线索嫁接出新候选——每一轮的结构变化都是可观察、可追溯的。</p>
+        <p class="lead">搜索问题没有解析解——第一步只能广撒网，进化体现在后续轮次如何从失败里收敛。四个公开可复现的领域，生成器从成功线索嫁接出新候选，每一轮的结构变化可观察、可追溯。</p>
         <div class="evolution-cases">
           <div class="evo-case">
             <div class="case-tag">symreg</div>
@@ -966,18 +966,18 @@
     </div>
   </section>
 
-  <section class="slide" id="s8">
-    <div class="slide-inner">
+  <section class=”slide” id=”s8”>
+    <div class=”slide-inner”>
       <div>
-        <div class="kicker">WHERE IT APPLIES</div>
-        <h2>凡是会试错的 Agent，<br>都需要一套失败进化机制。</h2>
-        <p class="lead">量化交易只是第一个沙盘。痕进真正服务的是“可重复试错”的工作流：失败能被定义，反馈能被记录，下一次行动能被改变。</p>
-        <div class="use-cases">
-          <div class="use-case"><div class="case-tag">code</div><h3>代码 Agent</h3><p>编译错误、测试失败被归成模式，下次调整代码结构而不是重复补丁。</p></div>
-          <div class="use-case"><div class="case-tag">ops</div><h3>自动化 Agent</h3><p>表格、API、浏览器操作失败后，记住哪类输入容易触发问题。</p></div>
-          <div class="use-case"><div class="case-tag">search</div><h3>检索 Agent</h3><p>搜索结果差时，进化查询路径，而不是只换几个关键词。</p></div>
-          <div class="use-case"><div class="case-tag">tutor</div><h3>教育 Agent</h3><p>学生反复出错时，识别错误类型，调整讲解顺序和例题。</p></div>
-          <div class="use-case"><div class="case-tag">sim</div><h3>模拟 Agent</h3><p>在游戏、仿真、策略环境里积累试错痕迹，更新下一轮策略。</p></div>
+        <div class=”kicker”>WHERE IT APPLIES · HOW TO INTEGRATE</div>
+        <h2>接入只写一个 adapter，<br>引擎一行不改。</h2>
+        <p class=”lead”>适用条件：Agent 反复试错、失败能被客观定义、同类错误会重复出现。满足这三条，写一个 adapter（5 个方法，约 50-150 行）即可接入。</p>
+        <div class=”use-cases”>
+          <div class=”use-case”><div class=”case-tag” style=”color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)”>已验证</div><h3>量化因子挖掘</h3><p>提因子→回测→看 Sharpe。记住”这类信号族在这个市场失效”，换方向不调参。</p></div>
+          <div class=”use-case”><div class=”case-tag” style=”color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)”>已验证</div><h3>符号回归</h3><p>猜公式→拟合→看 R²。记住”三角函数族拟合不了多项式”，换结构。</p></div>
+          <div class=”use-case”><div class=”case-tag” style=”color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)”>已验证</div><h3>规则合成</h3><p>猜规则→分类→看 F1。记住”过宽的规则会误伤”，收紧。</p></div>
+          <div class=”use-case”><div class=”case-tag”>Roadmap</div><h3>代码生成</h3><p>写代码→编译测试→修。记住”这类 API 调用容易触发异常”，换写法。</p></div>
+          <div class=”use-case”><div class=”case-tag”>Roadmap</div><h3>SQL / RAG</h3><p>写查询/检索→执行→看性能。记住”这类 JOIN 必慢””这类查询召回差”，进化路径。</p></div>
         </div>
       </div>
       <div>
