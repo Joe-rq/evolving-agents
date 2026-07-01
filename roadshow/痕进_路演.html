@@ -764,6 +764,44 @@
     font-size: clamp(18px, 1.8vw, 23px);
   }
 
+  .roadmap-cases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .rm-case {
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    background: var(--panel);
+    padding: 20px;
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .rm-head {
+    font-size: 19px;
+    margin-bottom: 14px;
+  }
+
+  .rm-chain {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .rm-bad { color: var(--red); font-weight: 700; }
+  .rm-good { color: var(--green); font-weight: 700; }
+
+  .rm-detail {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  #s7c .lead {
+    margin-top: 20px;
+    font-size: clamp(18px, 1.8vw, 23px);
+  }
+
   .accent-blue { color: var(--blue); }
   .accent-orange { color: var(--orange); }
   .accent-green { color: var(--green); }
@@ -798,7 +836,7 @@
 <body>
   <nav class="deck-nav" aria-label="slides">
     <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a>
-    <a href="#s5"></a><a href="#s5b"></a><a href="#s6"></a><a href="#s7"></a><a href="#s7b"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
+    <a href="#s5"></a><a href="#s5b"></a><a href="#s6"></a><a href="#s7"></a><a href="#s7b"></a><a href="#s7c"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
   </nav>
 
   <section class="slide" id="s1">
@@ -816,7 +854,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 13</span></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 14</span></div>
       </div>
     </div>
   </section>
@@ -832,7 +870,7 @@
       <div class="hero-mark" aria-hidden="true"></div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 13</span></div>
+        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 14</span></div>
       </div>
     </div>
   </section>
@@ -855,7 +893,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 13</span></div>
+        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 14</span></div>
       </div>
     </div>
   </section>
@@ -876,7 +914,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 13</span></div>
+        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 14</span></div>
       </div>
     </div>
   </section>
@@ -906,7 +944,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 13</span></div>
+        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 14</span></div>
       </div>
     </div>
   </section>
@@ -943,7 +981,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · observable evolution, public & reproducible</span><span>06 / 13</span></div>
+        <div class="footer"><span>乔木计划 · observable evolution, public & reproducible</span><span>06 / 14</span></div>
       </div>
     </div>
   </section>
@@ -969,7 +1007,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>07 / 13</span></div>
+        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>07 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1003,7 +1041,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>08 / 13</span></div>
+        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>08 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1034,7 +1072,39 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · structured evolution, no LLM tax</span><span>09 / 13</span></div>
+        <div class="footer"><span>乔木计划 · structured evolution, no LLM tax</span><span>09 / 14</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s7c">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">ROADMAP VERIFIED · SQL / CODE / RAG</div>
+        <h2>三个生产场景，<br>从 Roadmap 变成已验证。</h2>
+        <p class="lead">同一套引擎接入三个最常见的生产场景。每个都跑出了可观察的进化链——从全错到最优，每一步修掉一个缺陷。</p>
+        <div class="roadmap-cases">
+          <div class="rm-case">
+            <div class="rm-head"><b>🗄️ SQL 查询优化</b></div>
+            <div class="rm-chain"><span class="rm-bad">cost 24</span> → <span class="rm-good">cost 1</span></div>
+            <div class="rm-detail">+ON（消笛卡尔积）→ *→id → +LIMIT · 3 步</div>
+          </div>
+          <div class="rm-case">
+            <div class="rm-head"><b>💻 代码生成</b></div>
+            <div class="rm-chain"><span class="rm-bad">0.25</span> → <span class="rm-good">1.00</span></div>
+            <div class="rm-detail">x*2→x**2（修运算符）· 两条路径修同一个 bug</div>
+          </div>
+          <div class="rm-case">
+            <div class="rm-head"><b>🔍 RAG 检索</b></div>
+            <div class="rm-chain"><span class="rm-bad">0</span> → <span class="rm-good">1.0</span></div>
+            <div class="rm-detail">chunk→150 → th→0.7 → k→4 → +rerank → +expand · 5 步</div>
+          </div>
+        </div>
+        <div class="bridge-note"><b>共同模式</b><span>三个都是"修复链"——从有问题的版本出发，每步修一个缺陷。评估器是简化版（规则估算），但 graft 操作是真实的优化手段。</span></div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · roadmap verified, not just promised</span><span>10 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1055,7 +1125,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>10 / 13</span></div>
+        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>11 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1095,7 +1165,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>11 / 13</span></div>
+        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>12 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1128,7 +1198,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>12 / 13</span></div>
+        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>13 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1143,7 +1213,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>13 / 13</span></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>14 / 14</span></div>
       </div>
     </div>
   </section>

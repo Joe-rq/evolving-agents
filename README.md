@@ -23,7 +23,7 @@
 
 1. **引擎**（`core/`）——领域无关的自进化循环：memory / rules / meta_learner / evolver / novelty，由 `engine.py` 编排。配 mock adapter 可独立跑通。
 2. **一个真实领域**（私有）——一个量化因子挖掘的宿主实现了 5 个 adapter 协议、对接真实数据。机制是在这里**观察到的**，不是构造出来的。脱敏证据 → [案例研究](examples/case-study-pond-switch.md)。
-3. **诚实披露 + 公开对照 + 可观察进化**——每条 claim 都有边界。我们说机制做了什么，也公开说我们*证明不了*什么；并在公开的 2048 领域跑了一个预注册的失忆组对照——结果 **null（p=0.079）**：机制可观察地工作，但增益未被统计证明。我们还在符号回归 + 正则合成两个领域展示了**生成器从成功嫁接出新候选的可观察进化**——回答"agent 能不能造出新东西"（能），且跨任务类型（公式发现 vs 程序合成）一致，但同样是种子化轨迹、非统计证明。→ [诚实声明边界](content/honest-boundary.md) · [2048 对照](examples/case-study-2048-ablation.md) · [符号回归进化](examples/case-study-symreg-evolution.md) · [正则合成进化](examples/case-study-regex-evolution.md)
+3. **诚实披露 + 公开对照 + 可观察进化**——每条 claim 都有边界。我们说机制做了什么，也公开说我们*证明不了*什么；并在公开的 2048 领域跑了一个预注册的失忆组对照——结果 **null（p=0.079）**：机制可观察地工作，但增益未被统计证明。我们还在符号回归 + 正则合成两个领域展示了**生成器从成功嫁接出新候选的可观察进化**——回答"agent 能不能造出新东西"（能），且跨任务类型（公式发现 vs 程序合成）一致，但同样是种子化轨迹、非统计证明。此外，SQL 查询优化 / 代码生成 / RAG 检索三个 Roadmap 场景也已验证（进化链总览 → [demo/12](demo/12-roadmap-overview.zh.html)）。→ [诚实声明边界](content/honest-boundary.md) · [2048 对照](examples/case-study-2048-ablation.md) · [符号回归进化](examples/case-study-symreg-evolution.md) · [正则合成进化](examples/case-study-regex-evolution.md) · [三场景验证](examples/case-study-roadmap-domains.md)
 
 ## 5 个 Factor
 
