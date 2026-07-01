@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11 · RAG 检索策略进化 — 痕进</title>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--border:#30363d;--fg:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--yellow:#d29922;--purple:#bc8cff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI",Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;padding:24px;max-width:1000px;margin:0 auto}
+  h1{font-size:1.4rem;font-weight:600;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:.85rem;margin-bottom:20px}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:600;margin-left:8px}
+  .badge-true{background:rgba(63,185,80,.15);color:var(--green);border:1px solid rgba(63,185,80,.3)}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+  .panel h2{font-size:1rem;font-weight:600;margin-bottom:12px;color:var(--accent)}
+  .chain{font-family:"SFMono-Regular",Consolas,monospace;font-size:.82rem}
+  .step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:6px;margin:6px 0}
+  .step-bad{background:rgba(248,81,73,.08);border-left:3px solid var(--red)}
+  .step-mid{background:rgba(210,153,34,.08);border-left:3px solid var(--yellow)}
+  .step-good{background:rgba(63,185,80,.1);border-left:3px solid var(--green)}
+  .score{font-weight:700;min-width:55px}
+  .score-bad{color:var(--red)}.score-mid{color:var(--yellow)}.score-good{color:var(--green)}
+  .cfg{color:var(--fg);flex:1}
+  .detail{color:var(--muted);font-size:.72rem;margin-top:4px}
+  .arrow{color:var(--purple);padding-left:24px;font-size:.72rem;margin:2px 0}
+  .arrow b{color:var(--accent)}
+  .takeaway{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.2);border-radius:8px;padding:14px 18px;margin-top:12px}
+  .takeaway strong{color:var(--accent)}
+  .honest{background:rgba(248,81,73,.05);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.85rem}
+  code{background:rgba(110,118,129,.2);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:.82rem}
+</style>
+</head>
+<body>
+
+<h1>RAG 检索策略进化：从全错配置到最优 <span class="badge badge-true">生产场景 · Roadmap→已验证</span></h1>
+<div class="sub">同一套引擎，第七个领域。RAG 的进化空间不是"选关键词"（太粗），是"调检索流水线的结构"。配 <code>adapters/rag/</code></div>
+
+<div class="panel">
+  <h2>一条进化链：每一步调一个策略参数</h2>
+  <div class="sub">从最差的配置开始（大分块 + 无重排 + 低阈值 + 大 top_k），生成器每轮修一个参数。分数从 0.00 爬升到 1.00。</div>
+  <div class="chain">
+    <div class="step step-bad">
+      <span class="score score-bad">0.00</span>
+      <div><div class="cfg">chunk=1000, rerank=False, th=0.3, k=20</div>
+      <div class="detail">全错：分块太大 + 无重排 + 阈值太低（噪声多）+ top_k 太大（稀释）</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: chunk 1000→150</b> — 分块从 1000 降到 150，提升精度</div>
+    <div class="step step-bad">
+      <span class="score score-bad">0.35</span>
+      <div><div class="cfg">chunk=150, rerank=False, th=0.3, k=20</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: threshold 0.3→0.7</b> — 提高相似度阈值，过滤噪声</div>
+    <div class="step step-mid">
+      <span class="score score-mid">0.60</span>
+      <div><div class="cfg">chunk=150, rerank=False, th=0.7, k=20</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: top_k 20→4</b> — 减少召回数，避免稀释</div>
+    <div class="step step-mid">
+      <span class="score score-mid">0.80</span>
+      <div><div class="cfg">chunk=150, rerank=False, th=0.7, k=4</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: +rerank</b> — 加重排序步骤，提升精度</div>
+    <div class="step step-good">
+      <span class="score score-good">0.95</span>
+      <div><div class="cfg">chunk=150, rerank=True, th=0.7, k=4</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: +expand</b> — 加查询扩展，提升召回</div>
+    <div class="step step-good">
+      <span class="score score-good">1.00</span>
+      <div><div class="cfg">chunk=150, rerank=True, expand=True, th=0.7, k=4</div>
+      <div class="detail">✅ 最优配置</div></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <strong>5 步，每步调一个参数，分数从 0 到 1。</strong> 这和"调 prompt"有本质区别——引擎调的是<strong>检索流水线的结构</strong>（分块策略/重排序/阈值/召回数），这些是 RAG 工程里真正影响质量的旋钮。
+  </div>
+</div>
+
+<div class="panel">
+  <h2>关键洞察：为什么是"策略结构"而非"关键词"</h2>
+  <div class="sub">RAG 的进化空间不在"搜什么关键词"（一个关键词就拉满），在"怎么组织检索流水线"。</div>
+  <table style="width:100%;font-size:.85rem;border-collapse:collapse">
+    <tr style="color:var(--muted);font-size:.78rem">
+      <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">方向</th>
+      <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">为什么不行</th>
+    </tr>
+    <tr><td style="padding:8px;border-bottom:1px solid var(--border)">选关键词</td><td style="padding:8px;border-bottom:1px solid var(--border)">太粗——加一个"python"就从 0.5 跳到 1.0，没有逐步逼近的空间</td></tr>
+    <tr><td style="padding:8px">调策略结构 ✅</td><td style="padding:8px">5 个参数各有最优区间，从全错到最优有连续梯度——这才是 RAG 工程的真正进化空间</td></tr>
+  </table>
+</div>
+
+<div class="panel">
+  <h2>诚实边界</h2>
+  <table style="width:100%;font-size:.85rem;border-collapse:collapse">
+    <tr style="color:var(--muted);font-size:.78rem">
+      <th style="width:50%;text-align:left;padding:8px">✅ 证明了</th>
+      <th style="width:50%;text-align:left;padding:8px">⚠️ 局限</th>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid var(--border)">引擎在第七个领域（RAG）跑通；进化链清晰：5 步从 0→1，每步调一个策略参数。RAG 场景可接入。</td>
+      <td style="padding:8px;border-bottom:1px solid var(--border)">评估是<strong>规则模拟</strong>（基于 RAG best practices），非真实 embedding 检索。生产级需对接真实向量库。</td>
+    </tr>
+  </table>
+  <div class="honest">
+    <strong>定位：</strong>RAG 证明了引擎在<strong>检索增强场景</strong>上的可接入性。三个 Roadmap 场景（SQL + 代码 + RAG）全部从规划变成了已验证。
+  </div>
+</div>
+
+</body>
+</html>

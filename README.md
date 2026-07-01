@@ -43,7 +43,7 @@
 content/      # 5 篇 factor 文档 + honest-boundary（CC BY-SA 4.0）
 core/         # 领域无关引擎（Apache 2.0）：
               #   protocols · memory · rules · meta_learner · evolver · novelty · engine
-adapters/     # reference adapter：mock（玩具）+ game2048（公开对照）+ maze（机制接入，未 claim 进化）+ symreg（可观察进化）+ regex（程序合成进化）；
+adapters/     # reference adapter：mock（玩具）+ game2048（公开对照）+ maze（机制接入，未 claim 进化）+ symreg（可观察进化）+ regex（程序合成进化）+ sql（查询优化）+ codegen（代码生成）+ rag（检索策略）；
               #   真实量化 adapter 在私有宿主
 experiments/  # 2048 失忆组对照（ablation_runner）+ 符号回归/正则合成进化轨迹；纯 stdlib
 examples/     # 脱敏案例研究（换池塘 + 2048 对照 + 符号回归进化 + 正则合成进化 + 迷宫失败记录）
@@ -65,7 +65,7 @@ img/          # 图
 
 ## 状态与诚实边界
 
-在**六个领域**验证过：量化因子挖掘（私有，真实案例）+ 2048（公开，带失忆组对照）+ 符号回归（公开，可观察的生成器进化）+ 正则合成（公开，程序合成进化）+ **SQL 查询优化（公开，反模式修复进化）** + **代码生成（公开，bug 修复进化）**。后两个从 Roadmap 变成了已验证——代价从 24→1（SQL）、从部分通过到全通过（代码），证明引擎在生产相关场景上的可接入性。但 6 个领域 ≠ 泛化证明；跨领域泛化仍是 roadmap，不是 claim。→ [诚实声明边界](content/honest-boundary.md)
+在**七个领域**验证过：量化因子挖掘（私有，真实案例）+ 2048（公开，带失忆组对照）+ 符号回归（公开，可观察的生成器进化）+ 正则合成（公开，程序合成进化）+ SQL 查询优化（公开，反模式修复进化）+ 代码生成（公开，bug 修复进化）+ RAG 检索（公开，策略配置进化）。后三个从 Roadmap 变成了已验证——SQL 代价从 24→1、代码从部分通过到全通过、RAG 从 0→1。但 7 个领域 ≠ 泛化证明。→ [诚实声明边界](content/honest-boundary.md)
 
 ## License
 
