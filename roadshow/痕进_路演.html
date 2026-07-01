@@ -722,6 +722,48 @@
     color: var(--text);
   }
 
+  .llm-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 36px;
+  }
+
+  .llm-col {
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    background: var(--panel);
+    padding: 22px;
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .llm-head {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(82, 101, 125, 0.16);
+  }
+
+  .llm-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(82, 101, 125, 0.1);
+    font-size: 16px;
+  }
+  .llm-row:last-child { border-bottom: 0; }
+
+  .llm-label {
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  #s7b .lead {
+    margin-top: 20px;
+    font-size: clamp(18px, 1.8vw, 23px);
+  }
+
   .accent-blue { color: var(--blue); }
   .accent-orange { color: var(--orange); }
   .accent-green { color: var(--green); }
@@ -756,7 +798,7 @@
 <body>
   <nav class="deck-nav" aria-label="slides">
     <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a>
-    <a href="#s5"></a><a href="#s5b"></a><a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
+    <a href="#s5"></a><a href="#s5b"></a><a href="#s6"></a><a href="#s7"></a><a href="#s7b"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
   </nav>
 
   <section class="slide" id="s1">
@@ -774,7 +816,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 12</span></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 13</span></div>
       </div>
     </div>
   </section>
@@ -790,7 +832,7 @@
       <div class="hero-mark" aria-hidden="true"></div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 12</span></div>
+        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 13</span></div>
       </div>
     </div>
   </section>
@@ -813,7 +855,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 12</span></div>
+        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 13</span></div>
       </div>
     </div>
   </section>
@@ -834,7 +876,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 12</span></div>
+        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 13</span></div>
       </div>
     </div>
   </section>
@@ -864,7 +906,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 12</span></div>
+        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 13</span></div>
       </div>
     </div>
   </section>
@@ -901,7 +943,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · observable evolution, public & reproducible</span><span>06 / 12</span></div>
+        <div class="footer"><span>乔木计划 · observable evolution, public & reproducible</span><span>06 / 13</span></div>
       </div>
     </div>
   </section>
@@ -927,7 +969,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>07 / 12</span></div>
+        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>07 / 13</span></div>
       </div>
     </div>
   </section>
@@ -961,28 +1003,59 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>08 / 12</span></div>
+        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>08 / 13</span></div>
       </div>
     </div>
   </section>
 
-  <section class=”slide” id=”s8”>
-    <div class=”slide-inner”>
+  <section class="slide" id="s7b">
+    <div class="slide-inner">
       <div>
-        <div class=”kicker”>WHERE IT APPLIES · HOW TO INTEGRATE</div>
+        <div class="kicker">DESIGN DECISION · NO LLM DEPENDENCY</div>
+        <h2>引擎零 LLM 依赖。<br>纯本地、确定性、可复现。</h2>
+        <p class="lead">引擎做的事是结构化的记录与检索——记住失败、屏蔽死路、给家族打分、投影规则。全是确定性的数据结构操作，不调任何大模型。</p>
+        <div class="llm-compare">
+          <div class="llm-col">
+            <div class="llm-head" style="color:var(--muted)">依赖 LLM 的"自进化"</div>
+            <div class="llm-row"><span class="llm-label">每轮搜索成本</span><span class="accent-red">要调 LLM，贵</span></div>
+            <div class="llm-row"><span class="llm-label">可复现性</span><span class="accent-red">LLM 输出不确定</span></div>
+            <div class="llm-row"><span class="llm-label">可审计性</span><span class="accent-red">"学到了"是黑箱</span></div>
+            <div class="llm-row"><span class="llm-label">嵌入成本</span><span class="accent-red">要带 LLM 才能跑</span></div>
+          </div>
+          <div class="llm-col" style="border-color:rgba(21,149,107,.38);background:#f4fff9">
+            <div class="llm-head" style="color:var(--green)">痕进（结构化进化）</div>
+            <div class="llm-row"><span class="llm-label">每轮搜索成本</span><span class="accent-green">零 API，免费</span></div>
+            <div class="llm-row"><span class="llm-label">可复现性</span><span class="accent-green">确定性，同输入同输出</span></div>
+            <div class="llm-row"><span class="llm-label">可审计性</span><span class="accent-green">每条规则有 evidence_ids</span></div>
+            <div class="llm-row"><span class="llm-label">嵌入成本</span><span class="accent-green">纯 stdlib，离线跑</span></div>
+          </div>
+        </div>
+        <div class="bridge-note"><b>LLM 负责造，引擎负责筛和记</b><span>在你的项目里，LLM 可以作为候选生成器——但引擎本身的记忆、屏蔽、规则投影全部是确定性操作，不依赖任何大模型。</span></div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · structured evolution, no LLM tax</span><span>09 / 13</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s8">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">WHERE IT APPLIES · HOW TO INTEGRATE</div>
         <h2>接入只写一个 adapter，<br>引擎一行不改。</h2>
-        <p class=”lead”>适用条件：Agent 反复试错、失败能被客观定义、同类错误会重复出现。满足这三条，写一个 adapter（5 个方法，约 50-150 行）即可接入。</p>
-        <div class=”use-cases”>
-          <div class=”use-case”><div class=”case-tag” style=”color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)”>已验证</div><h3>量化因子挖掘</h3><p>提因子→回测→看 Sharpe。记住”这类信号族在这个市场失效”，换方向不调参。</p></div>
-          <div class=”use-case”><div class=”case-tag” style=”color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)”>已验证</div><h3>符号回归</h3><p>猜公式→拟合→看 R²。记住”三角函数族拟合不了多项式”，换结构。</p></div>
-          <div class=”use-case”><div class=”case-tag” style=”color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)”>已验证</div><h3>规则合成</h3><p>猜规则→分类→看 F1。记住”过宽的规则会误伤”，收紧。</p></div>
-          <div class=”use-case”><div class=”case-tag”>Roadmap</div><h3>代码生成</h3><p>写代码→编译测试→修。记住”这类 API 调用容易触发异常”，换写法。</p></div>
-          <div class=”use-case”><div class=”case-tag”>Roadmap</div><h3>SQL / RAG</h3><p>写查询/检索→执行→看性能。记住”这类 JOIN 必慢””这类查询召回差”，进化路径。</p></div>
+        <p class="lead">适用条件：Agent 反复试错、失败能被客观定义、同类错误会重复出现。满足这三条，写一个 adapter（5 个方法，约 50-150 行）即可接入。</p>
+        <div class="use-cases">
+          <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已验证</div><h3>量化因子挖掘</h3><p>提因子→回测→看 Sharpe。记住"这类信号族在这个市场失效"，换方向不调参。</p></div>
+          <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已验证</div><h3>符号回归</h3><p>猜公式→拟合→看 R²。记住"三角函数族拟合不了多项式"，换结构。</p></div>
+          <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已验证</div><h3>规则合成</h3><p>猜规则→分类→看 F1。记住"过宽的规则会误伤"，收紧。</p></div>
+          <div class="use-case"><div class="case-tag">Roadmap</div><h3>代码生成</h3><p>写代码→编译测试→修。记住"这类 API 调用容易触发异常"，换写法。</p></div>
+          <div class="use-case"><div class="case-tag">Roadmap</div><h3>SQL / RAG</h3><p>写查询/检索→执行→看性能。记住"这类 JOIN 必慢""这类查询召回差"，进化路径。</p></div>
         </div>
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>09 / 12</span></div>
+        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>10 / 13</span></div>
       </div>
     </div>
   </section>
@@ -1022,7 +1095,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>10 / 12</span></div>
+        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>11 / 13</span></div>
       </div>
     </div>
   </section>
@@ -1055,7 +1128,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>11 / 12</span></div>
+        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>12 / 13</span></div>
       </div>
     </div>
   </section>
@@ -1070,7 +1143,7 @@
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>12 / 12</span></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>13 / 13</span></div>
       </div>
     </div>
   </section>
