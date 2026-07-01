@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>痕进 · evolving-agents — 会进化的 Agent 引擎</title>
+<meta name="description" content="造能从自己的失败里学习的 agent 的一组原则。五个 Factor：记住失败、给搜索打分、学失败模式、换结构、追新颖。">
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --neutral: #6e7681;
+    --accent: #58a6ff;
+    --accent-bg: rgba(88, 166, 255, 0.08);
+    --alive: #3fb950;
+    --alive-bg: rgba(63, 185, 80, 0.08);
+    --warn: #ffa657;
+    --learn: #d2a8ff;
+    --memory: #79c0ff;
+    --pivot: #ffa657;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .hero {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 64px 24px 48px;
+    text-align: center;
+  }
+  .brand {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .hero .slogan {
+    font-size: 18px;
+    color: var(--dim);
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+  .hero .claim {
+    font-size: 15px;
+    color: var(--text);
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    text-align: left;
+  }
+  .hero .claim strong { color: var(--text); }
+  .hero .claim .dim { color: var(--dim); }
+
+  .nav-strip {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0 24px 48px;
+  }
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--panel);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .nav-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent-bg);
+    text-decoration: none;
+  }
+  .nav-btn .icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+  }
+
+  .section {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+  }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .factors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .factor-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    transition: border-color 0.15s, transform 0.1s;
+    display: flex;
+    flex-direction: column;
+  }
+  .factor-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .factor-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .factor-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .factor-card p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .factor-card .tag {
+    margin-top: 14px;
+    font-size: 11px;
+    color: var(--neutral);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .demos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .demo-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+  .demo-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .demo-card a { display: block; color: inherit; }
+  .demo-card a:hover { text-decoration: none; }
+  .demo-body { padding: 22px 24px; }
+  .demo-card .eyebrow {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .demo-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .demo-card p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+  .demo-card .arrow {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .demo-card .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: 2px;
+  }
+  .badge.live { color: var(--alive); background: var(--alive-bg); }
+  .badge.data { color: var(--warn); background: rgba(255, 166, 87, 0.1); }
+  .badge.chart { color: var(--learn); background: rgba(210, 168, 255, 0.1); }
+
+  .honest-bar {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px 28px;
+  }
+  .honest-bar .title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--warn);
+    margin-bottom: 10px;
+  }
+  .honest-bar p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.7;
+  }
+  .honest-bar .null-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--warn);
+    background: rgba(255, 166, 87, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+
+  .footer {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer .left {
+    font-size: 13px;
+    color: var(--neutral);
+  }
+  .footer .left a { color: var(--dim); }
+  .footer .left a:hover { color: var(--accent); }
+  .footer .github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+    background: var(--panel);
+  }
+  .footer .github-link:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 28px; }
+    .hero { padding: 40px 20px 32px; }
+    .factors, .demos { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="brand">evolving-agents</div>
+  <h1>痕进</h1>
+  <p class="slogan">失败留痕，凭痕而进。<br>造能从自己的失败里学习的 agent。</p>
+  <div class="claim">
+    <strong>大多数搜索循环不会学习。</strong> <span class="dim">要么每次从零开始，要么把历史塞进 prompt 碰运气。真正会进化的 agent 做的事不一样：给搜索策略打分，学习失败</span><em>模式</em><span class="dim">而非单个失败，卡住时换结构而非调参数。</span>
+  </div>
+</div>
+
+<div class="nav-strip">
+  <a class="nav-btn" href="https://github.com/Joe-rq/evolving-agents" target="_blank">
+    <span class="icon">&#10224;</span> GitHub 仓库
+  </a>
+  <a class="nav-btn" href="https://github.com/Joe-rq/evolving-agents/tree/main/content" target="_blank">
+    <span class="icon">&#128196;</span> 5 篇 Factor 文档
+  </a>
+  <a class="nav-btn" href="https://github.com/Joe-rq/evolving-agents/tree/main/core" target="_blank">
+    <span class="icon">&#9881;</span> 引擎源码
+  </a>
+  <a class="nav-btn" href="https://github.com/Joe-rq/evolving-agents/tree/main/experiments" target="_blank">
+    <span class="icon">&#128202;</span> 2048 对照实验
+  </a>
+</div>
+
+<div class="section">
+  <div class="section-title">五个 Factor</div>
+  <div class="factors">
+    <div class="factor-card">
+      <div class="num">Factor 1</div>
+      <h3>记住你的失败</h3>
+      <p>每次搜索留下一条疤痕记录：失败表达式、失败原因、所在池塘。下次不重复烧配额。</p>
+      <div class="tag">memory · rules</div>
+    </div>
+    <div class="factor-card">
+      <div class="num">Factor 2</div>
+      <h3>给搜索打分，不是给候选打分</h3>
+      <p>agent 评价的不是"这个候选好不好"，而是"这次搜索过程值不值得复用"。搜索策略本身才是学习对象。</p>
+      <div class="tag">meta_learner</div>
+    </div>
+    <div class="factor-card">
+      <div class="num">Factor 3</div>
+      <h3>学失败模式，不是单个失败</h3>
+      <p>一次 self-corr 失败后，整个 close-yield motif 类被降权——不只屏蔽那一条。从账本投影出规则，不是人写的规则。</p>
+      <div class="tag">rules · evidence_ids</div>
+    </div>
+    <div class="factor-card">
+      <div class="num">Factor 4</div>
+      <h3>换结构，不是调参数</h3>
+      <p>在拥挤池塘里调 decay/窗口永远修不好问题。agent 提议换数据源、换搜索空间——人批准。</p>
+      <div class="tag">evolver · pivot</div>
+    </div>
+    <div class="factor-card">
+      <div class="num">Factor 5</div>
+      <h3>追新颖，避拥挤</h3>
+      <p> novelty 模块追踪搜索过的空间，让 agent 在已有疤痕附近主动远离，探索新区域。</p>
+      <div class="tag">novelty · self_corr</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">体验 Demo</div>
+  <div class="demos">
+    <div class="demo-card">
+      <a href="demo/01-pond-switch.zh.html">
+        <div class="demo-body">
+          <div class="eyebrow">Factor 4 · 案例</div>
+          <h3>同一条因子，换了个池塘 <span class="badge live">LIVE</span></h3>
+          <p>Sharpe 始终是 2.15，拥挤度从 0.78 降到 0.68。因子从来不是问题——是池塘错了。</p>
+          <div class="arrow">查看案例 →</div>
+        </div>
+      </a>
+    </div>
+    <div class="demo-card">
+      <a href="demo/02-evolution-timeline.zh.html">
+        <div class="demo-body">
+          <div class="eyebrow">时间线</div>
+          <h3>从盲搜，到"换池塘" <span class="badge live">LIVE</span></h3>
+          <p>真实 commit 历史：积累失败 → 按池塘隔离记忆 → agent 提议换结构 → 死因子复活。</p>
+          <div class="arrow">查看时间线 →</div>
+        </div>
+      </a>
+    </div>
+    <div class="demo-card">
+      <a href="demo/03-auditable-rule.zh.html">
+        <div class="demo-body">
+          <div class="eyebrow">Factor 3 · 证据</div>
+          <h3>这条惩罚，从哪来？ <span class="badge live">LIVE</span></h3>
+          <p>不是黑箱"agent 学到了"——追到具体哪几次失败。3 条 evidence 可追溯。</p>
+          <div class="arrow">查看审计 →</div>
+        </div>
+      </a>
+    </div>
+    <div class="demo-card">
+      <a href="demo/04-architecture.zh.html">
+        <div class="demo-body">
+          <div class="eyebrow">架构</div>
+          <h3>引擎，不是平台 <span class="badge live">LIVE</span></h3>
+          <p>core/ 7 模块 + 5 协议 = 领域无关引擎。换领域只换适配器，引擎一行不改。</p>
+          <div class="arrow">查看架构 →</div>
+        </div>
+      </a>
+    </div>
+    <div class="demo-card">
+      <a href="demo/05-ablation-result.zh.html">
+        <div class="demo-body">
+          <div class="eyebrow">对照实验</div>
+          <h3>2048 失忆组 vs 完整组 <span class="badge chart">SVG</span></h3>
+          <p>M=30 配对复制，Wilcoxon 双尾。唯一变量：Memory 是否跨 round 累积。结果 null，如实报告。</p>
+          <div class="arrow">查看对照 →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">诚实声明</div>
+  <div class="honest-bar">
+    <div class="title">&#9888; 我们报告 null 结果</div>
+    <p>
+      <span class="null-tag">NULL</span> 在 2048 领域的失忆组对照（M=30）中，Memory 跨 round 累积的增益 <strong>未被统计证明</strong>（p = 0.079）。<br><br>
+      但我们同时报告：机制作为代码 <strong>全部可观察地工作</strong>——block 452 次、 pivot 131 次、规则投影 1.7 条，失忆组全部为零。我们区分「机制存在」与「增益被统计检出」，后者未成立即如实写入。这是这个项目的诚实边界。
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="left">
+    <a href="content/LICENSE.md">内容 CC BY-SA 4.0</a> ·
+    <a href="LICENSE">代码 Apache 2.0</a> ·
+    <span>致敬 <a href="https://github.com/humanlayer/12-factor-agents" target="_blank">12-factor agents</a></span>
+  </div>
+  <a class="github-link" href="https://github.com/Joe-rq/evolving-agents" target="_blank">
+    <span>GitHub</span> Joe-rq/evolving-agents
+  </a>
+</div>
+
+</body>
+</html>
