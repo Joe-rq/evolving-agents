@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+    <filter id="cardShadow5" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="3" result="offsetblur" />
+      <feFlood flood-color="#1D4D82" flood-opacity="0.10" result="shadowColor" />
+      <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow" />
+      <feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p05-header">
+    <text x="60" y="72" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">FIRST SANDBOX</text>
+    <text x="60" y="152" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">交易不是终点，</text>
+    <text x="60" y="226" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#1D70D6">只是第一个可验证沙盘。</text>
+    <text x="60" y="278" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">量化交易是第一个沙盘：反馈明确，失败可追溯。这个案例证明的不是"会交易"，而是 Agent 学会了<tspan font-weight="700" fill="#122033">换搜索结构</tspan>。</text>
+  </g>
+
+  
+  <g id="card-pond-dead">
+    <g filter="url(#cardShadow5)">
+      <path fill="#FFF7F6" stroke="#D94B4B" stroke-opacity="0.36" stroke-width="1.5" d="M76,318 H604 A16,16 0 0 1 620,334 V502 A16,16 0 0 1 604,518 H76 A16,16 0 0 1 60,502 V334 A16,16 0 0 1 76,318 Z" />
+    </g>
+    
+  <g transform="translate(84, 340) scale(1.66667)" fill="none" stroke="#D94B4B" stroke-width="2">
+    <path d="M9 9v-1a3 3 0 0 1 6 0v1" />
+    <path d="M8 9h8a6 6 0 0 1 1 3v3a5 5 0 0 1 -10 0v-3a6 6 0 0 1 1 -3" />
+    <path d="M3 13l4 0" />
+    <path d="M17 13l4 0" />
+    <path d="M12 20l0 -6" />
+    <path d="M4 19l3.35 -2" />
+    <path d="M20 19l-3.35 -2" />
+    <path d="M4 7l3.75 2.4" />
+    <path d="M20 7l-3.75 2.4" />
+  </g>
+    <text x="136" y="370" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#52657D">TOP3000 / 大盘池塘</text>
+    
+    <text x="84" y="424" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">Sharpe</text>
+    <text x="596" y="424" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="32" font-weight="700" fill="#D94B4B">2.15</text>
+    <line x1="84" y1="438" x2="596" y2="438" stroke="#52657D" stroke-opacity="0.16" stroke-width="1" />
+    <text x="84" y="472" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">self_corr</text>
+    <text x="596" y="472" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="32" font-weight="700" fill="#D94B4B">0.78</text>
+    <line x1="84" y1="486" x2="596" y2="486" stroke="#52657D" stroke-opacity="0.16" stroke-width="1" />
+    <text x="84" y="510" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">result</text>
+    <text x="596" y="510" text-anchor="end" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" font-weight="900" fill="#D94B4B">FAIL</text>
+  </g>
+
+  
+  <g id="card-pond-alive">
+    <g filter="url(#cardShadow5)">
+      <path fill="#F4FFF9" stroke="#15956B" stroke-opacity="0.38" stroke-width="1.5" d="M676,318 H1204 A16,16 0 0 1 1220,334 V502 A16,16 0 0 1 1204,518 H676 A16,16 0 0 1 660,502 V334 A16,16 0 0 1 676,318 Z" />
+    </g>
+    
+  <g transform="translate(684, 340) scale(1.66667)" fill="none" stroke="#15956B" stroke-width="2">
+    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+    <path d="M9 12l2 2l4 -4" />
+  </g>
+    <text x="736" y="370" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#52657D">TOP1000 / 中小盘池塘</text>
+    <text x="684" y="424" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">Sharpe</text>
+    <text x="1196" y="424" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="32" font-weight="700" fill="#15956B">2.15</text>
+    <line x1="684" y1="438" x2="1196" y2="438" stroke="#52657D" stroke-opacity="0.16" stroke-width="1" />
+    <text x="684" y="472" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">self_corr</text>
+    <text x="1196" y="472" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="32" font-weight="700" fill="#15956B">0.68</text>
+    <line x1="684" y1="486" x2="1196" y2="486" stroke="#52657D" stroke-opacity="0.16" stroke-width="1" />
+    <text x="684" y="510" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">result</text>
+    <text x="1196" y="510" text-anchor="end" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" font-weight="900" fill="#15956B">PASS</text>
+  </g>
+
+  
+  <g id="p05-pivot">
+    <text x="470" y="578" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="22" font-weight="700" fill="#E47B2C">agent proposes</text>
+    
+  <g transform="translate(616, 556) scale(1.83333)" fill="none" stroke="#E47B2C" stroke-width="2">
+    <path d="M5 12l14 0" />
+    <path d="M13 18l6 -6" />
+    <path d="M13 6l6 6" />
+  </g>
+    <text x="810" y="578" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="22" font-weight="700" fill="#E47B2C">human approves</text>
+  </g>
+  <g id="p05-bridge">
+    <path fill="#EAF3FF" stroke="#1D70D6" stroke-opacity="0.18" stroke-width="1" d="M70,610 H1210 A10,10 0 0 1 1220,620 V644 A10,10 0 0 1 1210,654 H70 A10,10 0 0 1 60,644 V620 A10,10 0 0 1 70,610 Z" />
+    <text x="84" y="640" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="24" font-weight="800" fill="#1D70D6">关键转折</text>
+    <text x="204" y="640" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">答案没变，<tspan font-weight="700" fill="#E47B2C">环境变了。</tspan></text>
+  </g>
+
+  <g id="p05-footer">
+    <rect x="60" y="678" width="1160" height="2" fill="url(#scarLine5)" />
+    <text x="60" y="708" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · first sandbox, not final domain</text>
+    <text x="1220" y="708" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">05 / 10</text>
+  </g>
+</svg>

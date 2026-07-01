@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+    <filter id="cardShadow6" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="3" result="offsetblur" />
+      <feFlood flood-color="#1D4D82" flood-opacity="0.10" result="shadowColor" />
+      <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow" />
+      <feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p06-header">
+    <text x="60" y="80" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">AUDITABILITY</text>
+    <text x="60" y="172" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">为什么这不是黑箱学习？</text>
+    <text x="60" y="246" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#1D70D6">因为每条规则都能追到证据。</text>
+  </g>
+
+  
+  <g id="card-evidence-rule">
+    <g filter="url(#cardShadow6)">
+      <path fill="#FFF8F4" stroke="#D94B4B" stroke-opacity="0.24" stroke-width="1.5" d="M76,310 H724 A16,16 0 0 1 740,326 V594 A16,16 0 0 1 724,610 H76 A16,16 0 0 1 60,594 V326 A16,16 0 0 1 76,310 Z" />
+    </g>
+    <g id="rule-top">
+      <path fill="#D94B4B" fill-opacity="0.10" d="M90,338 H198 A6,6 0 0 1 204,344 V366 A6,6 0 0 1 198,372 H90 A6,6 0 0 1 84,366 V344 A6,6 0 0 1 90,338 Z" />
+      <text x="98" y="362" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="800" fill="#D94B4B">PENALIZE</text>
+      <text x="226" y="362" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="26" font-weight="700" fill="#122033">cashflow_close_yield</text>
+      <text x="716" y="362" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">scope: TOP3000</text>
+    </g>
+    <line x1="84" y1="388" x2="716" y2="388" stroke="#C9D9EA" stroke-width="1" />
+    
+    <g id="evidence-cell-1">
+      <text x="84" y="424" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="18" font-weight="700" fill="#7B8DA3" letter-spacing="1">SCORE ADJUSTMENT</text>
+      <text x="84" y="492" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="64" font-weight="900" fill="#D94B4B">−0.65</text>
+    </g>
+    <line x1="290" y1="412" x2="290" y2="520" stroke="#52657D" stroke-opacity="0.22" stroke-width="2" />
+    <g id="evidence-cell-2">
+      <text x="316" y="424" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="18" font-weight="700" fill="#7B8DA3" letter-spacing="1">CONFIDENCE</text>
+      <text x="316" y="492" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="64" font-weight="900" fill="#1D70D6">0.75</text>
+    </g>
+    <line x1="522" y1="412" x2="522" y2="520" stroke="#52657D" stroke-opacity="0.22" stroke-width="2" />
+    <g id="evidence-cell-3">
+      <text x="548" y="424" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="18" font-weight="700" fill="#7B8DA3" letter-spacing="1">EVIDENCE IDS</text>
+      <text x="548" y="492" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="64" font-weight="900" fill="#E47B2C">3</text>
+    </g>
+  </g>
+
+  
+  <g id="p06-interp">
+    
+  <g transform="translate(800, 330) scale(2.33333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+    <path d="M12 21h-5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v4.5" />
+    <path d="M14 17.5a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
+    <path d="M18.5 19.5l2.5 2.5" />
+  </g>
+    <text x="800" y="432" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="34" font-weight="800" fill="#122033">真正的差异不在</text>
+    <text x="800" y="472" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="28" fill="#52657D">"Agent 好像学到了"，</text>
+    <text x="800" y="528" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="34" font-weight="800" fill="#1D70D6">而在它能回答：</text>
+    <text x="800" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#122033">是哪几次具体失败，</text>
+    <text x="800" y="600" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#122033">教会了这条惩罚。</text>
+  </g>
+
+  <g id="p06-footer">
+    <rect x="60" y="660" width="1160" height="2" fill="url(#scarLine6)" />
+    <text x="60" y="700" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · rules with evidence, not vibes</text>
+    <text x="1220" y="700" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">06 / 10</text>
+  </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow1b" cx="18%" cy="80%" r="40%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#31B67A" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="bgGlow2b" cx="88%" cy="20%" r="38%">
+      <stop offset="0%" stop-color="#1D70D6" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#1D70D6" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="scarLineB" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+    <rect width="1280" height="720" fill="url(#bgGlow1b)" />
+    <rect width="1280" height="720" fill="url(#bgGlow2b)" />
+  </g>
+
+  
+  <g id="deco-mark">
+    <path fill="#FFFFFF" fill-opacity="0.36" stroke="#1D70D6" stroke-opacity="0.20" stroke-width="1" transform="rotate(-8 1090 300)" d="M944,150 H1236 A4,4 0 0 1 1240,154 V446 A4,4 0 0 1 1236,450 H944 A4,4 0 0 1 940,446 V154 A4,4 0 0 1 944,150 Z" />
+    <path fill="none" stroke="#31B67A" stroke-opacity="0.28" stroke-width="1" d="M984,190 H1196 A4,4 0 0 1 1200,194 V406 A4,4 0 0 1 1196,410 H984 A4,4 0 0 1 980,406 V194 A4,4 0 0 1 984,190 Z" />
+    <path fill="none" stroke="#E47B2C" stroke-opacity="0.26" stroke-width="1" transform="rotate(14 1090 300)" d="M1014,220 H1166 A4,4 0 0 1 1170,224 V376 A4,4 0 0 1 1166,380 H1014 A4,4 0 0 1 1010,376 V224 A4,4 0 0 1 1014,220 Z" />
+    
+    
+  <g transform="translate(1052, 262) scale(3.16667)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M12 21v-13a4 4 0 1 0 -4 4h13" />
+    <path d="M17 16l4 -4l-4 -4" />
+  </g>
+  </g>
+
+  <g id="p02-header">
+    <path fill="#31B67A" fill-opacity="0.13" stroke="#31B67A" stroke-opacity="0.30" stroke-width="1" d="M68,80 H202 A8,8 0 0 1 210,88 V112 A8,8 0 0 1 202,120 H68 A8,8 0 0 1 60,112 V88 A8,8 0 0 1 68,80 Z" />
+    <path fill="#31B67A" d="M78,92 H78 A6,6 0 0 1 84,98 V104 A6,6 0 0 1 78,110 H78 A6,6 0 0 1 72,104 V98 A6,6 0 0 1 78,92 Z" />
+    <text x="92" y="107" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="20" font-weight="700" fill="#0B5A43">乔木计划</text>
+    <text x="60" y="172" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">THE PROMISE</text>
+  </g>
+
+  <g id="p02-title">
+    <text x="60" y="310" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="80" font-weight="900" fill="#122033">失败留痕，</text>
+    <text x="60" y="404" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="80" font-weight="900" fill="#1D70D6">凭痕而进。</text>
+  </g>
+
+  <g id="p02-message">
+    <text x="60" y="504" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="28" font-weight="400" fill="#52657D">痕进不是让 Agent 背更多上下文，而是让它学会长记性：</text>
+    <text x="60" y="552" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="28" font-weight="400" fill="#52657D">错在哪里、为什么错、下次该避开哪条路，都留下<tspan font-weight="700" fill="#1D70D6">可追溯的痕迹</tspan>。</text>
+  </g>
+
+  <g id="p02-footer">
+    <rect x="60" y="612" width="1160" height="2" fill="url(#scarLineB)" />
+    <text x="60" y="660" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · roadshow preview</text>
+    <text x="1220" y="660" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">02 / 10</text>
+  </g>
+</svg>
