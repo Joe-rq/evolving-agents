@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>乔木计划 · 痕进 Scarforge 路演预览</title>
+<style>
+  :root {
+    --bg: #f4f9ff;
+    --paper: #ffffff;
+    --panel: #ffffff;
+    --panel-2: #eaf3ff;
+    --line: #c9d9ea;
+    --text: #122033;
+    --muted: #52657d;
+    --subtle: #7b8da3;
+    --blue: #1d70d6;
+    --purple: #7f5af0;
+    --orange: #e47b2c;
+    --green: #15956b;
+    --red: #d94b4b;
+    --leaf: #31b67a;
+    --shadow: rgba(29, 77, 130, 0.13);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 12% 12%, rgba(49, 182, 122, 0.16), transparent 30%),
+      radial-gradient(circle at 82% 16%, rgba(29, 112, 214, 0.14), transparent 32%),
+      linear-gradient(180deg, #fbfdff 0%, var(--bg) 46%, #eef7f4 100%);
+    color: var(--text);
+    font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(rgba(29, 112, 214, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(49, 182, 122, 0.045) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.46), rgba(0,0,0,0.08));
+  }
+
+  .deck-nav {
+    position: fixed;
+    top: 22px;
+    right: 28px;
+    z-index: 20;
+    display: flex;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    box-shadow: 0 12px 32px var(--shadow);
+    backdrop-filter: blur(14px);
+  }
+
+  .deck-nav a {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #b8c9dd;
+    text-decoration: none;
+  }
+
+  .slide {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 64px 80px;
+  }
+
+  .slide-inner {
+    width: min(1120px, 100%);
+    min-height: 620px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+  }
+
+  .kicker {
+    font-family: Consolas, "Courier New", monospace;
+    color: var(--blue);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  h1, h2, p { margin: 0; }
+  h1 {
+    font-size: clamp(56px, 8vw, 104px);
+    line-height: 0.98;
+    letter-spacing: 0;
+    max-width: 920px;
+  }
+
+  h2 {
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1.08;
+    letter-spacing: 0;
+    max-width: 930px;
+  }
+
+  .lead {
+    color: var(--muted);
+    font-size: clamp(20px, 2.2vw, 28px);
+    line-height: 1.55;
+    max-width: 760px;
+    margin-top: 28px;
+  }
+
+  .team-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #0b5a43;
+    background: rgba(49, 182, 122, 0.13);
+    border: 1px solid rgba(49, 182, 122, 0.3);
+    padding: 10px 14px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .team-badge::before {
+    content: "";
+    width: 12px;
+    height: 18px;
+    border-radius: 12px 12px 12px 2px;
+    background: linear-gradient(135deg, var(--leaf), var(--blue));
+    transform: rotate(-24deg);
+  }
+
+  .scar-line {
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, var(--leaf), var(--blue), var(--orange), transparent);
+    opacity: 0.72;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--subtle);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    margin-top: 28px;
+  }
+
+  .hero {
+    align-content: center;
+  }
+
+  .hero-mark {
+    position: absolute;
+    right: -20px;
+    top: 60px;
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(29, 112, 214, 0.2);
+    transform: rotate(-8deg);
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .hero-mark::before,
+  .hero-mark::after {
+    content: "";
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgba(49, 182, 122, 0.28);
+  }
+
+  .hero-mark::after {
+    inset: 90px 20px;
+    border-color: rgba(228, 123, 44, 0.26);
+    transform: rotate(18deg);
+  }
+
+  .nameplate {
+    align-content: center;
+  }
+
+  .project-name {
+    font-size: clamp(88px, 15vw, 176px);
+    line-height: 0.86;
+    letter-spacing: 0;
+    max-width: 1060px;
+  }
+
+  .project-alias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    align-items: center;
+    margin-top: 30px;
+    color: var(--muted);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: clamp(18px, 2vw, 26px);
+  }
+
+  .project-alias strong {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .project-definition {
+    margin-top: 42px;
+    color: var(--text);
+    font-size: clamp(24px, 3vw, 38px);
+    line-height: 1.28;
+    max-width: 980px;
+  }
+
+  .project-definition span {
+    color: var(--green);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .big-quote {
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.08;
+    font-weight: 700;
+  }
+
+  .bad-list {
+    display: grid;
+    gap: 18px;
+  }
+
+  .bad-item {
+    border-left: 3px solid var(--red);
+    padding: 12px 0 12px 22px;
+  }
+
+  .bad-item strong {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 8px;
+  }
+
+  .bad-item span {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  .principles {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 54px;
+  }
+
+  .principle {
+    min-height: 210px;
+    border: 1px solid rgba(29, 112, 214, 0.14);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 247, 244, 0.86));
+    padding: 22px 18px;
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .principle .num {
+    color: var(--blue);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    margin-bottom: 42px;
+  }
+
+  .principle h3 {
+    margin: 0 0 12px;
+    font-size: 23px;
+    line-height: 1.18;
+  }
+
+  .principle p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .pond-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 42px;
+  }
+
+  .pond {
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    background: var(--panel);
+    padding: 30px;
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .pond.dead { border-color: rgba(217, 75, 75, 0.36); background: #fff7f6; }
+  .pond.alive { border-color: rgba(21, 149, 107, 0.38); background: #f4fff9; }
+
+  .pond-label {
+    font-family: Consolas, "Courier New", monospace;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 26px;
+  }
+
+  .metric {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(82, 101, 125, 0.16);
+  }
+
+  .metric:last-child { border-bottom: 0; }
+  .metric span { color: var(--muted); font-size: 16px; }
+  .metric b { font-family: Consolas, "Courier New", monospace; font-size: 32px; }
+  .dead b { color: var(--red); }
+  .alive b { color: var(--green); }
+
+  .pivot-arrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: var(--orange);
+    font-size: 22px;
+    margin-top: 28px;
+  }
+
+  .bridge-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 12px 16px;
+    border: 1px solid rgba(29, 112, 214, 0.18);
+    background: rgba(234, 243, 255, 0.72);
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.45;
+  }
+
+  .bridge-note b {
+    color: var(--blue);
+  }
+
+  .evidence-rule {
+    margin-top: 48px;
+    border: 1px solid rgba(217, 75, 75, 0.24);
+    background: #fff8f4;
+    padding: 30px 34px;
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .rule-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .badge {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 13px;
+    color: var(--red);
+    background: rgba(217, 75, 75, 0.1);
+    padding: 6px 10px;
+  }
+
+  .mono {
+    font-family: Consolas, "Courier New", monospace;
+  }
+
+  .evidence-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .evidence-cell {
+    border-left: 2px solid rgba(82, 101, 125, 0.22);
+    padding-left: 16px;
+  }
+
+  .evidence-cell small {
+    display: block;
+    color: var(--subtle);
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .evidence-cell b {
+    font-size: 28px;
+  }
+
+  .architecture {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .layer {
+    border: 1px solid rgba(29, 112, 214, 0.15);
+    padding: 28px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .layer h3 {
+    margin: 0 0 18px;
+    font-size: 24px;
+    color: var(--blue);
+  }
+
+  .layer:nth-child(2) h3 { color: var(--purple); }
+
+  .layer p {
+    color: var(--muted);
+    font-size: 17px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .module-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .module {
+    font-family: Consolas, "Courier New", monospace;
+    color: var(--muted);
+    border: 1px solid rgba(82, 101, 125, 0.16);
+    background: #f6faff;
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  .scope-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .scope-item {
+    border: 1px solid rgba(29, 112, 214, 0.15);
+    background: rgba(255, 255, 255, 0.72);
+    padding: 18px;
+  }
+
+  .scope-item small {
+    display: block;
+    color: var(--blue);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+
+  .scope-item b {
+    display: block;
+    font-size: 21px;
+    line-height: 1.25;
+  }
+
+  .scope-item span {
+    display: block;
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .use-cases {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 46px;
+  }
+
+  .use-case {
+    min-height: 230px;
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    background: rgba(255, 255, 255, 0.86);
+    padding: 20px 18px;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 14px;
+  }
+
+  .case-tag {
+    width: max-content;
+    color: var(--green);
+    background: rgba(49, 182, 122, 0.12);
+    border: 1px solid rgba(49, 182, 122, 0.24);
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  .use-case h3 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .use-case p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  #s5 .lead,
+  #s7 .lead,
+  #s8 .lead {
+    margin-top: 20px;
+    font-size: clamp(18px, 1.8vw, 23px);
+  }
+
+  #s5 .pond-grid {
+    margin-top: 28px;
+  }
+
+  #s5 .pond {
+    padding: 22px 26px;
+  }
+
+  #s5 .pond-label {
+    margin-bottom: 14px;
+  }
+
+  #s5 .metric {
+    padding: 8px 0;
+  }
+
+  #s5 .metric b {
+    font-size: 28px;
+  }
+
+  #s5 .pivot-arrow {
+    margin-top: 18px;
+  }
+
+  #s5 .bridge-note {
+    margin-top: 14px;
+    padding: 10px 14px;
+    font-size: 15px;
+  }
+
+  #s7 .architecture {
+    margin-top: 30px;
+  }
+
+  #s7 .layer {
+    padding: 22px;
+  }
+
+  #s7 .layer h3 {
+    margin-bottom: 14px;
+  }
+
+  #s7 .module {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  #s7 .scope-strip {
+    margin-top: 20px;
+  }
+
+  #s7 .scope-item {
+    padding: 14px;
+  }
+
+  #s7 .scope-item b {
+    font-size: 18px;
+  }
+
+  #s7 .scope-item span {
+    font-size: 14px;
+  }
+
+  #s8 .use-cases {
+    margin-top: 30px;
+  }
+
+  #s8 .use-case {
+    min-height: 190px;
+    padding: 16px 14px;
+    gap: 10px;
+  }
+
+  #s8 .use-case h3 {
+    font-size: 19px;
+  }
+
+  #s8 .use-case p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .boundary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .boundary-card {
+    border: 1px solid rgba(29, 112, 214, 0.16);
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 24px 60px var(--shadow);
+  }
+
+  .boundary-card h3 {
+    margin: 0 0 18px;
+    font-size: 28px;
+  }
+
+  .boundary-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 14px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .final-line {
+    font-size: clamp(42px, 6.2vw, 82px);
+    line-height: 1.08;
+    max-width: 960px;
+  }
+
+  .accent-blue { color: var(--blue); }
+  .accent-orange { color: var(--orange); }
+  .accent-green { color: var(--green); }
+  .accent-red { color: var(--red); }
+
+  @media (min-width: 861px) {
+    #s5 {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    html { scroll-snap-type: none; }
+    .slide { padding: 56px 24px; }
+    .slide-inner { min-height: auto; }
+    .deck-nav { display: none; }
+    .two-col,
+    .pond-grid,
+    .architecture,
+    .boundary,
+    .scope-strip,
+    .use-cases { grid-template-columns: 1fr; gap: 24px; }
+    .principles { grid-template-columns: 1fr; }
+    .principle { min-height: auto; }
+    .principle .num { margin-bottom: 20px; }
+    .evidence-row { grid-template-columns: 1fr; }
+    .hero-mark { display: none; }
+  }
+</style>
+</head>
+<body>
+  <nav class="deck-nav" aria-label="slides">
+    <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a>
+    <a href="#s5"></a><a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a><a href="#s11"></a>
+  </nav>
+
+  <section class="slide" id="s1">
+    <div class="slide-inner nameplate">
+      <div>
+        <div class="team-badge">乔木计划</div>
+        <div class="kicker">PROJECT NAME</div>
+        <h1 class="project-name">痕进</h1>
+        <div class="project-alias">
+          <strong>Scarforge</strong>
+          <span>/</span>
+          <span>Evolving Agents</span>
+        </div>
+        <p class="project-definition">一个给 Agent 装上的进化层：<span>把失败变成下一次行动的约束。</span></p>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>01 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s2">
+    <div class="slide-inner hero">
+      <div>
+        <div class="team-badge">乔木计划</div>
+        <div class="kicker">THE PROMISE</div>
+        <h1>失败留痕，<br>凭痕而进。</h1>
+        <p class="lead">痕进不是让 Agent 背更多上下文，而是让它学会长记性：错在哪里、为什么错、下次该避开哪条路，都留下可追溯的痕迹。</p>
+      </div>
+      <div class="hero-mark" aria-hidden="true"></div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · roadshow preview</span><span>02 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s3">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">THE PROBLEM</div>
+        <div class="two-col">
+          <div>
+            <h2>今天的 Agent，太容易反复犯同一个错。</h2>
+            <p class="lead">客服、代码、搜索、研究都一样：一次失败修掉了，下一次换个壳又回来。问题不只是记忆不够，而是失败没有进入决策系统。</p>
+          </div>
+          <div class="bad-list">
+            <div class="bad-item"><strong>只记成功</strong><span>正确答案进了记忆库，错误路径却被当成垃圾清掉。</span></div>
+            <div class="bad-item"><strong>只调参数</strong><span>prompt 改来改去，但真正该换的是任务结构和搜索路径。</span></div>
+            <div class="bad-item"><strong>只追最优</strong><span>大家挤向看起来最好的方向，新路线还没被试就被放弃。</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · failure becomes signal</span><span>03 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s4">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">THE THESIS</div>
+        <h2>不是修 prompt。<br>是让失败变成系统资产。</h2>
+        <p class="lead">一次失败如果只停在对话窗口里，就是噪音；写进账本、归成模式、投影成规则、影响下一轮搜索，它才开始产生复利。</p>
+        <div class="principles">
+          <div class="principle"><div class="num">01</div><h3>记住失败</h3><p>失败持久化，别把配额烧在已知死路上。</p></div>
+          <div class="principle"><div class="num">02</div><h3>评分搜索</h3><p>评估“怎么找答案”，而不只评估最后答案。</p></div>
+          <div class="principle"><div class="num">03</div><h3>学习模式</h3><p>从“这次错了”升级到“这类情况都会错”。</p></div>
+          <div class="principle"><div class="num">04</div><h3>换结构</h3><p>方法反复失败时，换路径，不在旧路上微调。</p></div>
+          <div class="principle"><div class="num">05</div><h3>避拥挤</h3><p>奖励新颖探索，防止集体挤进局部最优。</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · five mechanisms, one loop</span><span>04 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s5">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">FIRST SANDBOX</div>
+        <h2>交易不是终点，<br>只是第一个可验证沙盘。</h2>
+        <p class="lead">量化交易是第一个沙盘：反馈明确，失败可追溯。这个案例证明的不是“会交易”，而是 Agent 学会了换搜索结构。</p>
+        <div class="pond-grid">
+          <div class="pond dead">
+            <div class="pond-label">TOP3000 / 大盘池塘</div>
+            <div class="metric"><span>Sharpe</span><b>2.15</b></div>
+            <div class="metric"><span>self_corr</span><b>0.78</b></div>
+            <div class="metric"><span>result</span><b>FAIL</b></div>
+          </div>
+          <div class="pond alive">
+            <div class="pond-label">TOP1000 / 中小盘池塘</div>
+            <div class="metric"><span>Sharpe</span><b>2.15</b></div>
+            <div class="metric"><span>self_corr</span><b>0.68</b></div>
+            <div class="metric"><span>result</span><b>PASS</b></div>
+          </div>
+        </div>
+        <div class="pivot-arrow"><span class="mono">agent proposes</span><span>→</span><span>human approves</span></div>
+        <div class="bridge-note"><b>关键转折</b><span>答案没变，环境变了。</span></div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · first sandbox, not final domain</span><span>05 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s6">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">AUDITABILITY</div>
+        <h2>为什么这不是黑箱学习？<br>因为每条规则都能追到证据。</h2>
+        <div class="evidence-rule">
+          <div class="rule-top">
+            <span class="badge">PENALIZE</span>
+            <span class="mono">cashflow_close_yield</span>
+            <span style="margin-left:auto;color:var(--muted)" class="mono">scope: TOP3000</span>
+          </div>
+          <div class="evidence-row">
+            <div class="evidence-cell"><small>score adjustment</small><b class="accent-red">-0.65</b></div>
+            <div class="evidence-cell"><small>confidence</small><b class="accent-blue">0.75</b></div>
+            <div class="evidence-cell"><small>evidence ids</small><b class="accent-orange">3</b></div>
+          </div>
+        </div>
+        <p class="lead">真正的差异不在“Agent 好像学到了”，而在它能回答：是哪几次具体失败，教会了这条惩罚。</p>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · rules with evidence, not vibes</span><span>06 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s7">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">PRODUCT SHAPE</div>
+        <h2>它是一个可嵌入的进化层，<br>不是又一个 Agent 平台。</h2>
+        <p class="lead">你的 Agent 继续负责做事；痕进负责让它从失败中更新搜索方式。换领域时只换 adapter，进化循环留在 core。</p>
+        <div class="architecture">
+          <div class="layer">
+            <h3>core / universal loop</h3>
+            <p>通用进化逻辑：记录失败、学习模式、更新规则、奖励新颖探索。</p>
+            <div class="module-list">
+              <div class="module">memory.py</div>
+              <div class="module">meta_learner.py</div>
+              <div class="module">rules.py</div>
+            </div>
+          </div>
+          <div class="layer">
+            <h3>adapter / domain knowledge</h3>
+            <p>领域知识薄层：解释什么叫失败、什么叫好结果、什么动作能执行。</p>
+            <div class="module-list">
+              <div class="module">classify</div>
+              <div class="module">motif_of</div>
+              <div class="module">execute</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · evolution layer, not platform</span><span>07 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s8">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">WHERE IT APPLIES</div>
+        <h2>凡是会试错的 Agent，<br>都需要一套失败进化机制。</h2>
+        <p class="lead">量化交易只是第一个沙盘。痕进真正服务的是“可重复试错”的工作流：失败能被定义，反馈能被记录，下一次行动能被改变。</p>
+        <div class="use-cases">
+          <div class="use-case"><div class="case-tag">code</div><h3>代码 Agent</h3><p>编译错误、测试失败被归成模式，下次调整代码结构而不是重复补丁。</p></div>
+          <div class="use-case"><div class="case-tag">ops</div><h3>自动化 Agent</h3><p>表格、API、浏览器操作失败后，记住哪类输入容易触发问题。</p></div>
+          <div class="use-case"><div class="case-tag">search</div><h3>检索 Agent</h3><p>搜索结果差时，进化查询路径，而不是只换几个关键词。</p></div>
+          <div class="use-case"><div class="case-tag">tutor</div><h3>教育 Agent</h3><p>学生反复出错时，识别错误类型，调整讲解顺序和例题。</p></div>
+          <div class="use-case"><div class="case-tag">sim</div><h3>模拟 Agent</h3><p>在游戏、仿真、策略环境里积累试错痕迹，更新下一轮策略。</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · transferable failure evolution</span><span>08 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s9">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">OPEN CONTROL · AMNESIC vs FULL</div>
+        <h2>换个公开领域补上对照。<br>跑完了，结果 null。</h2>
+        <p class="lead">量化数据是私有的、跑不了对照。我们在公开的 2048 上做了预注册的失忆组 vs 完整组对照（M=30 配对）。唯一变量：Memory 是否跨 round 累积。结果 p=0.079——机制可观察地工作，增益没达统计显著。我们不藏这个结果。</p>
+        <div class="evidence-rule">
+          <div class="rule-top">
+            <span class="badge" style="color:var(--orange);background:rgba(228,123,44,0.12)">NULL · p≥0.05</span>
+            <span class="mono">2048 · Wilcoxon signed-rank · M=30</span>
+          </div>
+          <div class="evidence-row">
+            <div class="evidence-cell"><small>p value（双尾）</small><b class="accent-orange">0.079</b></div>
+            <div class="evidence-cell"><small>配对差中位数</small><b class="accent-blue">+0.083</b></div>
+            <div class="evidence-cell"><small>bootstrap 95% CI</small><b class="mono">[0.000, 0.167]</b></div>
+          </div>
+        </div>
+        <div class="pond-grid">
+          <div class="pond alive">
+            <div class="pond-label">完整组 FULL · Memory 跨 round 累积</div>
+            <div class="metric"><span>block 候选（F1/3）</span><b>452</b></div>
+            <div class="metric"><span>pivot 触发（F4）</span><b>131</b></div>
+            <div class="metric"><span>投影规则（F3）</span><b>1.7</b></div>
+          </div>
+          <div class="pond dead">
+            <div class="pond-label">失忆组 AMNESIC · 每 round 清空记忆</div>
+            <div class="metric"><span>block 候选（F1/3）</span><b>0</b></div>
+            <div class="metric"><span>pivot 触发（F4）</span><b>3</b></div>
+            <div class="metric"><span>投影规则（F3）</span><b>0</b></div>
+          </div>
+        </div>
+        <div class="bridge-note"><b>机制存在 ≠ 机制有效</b><span>我们如实区分这两件事——这是项目迄今最硬的一块诚实。</span></div>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · ran the control, reported the null</span><span>09 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s10">
+    <div class="slide-inner">
+      <div>
+        <div class="kicker">HONEST BOUNDARY</div>
+        <h2>真正的可信感，来自边界说清楚。</h2>
+        <div class="boundary">
+          <div class="boundary-card">
+            <h3 class="accent-green">我们 claim</h3>
+            <ul>
+              <li>5 个机制都已实现。</li>
+              <li>观察到一次真实换结构事件。</li>
+              <li>部分学习来自账本投影，不是手写规则。</li>
+            </ul>
+          </div>
+          <div class="boundary-card">
+            <h3 class="accent-orange">我们不 claim</h3>
+            <ul>
+              <li>没有有效性的对照证明（2048 对照已跑，结果 null）。</li>
+              <li>没有量化收益曲线。</li>
+              <li>只有 2 个领域（量化 + 2048），2 ≠ 泛化证明。</li>
+            </ul>
+          </div>
+        </div>
+        <p class="lead">这不是软弱，这是可信产品该有的边界。我们讲一个可追溯的进化事件，不把它包装成万能神话。</p>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · mechanism + observed behavior + disclosed boundary</span><span>10 / 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="s11">
+    <div class="slide-inner hero">
+      <div>
+        <div class="team-badge">乔木计划</div>
+        <div class="kicker">CLOSING</div>
+        <h2 class="final-line">大多数 Agent 把失败当垃圾。<br><span class="accent-blue">痕进把失败变成下一次行动的路标。</span></h2>
+        <p class="lead">真正的智能，不是第一次就做对，而是第一次做错之后，第二次少走同一条错路。</p>
+      </div>
+      <div>
+        <div class="scar-line"></div>
+        <div class="footer"><span>乔木计划 · Scarforge / evolving-agents</span><span>11 / 11</span></div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

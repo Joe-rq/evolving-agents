@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>痕进 · 路演演示索引</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel-2: #1c2129;
+    --border: #30363d;
+    --text: #e6edf3;
+    --dim: #8b949e;
+    --neutral: #6e7681;
+    --accent: #58a6ff;
+    --dead: #f85149;
+    --alive: #3fb950;
+    --learn: #d2a8ff;
+    --pivot: #ffa657;
+    --engine: #1f6feb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    min-height: 100vh;
+    padding: 56px 32px 80px;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+
+  /* —— 顶部标题区 —— */
+  .header { margin-bottom: 44px; }
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .brand .name {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .brand .en {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 14px;
+    color: var(--dim);
+  }
+  .tagline {
+    font-size: 17px;
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 720px;
+  }
+  .tagline strong { color: var(--accent); font-weight: 600; }
+  .meta-row {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--dim);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  /* —— 区段标签 —— */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 18px;
+  }
+  .section-label .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .section-label .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .section-label .hint {
+    font-size: 12px;
+    color: var(--neutral);
+  }
+  .section-label .line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* —— 卡片网格 —— */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color .15s ease, transform .15s ease, background .15s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-link:hover .card {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    background: var(--panel-2);
+  }
+
+  /* —— 微缩预览区（纯 CSS 模拟） —— */
+  .thumb {
+    height: 168px;
+    background: #0a0e14;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 01 池塘：左红框 ✗ / 箭头 / 右绿框 ✓ */
+  .thumb-pond {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    align-items: stretch;
+  }
+  .mini-pond {
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border: 1px solid;
+  }
+  .mini-pond.dead { background: rgba(248,81,73,.08); border-color: rgba(248,81,73,.35); }
+  .mini-pond.alive { background: rgba(63,185,80,.08); border-color: rgba(63,185,80,.35); }
+  .mini-pond .mp-name { font-size: 10px; font-weight: 600; }
+  .mini-pond .mp-val { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; }
+  .mini-pond.dead .mp-val { color: var(--dead); }
+  .mini-pond.alive .mp-val { color: var(--alive); }
+  .mini-pond .mp-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+  .mini-pond.dead .mp-tag { color: var(--dead); }
+  .mini-pond.alive .mp-tag { color: var(--alive); }
+  .mini-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 8px;
+    gap: 2px;
+  }
+  .mini-arrow .a { font-size: 16px; line-height: 1; }
+
+  /* 02 时间线：纵向 commit 链 */
+  .thumb-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 260px;
+  }
+  .tl-node {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+  }
+  .tl-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    flex-shrink: 0;
+    border: 2px solid #0a0e14;
+  }
+  .tl-line {
+    width: 2px; height: 10px; margin-left: 3.5px;
+    background: var(--border);
+  }
+  .tl-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--dim); }
+
+  /* 03 规则：红 block + evidence 行 */
+  .thumb-rule {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mr-head {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(248,81,73,.1);
+    border: 1px solid rgba(248,81,73,.3);
+    border-radius: 5px;
+    padding: 6px 9px;
+  }
+  .mr-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600;
+    color: var(--dead); background: rgba(248,81,73,.15); padding: 1px 5px; border-radius: 3px;
+  }
+  .mr-motif { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text); }
+  .mr-evidence {
+    display: flex; align-items: center; gap: 8px;
+    background: #0d1117; border: 1px solid var(--border); border-radius: 4px;
+    padding: 5px 9px;
+  }
+  .mr-num { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--learn); font-weight: 600; }
+  .mr-expr { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--dim); flex: 1; white-space: nowrap; overflow: hidden; }
+  .mr-tag { font-size: 7px; color: var(--dead); }
+
+  /* 04 架构：三层堆叠 */
+  .thumb-arch {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    max-width: 240px;
+  }
+  .arch-layer {
+    border-radius: 6px;
+    padding: 9px 12px;
+    border: 1px solid;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .arch-layer.engine { background: rgba(31,111,235,.1); border-color: rgba(31,111,235,.4); }
+  .arch-layer.adapter { background: rgba(210,168,255,.07); border-color: rgba(210,168,255,.35); }
+  .arch-layer.domain { background: rgba(255,166,87,.07); border-color: rgba(255,166,87,.35); }
+  .arch-layer .al-name { font-size: 11px; font-weight: 600; }
+  .arch-layer.engine .al-name { color: var(--engine); }
+  .arch-layer.adapter .al-name { color: var(--learn); }
+  .arch-layer.domain .al-name { color: var(--pivot); }
+  .arch-layer .al-sub { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--neutral); }
+
+  /* —— 卡片信息区 —— */
+  .card-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
+  .card-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .card-title { font-size: 17px; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .card-desc { font-size: 13px; color: var(--dim); line-height: 1.6; flex: 1; }
+  .card-foot {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .card-foot .open {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .card-foot .factor-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--neutral);
+  }
+
+  /* 主演角标 */
+  .star {
+    position: absolute;
+    top: 12px; right: 12px;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--accent);
+    background: rgba(88,166,255,.12);
+    border: 1px solid rgba(88,166,255,.35);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  /* —— 底部诚实提醒 —— */
+  .footer {
+    margin-top: 48px;
+    padding: 20px 24px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--dim);
+  }
+  .footer strong { color: var(--text); }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- 顶部 -->
+    <div class="header">
+      <div class="brand">
+        <span class="name">痕进</span>
+        <span class="en">Scarforge · evolving-agents</span>
+      </div>
+      <div class="tagline">
+        失败留痕，凭痕而进。造能<strong>从自己的失败里学习</strong>的 agent 的引擎——记住失败，换结构而非调参数。
+      </div>
+      <div class="meta-row">
+        <span class="chip">3–5 分钟版 · 主演 2 张</span>
+        <span class="chip">Q&amp;A 储备 2 张</span>
+        <span class="chip">静态 · 零依赖 · 离线可演</span>
+      </div>
+    </div>
+
+    <!-- 主演区 -->
+    <div class="section-label">
+      <span class="num">01</span>
+      <span class="title">主演</span>
+      <span class="line"></span>
+      <span class="hint">3–5 分钟路演的核心两张，按顺序点开</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- 卡片 1：池塘 -->
+      <a class="card-link" href="01-pond-switch.zh.html" target="_blank" rel="noopener">
+        <div class="card">
+          <div class="thumb">
+            <span class="star">开场</span>
+            <div class="thumb-pond">
+              <div class="mini-pond dead">
+                <div class="mp-name">TOP3000</div>
+                <div class="mp-val">0.78</div>
+                <div class="mp-tag">✗ 失败</div>
+              </div>
+              <div class="mini-arrow">
+                <span>agent</span>
+                <span class="a">→</span>
+                <span>换池塘</span>
+              </div>
+              <div class="mini-pond alive">
+                <div class="mp-name">TOP1000</div>
+                <div class="mp-val">0.68</div>
+                <div class="mp-tag">✓ 通过</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-eyebrow">开场钩子</div>
+            <div class="card-title">同一条因子，换了个池塘</div>
+            <div class="card-desc">同一个表达式、同一个 Sharpe 2.15，在大盘死了、中小盘活了。agent 不让调参数，它让换池塘。<strong style="color:var(--text)">因子从来不是问题，池塘才是。</strong></div>
+            <div class="card-foot">
+              <span class="open">打开演示 →</span>
+              <span class="factor-tag">Factor 4 · 5</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 卡片 2：可审计规则 -->
+      <a class="card-link" href="03-auditable-rule.zh.html" target="_blank" rel="noopener">
+        <div class="card">
+          <div class="thumb">
+            <span class="star">差异化</span>
+            <div class="thumb-rule">
+              <div class="mr-head">
+                <span class="mr-badge">✗ block</span>
+                <span class="mr-motif">cashflow_close_yield</span>
+              </div>
+              <div class="mr-evidence">
+                <span class="mr-num">1.</span>
+                <span class="mr-expr">ts_rank(free_cash_flow/close,252)</span>
+                <span class="mr-tag">FAIL</span>
+              </div>
+              <div class="mr-evidence">
+                <span class="mr-num">2.</span>
+                <span class="mr-expr">ts_rank(free_cash_flow/close,126)</span>
+                <span class="mr-tag">FAIL</span>
+              </div>
+              <div class="mr-evidence">
+                <span class="mr-num">3.</span>
+                <span class="mr-expr">ts_rank(free_cash_flow/close,126)</span>
+                <span class="mr-tag">FAIL</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-eyebrow">差异化武器</div>
+            <div class="card-title">这条惩罚，从哪来？</div>
+            <div class="card-desc">别家说"agent 学会了"，说不清学的什么。这里每条惩罚都能追到具体 <strong style="color:var(--text)">evidence_ids</strong>——哪几次失败教的。可审计，不是黑箱。</div>
+            <div class="card-foot">
+              <span class="open">打开演示 →</span>
+              <span class="factor-tag">Factor 3</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- 储备区 -->
+    <div class="section-label">
+      <span class="num">02</span>
+      <span class="title">Q&amp;A 储备</span>
+      <span class="line"></span>
+      <span class="hint">评委追问时秒切，不进主流程</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- 卡片 3：时间线 -->
+      <a class="card-link" href="02-evolution-timeline.zh.html" target="_blank" rel="noopener">
+        <div class="card">
+          <div class="thumb">
+            <div class="thumb-timeline">
+              <div class="tl-node"><span class="tl-dot" style="background:var(--learn)"></span><span class="tl-label">e1937ed · universe 级记忆</span></div>
+              <div class="tl-line"></div>
+              <div class="tl-node"><span class="tl-dot" style="background:var(--learn)"></span><span class="tl-label">3a38a52 · motif 软惩罚</span></div>
+              <div class="tl-line"></div>
+              <div class="tl-node"><span class="tl-dot" style="background:var(--pivot)"></span><span class="tl-label">b38ce00 · 提议换池塘</span></div>
+              <div class="tl-line"></div>
+              <div class="tl-node"><span class="tl-dot" style="background:var(--alive)"></span><span class="tl-label">06-24 · TOP1000 通过</span></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-eyebrow">追问"怎么进化的？"</div>
+            <div class="card-title">进化时间线 · commit 链</div>
+            <div class="card-desc">从记忆隔离 → motif 惩罚 → 提议换池塘 → 新池塘通过，一条 commit 链串起来。强调 <strong style="color:var(--text)">agent 提议 / 人批准</strong>。</div>
+            <div class="card-foot">
+              <span class="open">打开演示 →</span>
+              <span class="factor-tag">Factor 1 · 3 · 4</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- 卡片 4：架构 -->
+      <a class="card-link" href="04-architecture.zh.html" target="_blank" rel="noopener">
+        <div class="card">
+          <div class="thumb">
+            <div class="thumb-arch">
+              <div class="arch-layer engine">
+                <span class="al-name">引擎 core/</span>
+                <span class="al-sub">领域无关</span>
+              </div>
+              <div class="arch-layer adapter">
+                <span class="al-name">adapters/</span>
+                <span class="al-sub">5 个协议</span>
+              </div>
+              <div class="arch-layer domain">
+                <span class="al-name">宿主领域</span>
+                <span class="al-sub">因子 / 代码 / …</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-eyebrow">追问"怎么接进我的系统？"</div>
+            <div class="card-title">架构 · 引擎，不是平台</div>
+            <div class="card-desc">本地、可嵌入的引擎，接在任意会试错的 agent 后面。不替代你的 agent，只让它<strong style="color:var(--text)">越失败越聪明</strong>。</div>
+            <div class="card-foot">
+              <span class="open">打开演示 →</span>
+              <span class="factor-tag">定位</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- 底部诚实边界 -->
+    <div class="footer">
+      <strong>路演口径守则：</strong>演示的是量化案例（真跑过），讲的是通用愿景（设计意图），别混着说。有效性对照实验还在 roadmap——进化机制 2026-06-24 上线，数据约 2-3 天。完整披露见 <a href="../content/honest-boundary.md">诚实声明边界</a>，项目说明见 <a href="../README.md">README</a>。
+    </div>
+
+  </div>
+</body>
+</html>
