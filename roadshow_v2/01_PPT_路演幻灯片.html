@@ -873,31 +873,31 @@
     <div class="slide-inner">
       <div>
         <div class="kicker">OBSERVABLE EVOLUTION · PUBLIC DOMAIN</div>
-        <h2>私有案例验证不了？<br>换成公开领域，让进化肉眼可见。</h2>
-        <p class="lead">换池塘是私有的、评委无法复现。我们在符号回归（猜公式）和正则合成（猜分类规则）两个公开领域补上了它——生成器从成功线索嫁接出新候选，每一轮的结构变化肉眼可见。</p>
+        <h2>同一套引擎，<br>四种任务，进化肉眼可见。</h2>
+        <p class="lead">在四个公开可复现的领域里，生成器从成功线索嫁接出新候选——每一轮的结构变化都是可观察、可追溯的。</p>
         <div class="evolution-cases">
           <div class="evo-case">
             <div class="case-tag">symreg</div>
-            <h3>猜公式画出目标曲线</h3>
+            <h3>符号回归 · 发现隐藏公式</h3>
             <div class="evo-chain">
               <div class="evo-step"><span class="evo-r2 r2-mid">0.37</span><span class="mono">(x*x)</span></div>
               <div class="evo-arrow">→ 嫁接 ×2 →</div>
               <div class="evo-step"><span class="evo-r2 r2-good">0.996</span><span class="mono">2*(x*x)</span></div>
             </div>
-            <p>隐藏目标 y=2x²+1。蓝线（Agent）从乱码曲线，跃升到几乎与目标虚线重合。<strong>完整组守住，基线组崩盘。</strong></p>
+            <p>隐藏目标 <span class="mono">y=2x²+1</span>。R² 从 0.37 跃升到 0.996，公式从 <span class="mono">x²</span> 长出 <span class="mono">2x²</span>。</p>
           </div>
           <div class="evo-case">
             <div class="case-tag">regex</div>
-            <h3>猜规则识别日期格式</h3>
+            <h3>正则合成 · 归纳分类规则</h3>
             <div class="evo-chain">
               <div class="evo-step"><span class="evo-r2 r2-mid">0.58</span><span class="mono">.*</span></div>
               <div class="evo-arrow">→ 收紧替换 →</div>
               <div class="evo-step"><span class="evo-r2 r2-good">0.74</span><span class="mono">[0-9]+-[0-9]+</span></div>
             </div>
-            <p>从"什么都框进来"（太宽）收紧到精确的三段数字序列。<strong>程序合成任务，进化方向相反：不是加性，是收紧。</strong></p>
+            <p>隐藏目标：识别 <span class="mono">YYYY-MM-DD</span> 日期。F1 从 0.58 升到 0.74，规则从过宽收紧到精确。</p>
           </div>
         </div>
-        <div class="bridge-note"><b>跨任务类型一致</b><span>公式发现（加性嫁接）+ 程序合成（收紧替换），同一套引擎，同一种"从成功里学"。现场动画 → <span class="mono">demo/08</span></span></div>
+        <div class="bridge-note"><b>两种进化方向，同一个机制</b><span>符号回归是加性生长（公式越长越接近），正则合成是收紧替换（规则越收越精确）。<span class="mono">现场动画 → demo/08</span></span></div>
       </div>
       <div>
         <div class="scar-line"></div>
@@ -991,8 +991,8 @@
     <div class="slide-inner">
       <div>
         <div class="kicker">OPEN CONTROL · AMNESIC vs FULL</div>
-        <h2>换个公开领域补上对照。<br>跑完了，结果 null。</h2>
-        <p class="lead">量化数据是私有的、跑不了对照。我们在公开的 2048 上做了预注册的失忆组 vs 完整组对照（M=30 配对）。唯一变量：Memory 是否跨 round 累积。结果 p=0.079——机制可观察地工作，增益没达统计显著。我们不藏这个结果。符号回归和正则合成展示的是<strong>可观察的进化轨迹</strong>，但同样是种子化轨迹、非统计证明。</p>
+        <h2>预注册对照实验：<br>机制可观察，增益未达显著。</h2>
+        <p class="lead">在公开的 2048 上做了预注册的失忆组 vs 完整组对照（M=30 配对）。唯一变量：Memory 是否跨 round 累积。结果 p=0.079——机制作为代码可观察地工作，但学习增益未达统计显著。符号回归和正则合成展示了可观察的进化轨迹，但同为种子化轨迹、非统计证明。</p>
         <div class="evidence-rule">
           <div class="rule-top">
             <span class="badge" style="color:var(--orange);background:rgba(228,123,44,0.12)">NULL · p≥0.05</span>
@@ -1018,7 +1018,7 @@
             <div class="metric"><span>投影规则（F3）</span><b>0</b></div>
           </div>
         </div>
-        <div class="bridge-note"><b>机制存在 ≠ 机制有效</b><span>我们如实区分这两件事——这是项目迄今最硬的一块诚实。</span></div>
+        <div class="bridge-note"><b>机制存在 ≠ 机制有效</b><span>完整组屏蔽了 452 个失败候选、触发 131 次结构性 pivot——失忆组几乎全零。但学习增益的统计检出未达标。</span></div>
       </div>
       <div>
         <div class="scar-line"></div>
@@ -1031,7 +1031,7 @@
     <div class="slide-inner">
       <div>
         <div class="kicker">HONEST BOUNDARY</div>
-        <h2>真正的可信感，来自边界说清楚。</h2>
+        <h2>能做到什么，不能做到什么。</h2>
         <div class="boundary">
           <div class="boundary-card">
             <h3 class="accent-green">我们 claim</h3>
@@ -1051,7 +1051,7 @@
             </ul>
           </div>
         </div>
-        <p class="lead">这不是软弱，这是可信产品该有的边界。我们讲一个可追溯的进化事件，不把它包装成万能神话。</p>
+        <p class="lead">区分「机制存在」与「机制有效」——前者有代码与对照证据，后者尚未被统计证明。这是项目的边界。</p>
       </div>
       <div>
         <div class="scar-line"></div>
