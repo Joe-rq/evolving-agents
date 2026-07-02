@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow10a" cx="15%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0.13" />
+      <stop offset="100%" stop-color="#31B67A" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="bgGlow10b" cx="85%" cy="75%" r="42%">
+      <stop offset="0%" stop-color="#1D70D6" stop-opacity="0.13" />
+      <stop offset="100%" stop-color="#1D70D6" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="scarLine10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+    <rect width="1280" height="720" fill="url(#bgGlow10a)" />
+    <rect width="1280" height="720" fill="url(#bgGlow10b)" />
+  </g>
+
+  <g id="p10-header">
+    <path fill="#31B67A" fill-opacity="0.13" stroke="#31B67A" stroke-opacity="0.30" stroke-width="1" d="M68,80 H202 A8,8 0 0 1 210,88 V112 A8,8 0 0 1 202,120 H68 A8,8 0 0 1 60,112 V88 A8,8 0 0 1 68,80 Z" />
+    <path fill="#31B67A" d="M78,92 H78 A6,6 0 0 1 84,98 V104 A6,6 0 0 1 78,110 H78 A6,6 0 0 1 72,104 V98 A6,6 0 0 1 78,92 Z" />
+    <text x="92" y="107" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="20" font-weight="700" fill="#0B5A43">乔木计划</text>
+    <text x="60" y="172" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">CLOSING</text>
+  </g>
+
+  <g id="p10-title">
+    <text x="60" y="310" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="72" font-weight="900" fill="#122033">大多数 Agent 把失败当垃圾。</text>
+    <text x="60" y="406" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="72" font-weight="900" fill="#1D70D6">痕进把失败变成</text>
+    <text x="60" y="500" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="72" font-weight="900" fill="#1D70D6">下一次行动的<tspan fill="#E47B2C">路标</tspan>。</text>
+  </g>
+
+  <g id="p10-message">
+    <text x="60" y="566" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="28" fill="#52657D">真正的智能，不是第一次就做对，而是第一次做错之后，第二次少走同一条错路。</text>
+  </g>
+
+  <g id="p10-footer">
+    <rect x="60" y="624" width="1160" height="2" fill="url(#scarLine10)" />
+    <text x="60" y="672" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · Scarforge / evolving-agents</text>
+    <text x="1220" y="672" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">10 / 10</text>
+  </g>
+</svg>

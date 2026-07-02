@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08 · 公式进化动画 — 痕进</title>
+<style>
+  :root{
+    --bg:#0d1117;--card:#161b22;--border:#30363d;
+    --fg:#e6edf3;--muted:#8b949e;--accent:#58a6ff;
+    --green:#3fb950;--red:#f85149;--yellow:#d29922;
+    --target:#e6edf3;--curve:#58a6ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI",Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;padding:20px;max-width:1100px;margin:0 auto}
+  h1{font-size:1.35rem;font-weight:600;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:.82rem;margin-bottom:16px}
+  .layout{display:grid;grid-template-columns:1fr 320px;gap:16px}
+  @media(max-width:800px){.layout{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px}
+  .canvas-wrap{position:relative}
+  svg.chart{width:100%;height:420px;display:block}
+  .axis text{font-size:10px;fill:var(--muted)}
+  .axis line,.axis path{stroke:var(--border)}
+  .grid-line{stroke:var(--border);stroke-dasharray:2,3;opacity:.4}
+  .legend-row{display:flex;gap:20px;justify-content:center;font-size:.78rem;color:var(--muted);margin-top:8px}
+  .legend-row span{display:inline-flex;align-items:center;gap:6px}
+  .legend-row i{width:20px;height:3px;display:inline-block}
+  .rpanel h2{font-size:.9rem;color:var(--accent);margin-bottom:10px}
+  .round-tag{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .formula-box{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.2);border-radius:6px;padding:10px 12px;margin:10px 0;font-family:"SFMono-Regular",Consolas,monospace;font-size:.95rem;color:var(--curve);word-break:break-all;min-height:48px}
+  .r2-big{font-size:2.2rem;font-weight:700;font-variant-numeric:tabular-nums}
+  .r2-good{color:var(--green)}.r2-mid{color:var(--yellow)}.r2-bad{color:var(--red)}
+  .event{font-size:.8rem;color:var(--muted);margin-top:8px;min-height:36px}
+  .event strong{color:var(--fg)}
+  .controls{display:flex;align-items:center;gap:12px;margin-top:14px}
+  .btn{background:var(--card);border:1px solid var(--border);color:var(--fg);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:.82rem}
+  .btn:hover{border-color:var(--accent)}
+  .btn.active{background:rgba(88,166,255,.15);border-color:var(--accent);color:var(--accent)}
+  .progress{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;cursor:pointer}
+  .progress-fill{height:100%;background:var(--accent);width:0;transition:width .3s}
+  .round-label{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums;min-width:50px}
+  code{background:rgba(110,118,129,.2);padding:1px 5px;border-radius:3px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.82rem}
+  .takeaway{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.2);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:.85rem}
+  .takeaway strong{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<h1>公式进化动画：从乱码到 2x²+1</h1>
+<div class="sub">符号回归领域 · 隐藏目标 <code>y = 2x² + 1</code> · 完整组生成器从成功嫁接 · 每轮渲染当轮最佳公式的曲线 vs 目标曲线</div>
+
+<div class="layout">
+  <!-- 左：曲线画布 -->
+  <div class="panel canvas-wrap">
+    <svg class="chart" id="chart" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="legend-row">
+      <span><i style="background:var(--target);border-top:2px dashed var(--target)"></i>隐藏目标 y=2x²+1（虚线）</span>
+      <span><i style="background:var(--curve)"></i>agent 当前最佳公式（实线）</span>
+    </div>
+    <div class="controls">
+      <button class="btn" id="playBtn">▶ 播放</button>
+      <button class="btn" id="prevBtn">◀ 上一轮</button>
+      <button class="btn" id="nextBtn">下一轮 ▶</button>
+      <div class="progress" id="progress"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="round-label" id="roundLabel">r0 / r7</span>
+    </div>
+  </div>
+
+  <!-- 右：信息面板 -->
+  <div class="panel rpanel">
+    <h2>当前轮次</h2>
+    <div class="round-tag" id="roundTag">ROUND 0</div>
+    <div class="formula-box" id="formulaBox">(4+-3)</div>
+    <div style="margin:10px 0">
+      <span class="round-tag">R² 拟合度</span><br>
+      <span class="r2-big r2-bad" id="r2Big">-1.22</span>
+    </div>
+    <div class="event" id="eventText">冷启动。纯常数 <code>(4+-3)</code>，完全不沾 x——曲线是一条水平线，和目标抛物线毫无关系。</div>
+
+    <div class="takeaway" id="takeaway" style="display:none">
+      <strong>命中目标！</strong>agent 从 <code>(x*x)</code>（R²=0.37）嫁接 <code>×2</code>，长出 <code>2*(x*x)</code>，R² 跃升到 0.996。曲线几乎完全重合——只差一个常数项。
+    </div>
+  </div>
+</div>
+
+<script>
+// 进化数据 (poly2_offset seed=3, 每轮最佳公式)
+const ROUNDS = [
+  {r:0, formula:'(4+-3)',                    r2:-1.216, event:'冷启动。纯常数 <code>(4+-3)</code>，完全不沾 x——曲线是一条水平线，和目标抛物线毫无关系。'},
+  {r:1, formula:'((x*-1))^2',                r2:0.370,  event:'<strong>首次正向线索。</strong>agent 发现了 x 和平方——曲线开始有抛物线形状，但系数错了（<code>(-x)²</code> 和 <code>2x²</code> 形状一样，幅度不对）。'},
+  {r:2, formula:'(((x*1))^2+(sin(-1)*sin(x)))', r2:0.395, event:'围绕 x² 线索探索：尝试加 sin 项。R² 没提升——sin 方向是错的，但 x² 的内核被保留。'},
+  {r:3, formula:'(2*(x*x))',                 r2:0.996,  event:'<strong>跃升！嫁接 ×2 系数。</strong>从 <code>(x*x)</code> 长出 <code>2*(x*x)</code>，曲线几乎完全重合目标——只差一个常数项 +1。'},
+  {r:4, formula:'((2*(x*x))+3)',             r2:0.983,  event:'在成功根 <code>2*(x*x)</code> 上嫁接 +3（探索常数项 offset）。方向对了，但 +3 偏大（目标是 +1）。'},
+  {r:5, formula:'(2*(x*x))+0',               r2:0.996,  event:'回到干净根，嫁接 +0。R² 回到 0.996——agent 在探索"加什么常数最好"。'},
+  {r:6, formula:'(((2*(x*x))+3)+sin(x))',    r2:0.979,  event:'尝试跨族探索：在成功公式上嫁接 sin(x) 项。R² 略降（sin 不该在这），但守住高位。'},
+  {r:7, formula:'((sin(x)*-2)+(2*(x*x)))',   r2:0.985,  event:'持续的稳定探索。完整组从 r3 起 R² 始终 ≥0.98——而基线组同期已跌到 0.02。'},
+];
+
+// SVG 坐标系参数
+const VB = {w:600, h:420, pad:{l:50,r:20,t:20,b:40}};
+const XMIN=0, XMAX=5, YMIN=-5, YMAX=55;
+const sx = x => VB.pad.l + (VB.w-VB.pad.l-VB.pad.r) * (x-XMIN)/(XMAX-XMIN);
+const sy = y => VB.pad.t + (VB.h-VB.pad.t-VB.pad.b) * (1-(y-YMIN)/(YMAX-YMIN));
+
+function toJS(f){ return f.replace(/\^/g,'**'); }
+function evalf(f, x){
+  try { return eval(toJS(f)); }
+  catch(e){ return NaN; }
+}
+
+// 预计算目标曲线 path
+function buildPath(fn){
+  const pts=[];
+  for(let i=0;i<=100;i++){
+    const x=XMIN+(XMAX-XMIN)*i/100;
+    const y=fn(x);
+    if(isFinite(y) && Math.abs(y)<1e4) pts.push(`${sx(x).toFixed(1)},${sy(Math.max(YMIN,Math.min(YMAX,y))).toFixed(1)}`);
+  }
+  return 'M'+pts.join(' L');
+}
+
+const targetFn = x => 2*x*x+1;
+const targetPath = buildPath(targetFn);
+
+let curRound = 0;
+let playing = false;
+let timer = null;
+
+function render(){
+  const rd = ROUNDS[curRound];
+  const fn = x => evalf(rd.formula, x);
+  const curvePath = buildPath(fn);
+
+  // 画布
+  let g='';
+  // grid
+  for(let y=0;y<=50;y+=10){
+    g+=`<line class="grid-line" x1="${VB.pad.l}" y1="${sy(y)}" x2="${VB.w-VB.pad.r}" y2="${sy(y)}"/>`;
+    g+=`<text x="${VB.pad.l-8}" y="${sy(y)+3}" text-anchor="end" font-size="10" fill="#8b949e">${y}</text>`;
+  }
+  for(let x=0;x<=5;x++){
+    g+=`<text x="${sx(x)}" y="${VB.h-VB.pad.b+18}" text-anchor="middle" font-size="10" fill="#8b949e">${x}</text>`;
+  }
+  // axis labels
+  g+=`<text x="${VB.w-VB.pad.r+4}" y="${sy(0)+3}" font-size="10" fill="#8b949e">x</text>`;
+  // target curve (dashed)
+  g+=`<path d="${targetPath}" fill="none" stroke="#e6edf3" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>`;
+  // agent curve (solid, animated fade-in)
+  g+=`<path d="${curvePath}" fill="none" stroke="#58a6ff" stroke-width="2.8" opacity="0">
+       <animate attributeName="opacity" from="0" to="1" dur="0.5s" fill="freeze"/></path>`;
+  // data points on target (for reference)
+  for(const px of [1,2,3,4]){
+    g+=`<circle cx="${sx(px)}" cy="${sy(targetFn(px))}" r="3" fill="#e6edf3" opacity="0.6"/>`;
+  }
+  document.getElementById('chart').innerHTML=g;
+
+  // 信息面板
+  document.getElementById('roundTag').textContent='ROUND '+rd.r;
+  document.getElementById('formulaBox').textContent=rd.formula;
+  const r2El=document.getElementById('r2Big');
+  r2El.textContent=rd.r2.toFixed(2);
+  r2El.className='r2-big '+(rd.r2>=0.85?'r2-good':(rd.r2>=0.3?'r2-mid':'r2-bad'));
+  document.getElementById('eventText').innerHTML=rd.event;
+  document.getElementById('roundLabel').textContent=`r${rd.r} / r7`;
+  document.getElementById('progressFill').style.width=(curRound/(ROUNDS.length-1)*100)+'%';
+  // 命中提示
+  document.getElementById('takeaway').style.display = (rd.r===3)?'block':'none';
+}
+
+function next(){ curRound=Math.min(ROUNDS.length-1,curRound+1); render(); }
+function prev(){ curRound=Math.max(0,curRound-1); render(); }
+function togglePlay(){
+  playing=!playing;
+  const btn=document.getElementById('playBtn');
+  if(playing){
+    btn.textContent='⏸ 暂停'; btn.classList.add('active');
+    timer=setInterval(()=>{
+      if(curRound>=ROUNDS.length-1){curRound=0;}
+      next();
+      if(curRound===ROUNDS.length-1){ // 到末尾停一下再循环
+        clearInterval(timer);
+        setTimeout(()=>{ if(playing){ timer=setInterval(loopStep,1500); } },2000);
+      }
+    },1500);
+  } else {
+    btn.textContent='▶ 播放'; btn.classList.remove('active');
+    clearInterval(timer);
+  }
+}
+function loopStep(){
+  if(curRound>=ROUNDS.length-1){curRound=-1;}
+  next();
+}
+document.getElementById('playBtn').onclick=togglePlay;
+document.getElementById('nextBtn').onclick=next;
+document.getElementById('prevBtn').onclick=prev;
+document.getElementById('progress').onclick=(e)=>{
+  const rect=e.currentTarget.getBoundingClientRect();
+  const frac=(e.clientX-rect.left)/rect.width;
+  curRound=Math.round(frac*(ROUNDS.length-1));
+  render();
+};
+
+render(); // 初始渲染
+</script>
+</body>
+</html>

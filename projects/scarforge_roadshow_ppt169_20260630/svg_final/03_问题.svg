@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p03-header">
+    <text x="60" y="80" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">THE PROBLEM</text>
+  </g>
+
+  <g id="p03-left-thesis">
+    <text x="60" y="230" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">今天的 Agent，</text>
+    <text x="60" y="304" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">太容易反复犯</text>
+    <text x="60" y="378" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#D94B4B">同一个错。</text>
+    <text x="60" y="466" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" font-weight="400" fill="#52657D">客服、代码、搜索、研究都一样：一次失败</text>
+    <text x="60" y="502" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" font-weight="400" fill="#52657D">修掉了，下一次换个壳又回来。</text>
+    <text x="60" y="556" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" font-weight="600" fill="#122033">问题不只是记忆不够，</text>
+    <text x="60" y="592" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" font-weight="600" fill="#122033">而是<tspan font-weight="900" fill="#D94B4B">失败没有进入决策系统</tspan>。</text>
+  </g>
+
+  <g id="card-pain-1">
+    <path fill="#FFFFFF" stroke="#C9D9EA" stroke-width="1" d="M652,150 H1208 A12,12 0 0 1 1220,162 V286 A12,12 0 0 1 1208,298 H652 A12,12 0 0 1 640,286 V162 A12,12 0 0 1 652,150 Z" />
+    <path fill="#D94B4B" d="M642.50,150 H642.50 A2.50,2.50 0 0 1 645,152.50 V295.50 A2.50,2.50 0 0 1 642.50,298 H642.50 A2.50,2.50 0 0 1 640,295.50 V152.50 A2.50,2.50 0 0 1 642.50,150 Z" />
+    
+  <g transform="translate(670, 182) scale(2)" fill="none" stroke="#D94B4B" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+    <text x="738" y="210" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" font-weight="800" fill="#122033">只记成功</text>
+    <text x="670" y="262" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">正确答案进了记忆库，</text>
+    <text x="670" y="292" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">错误路径却被当成垃圾清掉。</text>
+  </g>
+
+  <g id="card-pain-2">
+    <path fill="#FFFFFF" stroke="#C9D9EA" stroke-width="1" d="M652,316 H1208 A12,12 0 0 1 1220,328 V452 A12,12 0 0 1 1208,464 H652 A12,12 0 0 1 640,452 V328 A12,12 0 0 1 652,316 Z" />
+    <path fill="#D94B4B" d="M642.50,316 H642.50 A2.50,2.50 0 0 1 645,318.50 V461.50 A2.50,2.50 0 0 1 642.50,464 H642.50 A2.50,2.50 0 0 1 640,461.50 V318.50 A2.50,2.50 0 0 1 642.50,316 Z" />
+    
+  <g transform="translate(670, 348) scale(2)" fill="none" stroke="#D94B4B" stroke-width="2">
+    <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M6 4v4" />
+    <path d="M6 12v8" />
+    <path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M12 4v10" />
+    <path d="M12 18v2" />
+    <path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M18 4v1" />
+    <path d="M18 9v11" />
+  </g>
+    <text x="738" y="376" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" font-weight="800" fill="#122033">只调参数</text>
+    <text x="670" y="428" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">prompt 改来改去，但真正该换的</text>
+    <text x="670" y="458" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">是任务结构和搜索路径。</text>
+  </g>
+
+  <g id="card-pain-3">
+    <path fill="#FFFFFF" stroke="#C9D9EA" stroke-width="1" d="M652,482 H1208 A12,12 0 0 1 1220,494 V618 A12,12 0 0 1 1208,630 H652 A12,12 0 0 1 640,618 V494 A12,12 0 0 1 652,482 Z" />
+    <path fill="#D94B4B" d="M642.50,482 H642.50 A2.50,2.50 0 0 1 645,484.50 V627.50 A2.50,2.50 0 0 1 642.50,630 H642.50 A2.50,2.50 0 0 1 640,627.50 V484.50 A2.50,2.50 0 0 1 642.50,482 Z" />
+    
+  <g transform="translate(670, 514) scale(2)" fill="none" stroke="#D94B4B" stroke-width="2">
+    <path d="M11.5 12a.5 .5 0 1 0 1 0a.5 .5 0 1 0 -1 0" />
+    <path d="M5 12a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+    <path d="M12 3l0 2" />
+    <path d="M3 12l2 0" />
+    <path d="M12 19l0 2" />
+    <path d="M19 12l2 0" />
+  </g>
+    <text x="738" y="542" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="32" font-weight="800" fill="#122033">只追最优</text>
+    <text x="670" y="594" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">大家挤向看起来最好的方向，</text>
+    <text x="670" y="624" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">新路线还没被试就被放弃。</text>
+  </g>
+
+  <g id="p03-footer">
+    <rect x="60" y="660" width="1160" height="2" fill="url(#scarLine3)" />
+    <text x="60" y="700" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · failure becomes signal</text>
+    <text x="1220" y="700" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">03 / 10</text>
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 · 代码生成进化 — 痕进</title>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--border:#30363d;--fg:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--yellow:#d29922;--purple:#bc8cff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI",Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;padding:24px;max-width:1000px;margin:0 auto}
+  h1{font-size:1.4rem;font-weight:600;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:.85rem;margin-bottom:20px}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:600;margin-left:8px}
+  .badge-true{background:rgba(63,185,80,.15);color:var(--green);border:1px solid rgba(63,185,80,.3)}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+  .panel h2{font-size:1rem;font-weight:600;margin-bottom:12px;color:var(--accent)}
+  .chain{font-family:"SFMono-Regular",Consolas,monospace;font-size:.82rem}
+  .step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:6px;margin:6px 0}
+  .step-bad{background:rgba(248,81,73,.08);border-left:3px solid var(--red)}
+  .step-good{background:rgba(63,185,80,.1);border-left:3px solid var(--green)}
+  .score{font-weight:700;min-width:60px}
+  .score-bad{color:var(--red)}.score-good{color:var(--green)}
+  .code-text{color:var(--fg);flex:1}
+  .detail{color:var(--muted);font-size:.72rem;margin-top:4px}
+  .arrow{color:var(--purple);padding-left:24px;font-size:.72rem;margin:2px 0}
+  .arrow b{color:var(--accent)}
+  .takeaway{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.2);border-radius:8px;padding:14px 18px;margin-top:12px}
+  .takeaway strong{color:var(--accent)}
+  .honest{background:rgba(248,81,73,.05);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.85rem}
+  code{background:rgba(110,118,129,.2);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:.82rem}
+</style>
+</head>
+<body>
+
+<h1>代码生成进化：从错误代码到全测试通过 <span class="badge badge-true">生产场景 · Roadmap→已验证</span></h1>
+<div class="sub">同一套引擎，第六个领域。代码生成是 LLM 时代最常见的 Agent 任务——这里展示引擎怎么从"接近但错"的代码嫁接修复。配 <code>experiments/codegen_evolution.py</code></div>
+
+<div class="panel">
+  <h2>两条进化链：嫁接一个修复，从部分通过到全通过</h2>
+  <div class="sub">问题：返回列表元素的平方和。测试用例 [1,2,3]→14, [0]→0, [1,1,1]→3, [2,3]→13</div>
+  <div class="chain">
+    <div style="color:var(--muted);font-size:.78rem;margin-bottom:8px">链一：用错运算符（×2 而非 x²）</div>
+    <div class="step step-bad">
+      <span class="score score-bad">0.25</span>
+      <div><div class="code-text">return sum(x*2 for x in lst)</div>
+      <div class="detail">4 个测试只过 1 个 — 用了 ×2 而不是 x²，[1,2,3] 算出 12 而非 14</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: x*2 → x**2</b> — 把乘法改成幂运算</div>
+    <div class="step step-good">
+      <span class="score score-good">1.00</span>
+      <div><div class="code-text">return sum(x**2 for x in lst)</div>
+      <div class="detail">✅ 4 个测试全过 — 正确的平方和</div></div>
+    </div>
+  </div>
+  <div class="chain" style="margin-top:20px">
+    <div style="color:var(--muted);font-size:.78rem;margin-bottom:8px">链二：忘记平方（直接求和）</div>
+    <div class="step step-bad">
+      <span class="score score-bad">0.50</span>
+      <div><div class="code-text">return sum(x for x in lst)</div>
+      <div class="detail">4 个测试只过 2 个 — 求和而非平方和</div></div>
+    </div>
+    <div class="arrow">↓ <b>graft: +**2</b> — 在求和表达式里加上平方</div>
+    <div class="step step-good">
+      <span class="score score-good">1.00</span>
+      <div><div class="code-text">return sum(x**2 for x in lst)</div>
+      <div class="detail">✅ 4 个测试全过</div></div>
+    </div>
+  </div>
+  <div class="takeaway">
+    <strong>同一个 bug，两条路径，同一个正确答案。</strong> 引擎从"接近但错"的代码出发，嫁接一个修复（改运算符 / 加缺失的平方），跳到全测试通过。这正是 LLM 代码 Agent 最需要的能力——<strong>不重写，而是在接近正确的版本上修</strong>。
+  </div>
+</div>
+
+<div class="panel">
+  <h2>和 LLM 的配合</h2>
+  <div class="sub">引擎不替代 LLM——它帮 LLM 避免重复犯错。</div>
+  <table style="width:100%;font-size:.85rem;border-collapse:collapse">
+    <tr style="color:var(--muted);font-size:.78rem">
+      <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">阶段</th>
+      <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">没有痕进</th>
+      <th style="text-align:left;padding:8px;border-bottom:1px solid var(--border)">有痕进</th>
+    </tr>
+    <tr><td style="padding:8px;border-bottom:1px solid var(--border)">LLM 生成</td><td style="padding:8px;border-bottom:1px solid var(--border)">5 个方案，含已知会错的</td><td style="padding:8px;border-bottom:1px solid var(--border)">5 个方案，<strong>已知死路被屏蔽</strong></td></tr>
+    <tr><td style="padding:8px;border-bottom:1px solid var(--border)">执行测试</td><td style="padding:8px;border-bottom:1px solid var(--border)">全跑一遍（浪费）</td><td style="padding:8px;border-bottom:1px solid var(--border)">只跑没试过的</td></tr>
+    <tr><td style="padding:8px;border-bottom:1px solid var(--border)">记录失败</td><td style="padding:8px;border-bottom:1px solid var(--border)">对话窗口里，下次忘</td><td style="padding:8px;border-bottom:1px solid var(--border)">写进账本，<strong>下次自动跳过</strong></td></tr>
+    <tr><td style="padding:8px">下一轮</td><td style="padding:8px">LLM 可能又犯同一个错</td><td style="padding:8px">引擎提醒"这类 API 上次崩了"</td></tr>
+  </table>
+</div>
+
+<div class="panel">
+  <h2>诚实边界</h2>
+  <table style="width:100%;font-size:.85rem;border-collapse:collapse">
+    <tr style="color:var(--muted);font-size:.78rem">
+      <th style="width:50%;text-align:left;padding:8px">✅ 证明了</th>
+      <th style="width:50%;text-align:left;padding:8px">⚠️ 局限</th>
+    </tr>
+    <tr>
+      <td style="padding:8px;border-bottom:1px solid var(--border)">引擎在第六个领域（代码生成）跑通；进化链清晰：从部分通过嫁接修复到全通过。LLM 场景可接入。</td>
+      <td style="padding:8px;border-bottom:1px solid var(--border)">任务是<strong>编程题级别</strong>（LeetCode easy），非真实生产代码库。graft 是预定义的修复模式，非 LLM 自主修复。</td>
+    </tr>
+  </table>
+  <div class="honest">
+    <strong>定位：</strong>代码生成证明了引擎在<strong>LLM 时代最常见场景</strong>上的可接入性。从 Roadmap 变成了已验证——但任务规模还是玩具级，生产级集成需要对接真实编译/测试流水线。
+  </div>
+</div>
+
+</body>
+</html>

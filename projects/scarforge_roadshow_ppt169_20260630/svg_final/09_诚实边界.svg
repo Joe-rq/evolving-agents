@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine9" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+    <filter id="cardShadow9" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="3" result="offsetblur" />
+      <feFlood flood-color="#1D4D82" flood-opacity="0.10" result="shadowColor" />
+      <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow" />
+      <feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p09-header">
+    <text x="60" y="80" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">HONEST BOUNDARY</text>
+    <text x="60" y="172" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">真正的可信感，</text>
+    <text x="60" y="246" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#1D70D6">来自边界说清楚。</text>
+  </g>
+
+  
+  <g id="card-claim">
+    <g filter="url(#cardShadow9)">
+      <path fill="#FFFFFF" d="M76,310 H604 A16,16 0 0 1 620,326 V574 A16,16 0 0 1 604,590 H76 A16,16 0 0 1 60,574 V326 A16,16 0 0 1 76,310 Z" />
+    </g>
+    
+  <g transform="translate(84, 334) scale(2)" fill="none" stroke="#15956B" stroke-width="2">
+    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+    <path d="M9 12l2 2l4 -4" />
+  </g>
+    <text x="148" y="370" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="34" font-weight="800" fill="#15956B">我们 claim</text>
+    <line x1="84" y1="398" x2="596" y2="398" stroke="#15956B" stroke-opacity="0.22" stroke-width="1" />
+    <g id="claim-item-1">
+      <circle cx="94" cy="438" r="5" fill="#15956B" />
+      <text x="114" y="446" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D"><tspan font-weight="700" fill="#122033">5 个机制</tspan>都已实现。</text>
+    </g>
+    <g id="claim-item-2">
+      <circle cx="94" cy="498" r="5" fill="#15956B" />
+      <text x="114" y="506" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">观察到一次<tspan font-weight="700" fill="#122033">真实换结构事件</tspan>。</text>
+    </g>
+    <g id="claim-item-3">
+      <circle cx="94" cy="558" r="5" fill="#15956B" />
+      <text x="114" y="566" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">部分学习来自<tspan font-weight="700" fill="#122033">账本投影</tspan>，</text>
+      <text x="114" y="588" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">不是手写规则。</text>
+    </g>
+  </g>
+
+  
+  <g id="card-not-claim">
+    <g filter="url(#cardShadow9)">
+      <path fill="#FFFFFF" d="M676,310 H1204 A16,16 0 0 1 1220,326 V574 A16,16 0 0 1 1204,590 H676 A16,16 0 0 1 660,574 V326 A16,16 0 0 1 676,310 Z" />
+    </g>
+    
+  <g transform="translate(684, 334) scale(2)" fill="none" stroke="#E47B2C" stroke-width="2">
+    <path d="M12 9v4" />
+    <path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0" />
+    <path d="M12 16h.01" />
+  </g>
+    <text x="748" y="370" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="34" font-weight="800" fill="#E47B2C">我们不 claim</text>
+    <line x1="684" y1="398" x2="1196" y2="398" stroke="#E47B2C" stroke-opacity="0.22" stroke-width="1" />
+    <g id="notclaim-item-1">
+      <circle cx="694" cy="438" r="5" fill="#E47B2C" />
+      <text x="714" y="446" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">没有<tspan font-weight="700" fill="#122033">有效性</tspan>的对照证明。</text>
+    </g>
+    <g id="notclaim-item-2">
+      <circle cx="694" cy="498" r="5" fill="#E47B2C" />
+      <text x="714" y="506" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">没有<tspan font-weight="700" fill="#122033">量化收益曲线</tspan>。</text>
+    </g>
+    <g id="notclaim-item-3">
+      <circle cx="694" cy="558" r="5" fill="#E47B2C" />
+      <text x="714" y="566" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">还没有<tspan font-weight="700" fill="#122033">跨领域规模化</tspan></text>
+      <text x="714" y="588" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="22" fill="#52657D">验证结论。</text>
+    </g>
+  </g>
+
+  <g id="p09-message">
+    <text x="60" y="634" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">这不是软弱，这是可信产品该有的边界。我们讲一个<tspan font-weight="700" fill="#122033">可追溯的进化事件</tspan>，不把它包装成万能神话。</text>
+  </g>
+
+  <g id="p09-footer">
+    <rect x="60" y="678" width="1160" height="2" fill="url(#scarLine9)" />
+    <text x="60" y="708" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · mechanism + observed behavior + disclosed boundary</text>
+    <text x="1220" y="708" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">09 / 10</text>
+  </g>
+</svg>

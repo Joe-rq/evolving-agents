@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+    <filter id="cardShadow4" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="3" result="offsetblur" />
+      <feFlood flood-color="#1D4D82" flood-opacity="0.10" result="shadowColor" />
+      <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow" />
+      <feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p04-header">
+    <text x="60" y="80" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">THE THESIS</text>
+    <text x="60" y="172" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">不是修 prompt。</text>
+    <text x="60" y="246" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#1D70D6">是让失败变成系统资产。</text>
+    <text x="60" y="306" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">一次失败只停在对话窗口里就是噪音；写进账本、归成模式、投影成规则、影响下一轮搜索，它才开始<tspan font-weight="700" fill="#122033">产生复利</tspan>。</text>
+  </g>
+
+  
+  <g id="card-mech-1">
+    <g filter="url(#cardShadow4)">
+      <path fill="#FFFFFF" d="M76,350 H260 A16,16 0 0 1 276,366 V594 A16,16 0 0 1 260,610 H76 A16,16 0 0 1 60,594 V366 A16,16 0 0 1 76,350 Z" />
+    </g>
+    <text x="84" y="392" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#1D70D6">01</text>
+    
+  <g transform="translate(84, 408) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+    <text x="84" y="500" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">记住失败</text>
+    <text x="84" y="540" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">失败持久化，</text>
+    <text x="84" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">别把配额烧在</text>
+    <text x="84" y="596" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">已知死路上。</text>
+  </g>
+
+  <g id="card-mech-2">
+    <g filter="url(#cardShadow4)">
+      <path fill="#FFFFFF" d="M312,350 H496 A16,16 0 0 1 512,366 V594 A16,16 0 0 1 496,610 H312 A16,16 0 0 1 296,594 V366 A16,16 0 0 1 312,350 Z" />
+    </g>
+    <text x="320" y="392" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#1D70D6">02</text>
+    
+  <g transform="translate(320, 408) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+    <path d="M21 21l-6 -6" />
+  </g>
+    <text x="320" y="500" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">评分搜索</text>
+    <text x="320" y="540" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">评估"怎么找答</text>
+    <text x="320" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">案"，而不只评</text>
+    <text x="320" y="596" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">估最后答案。</text>
+  </g>
+
+  <g id="card-mech-3">
+    <g filter="url(#cardShadow4)">
+      <path fill="#FFFFFF" d="M548,350 H732 A16,16 0 0 1 748,366 V594 A16,16 0 0 1 732,610 H548 A16,16 0 0 1 532,594 V366 A16,16 0 0 1 548,350 Z" />
+    </g>
+    <text x="556" y="392" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#1D70D6">03</text>
+    
+  <g transform="translate(556, 408) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M5 2h5v4h-5l0 -4" />
+    <path d="M15 10h5v4h-5l0 -4" />
+    <path d="M5 18h5v4h-5l0 -4" />
+    <path d="M5 10h5v4h-5l0 -4" />
+    <path d="M10 12h5" />
+    <path d="M7.5 6v4" />
+    <path d="M7.5 14v4" />
+  </g>
+    <text x="556" y="500" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">学习模式</text>
+    <text x="556" y="540" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">从"这次错了"</text>
+    <text x="556" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">升级到"这类</text>
+    <text x="556" y="596" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">情况都会错"。</text>
+  </g>
+
+  <g id="card-mech-4">
+    <g filter="url(#cardShadow4)">
+      <path fill="#FFFFFF" d="M784,350 H968 A16,16 0 0 1 984,366 V594 A16,16 0 0 1 968,610 H784 A16,16 0 0 1 768,594 V366 A16,16 0 0 1 784,350 Z" />
+    </g>
+    <text x="792" y="392" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#1D70D6">04</text>
+    
+  <g transform="translate(792, 408) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M5 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M5 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M15 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M7 8l0 8" />
+    <path d="M9 18h6a2 2 0 0 0 2 -2v-5" />
+    <path d="M14 14l3 -3l3 3" />
+  </g>
+    <text x="792" y="500" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">换结构</text>
+    <text x="792" y="540" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">方法反复失败</text>
+    <text x="792" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">时，换路径，</text>
+    <text x="792" y="596" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">不在旧路上微调。</text>
+  </g>
+
+  <g id="card-mech-5">
+    <g filter="url(#cardShadow4)">
+      <path fill="#FFFFFF" d="M1020,350 H1204 A16,16 0 0 1 1220,366 V594 A16,16 0 0 1 1204,610 H1020 A16,16 0 0 1 1004,594 V366 A16,16 0 0 1 1020,350 Z" />
+    </g>
+    <text x="1028" y="392" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#1D70D6">05</text>
+    
+  <g transform="translate(1028, 408) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />
+  </g>
+    <text x="1028" y="500" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">避拥挤</text>
+    <text x="1028" y="540" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">奖励新颖探索，</text>
+    <text x="1028" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">防止集体挤进</text>
+    <text x="1028" y="596" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">局部最优。</text>
+  </g>
+
+  <g id="p04-footer">
+    <rect x="60" y="660" width="1160" height="2" fill="url(#scarLine4)" />
+    <text x="60" y="700" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · five mechanisms, one loop</text>
+    <text x="1220" y="700" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">04 / 10</text>
+  </g>
+</svg>

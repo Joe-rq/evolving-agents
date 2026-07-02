@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>00 · 小白图解 — 痕进</title>
+<style>
+  :root{
+    --bg:#0d1117;--card:#161b22;--border:#30363d;
+    --fg:#e6edf3;--muted:#8b949e;--accent:#58a6ff;
+    --green:#3fb950;--red:#f85149;--yellow:#d29922;--purple:#bc8cff;--orange:#e8873e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI",Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;padding:24px;max-width:980px;margin:0 auto}
+  h1{font-size:1.5rem;font-weight:700;margin-bottom:6px}
+  .lead{font-size:1.05rem;color:var(--accent);margin-bottom:8px;font-weight:500}
+  .sub{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:20px}
+  .section h2{font-size:1.15rem;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+  .section h2 .num{background:var(--accent);color:var(--bg);width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700}
+  .analogy-box{background:rgba(188,140,255,.08);border:1px solid rgba(188,140,255,.25);border-radius:8px;padding:16px 20px;margin-bottom:20px;font-size:1rem}
+  .analogy-box strong{color:var(--purple)}
+  /* 核心机制三步图 */
+  .mech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0}
+  @media(max-width:700px){.mech-grid{grid-template-columns:1fr}}
+  .mech-step{background:rgba(88,166,255,.05);border:1px solid rgba(88,166,255,.15);border-radius:8px;padding:16px;text-align:center}
+  .mech-step .icon{font-size:2rem;margin-bottom:8px}
+  .mech-step .title{font-weight:600;margin-bottom:4px;color:var(--accent)}
+  .mech-step .desc{font-size:.82rem;color:var(--muted)}
+  .arrow-flow{text-align:center;color:var(--muted);font-size:1.2rem;margin:4px 0}
+  /* 案例卡片 */
+  .case{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;margin-bottom:16px}
+  @media(max-width:700px){.case{grid-template-columns:1fr}}
+  .case-vis{background:rgba(0,0,0,.2);border-radius:8px;padding:12px;display:flex;align-items:center;justify-content:center;min-height:140px}
+  .case-vis svg{max-width:100%;height:auto}
+  .case-info h3{font-size:1.05rem;font-weight:600;margin-bottom:6px}
+  .case-info .where{font-size:.75rem;color:var(--muted);margin-bottom:10px}
+  .case-info .where code{background:rgba(110,118,129,.2);padding:1px 5px;border-radius:3px;font-size:.72rem}
+  .four-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+  .cell{padding:8px 10px;border-radius:6px;font-size:.8rem}
+  .cell-target{background:rgba(63,185,80,.1);border-left:3px solid var(--green)}
+  .cell-start{background:rgba(248,81,73,.1);border-left:3px solid var(--red)}
+  .cell-score{background:rgba(210,153,34,.1);border-left:3px solid var(--yellow)}
+  .cell-evolve{background:rgba(88,166,255,.1);border-left:3px solid var(--accent)}
+  .cell .label{font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:2px}
+  /* 评分进度条 */
+  .bar{height:8px;border-radius:4px;background:var(--border);overflow:hidden;margin:4px 0}
+  .bar-fill{height:100%;border-radius:4px}
+  /* 失败标签 */
+  .tag{display:inline-block;font-size:.7rem;padding:2px 8px;border-radius:10px;margin:2px}
+  .tag-fail{background:rgba(248,81,73,.15);color:var(--red)}
+  .tag-ok{background:rgba(63,185,80,.15);color:var(--green)}
+  .tag-meh{background:rgba(210,153,34,.15);color:var(--yellow)}
+  .footnote{color:var(--muted);font-size:.8rem;margin-top:8px}
+  .evolve-row{display:flex;align-items:center;gap:6px;font-size:.78rem;flex-wrap:wrap}
+  code{background:rgba(110,118,129,.2);padding:1px 5px;border-radius:3px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.8rem}
+</style>
+</head>
+<body>
+
+<h1>蒙眼学徒的笔记本</h1>
+<div class="lead">用大白话讲清楚「痕进」在干什么 —— 不用懂任何技术</div>
+<div class="sub">假设你完全不知道 AI、agent、进化是什么。这篇只用图画和类比。</div>
+
+<!-- ========== 第一部分：核心类比 ========== -->
+<div class="section">
+  <h2><span class="num">1</span> 一句话讲完整个项目</h2>
+  <div class="analogy-box">
+    想象一个 <strong>蒙着眼的学徒</strong>，被送进不同的工坊学手艺。<br>
+    他<strong>看不见成品长什么样</strong>，做完师傅只说"行 / 不行"。<br>
+    但他有一本 <strong>笔记本</strong> —— 记下"上次这么做栽了"。<br>
+    下次他就<strong>绕开笔记本上的死路</strong>，往没栽过的地方试。<br><br>
+    这个项目就是<strong>把这本笔记本变成了一套能复用的方法</strong>。<br>
+    下面四个工坊，<strong>笔记本是同一本，学法是同一套，只是手艺不同。</strong>
+  </div>
+
+  <h2 style="margin-top:24px"><span class="num">2</span> 笔记本怎么帮他变聪明（核心三步）</h2>
+  <div class="mech-grid">
+    <div class="mech-step">
+      <div class="icon">🙅</div>
+      <div class="title">记住失败</div>
+      <div class="desc">"上次往左拐，撞墙了"<br>记进笔记本，<strong>不只记一次</strong>，<br>记住"往左拐这类路都不行"</div>
+    </div>
+    <div class="mech-step">
+      <div class="icon">🚫</div>
+      <div class="title">绕开死路</div>
+      <div class="desc">下次<strong>自动跳过</strong>笔记本上的死路<br>（不用师傅再说"别往左"）<br>省下的力气去试新路</div>
+    </div>
+    <div class="mech-step">
+      <div class="icon">✨</div>
+      <div class="title">往成功处长</div>
+      <div class="desc">"上次往右拐好像对了"<br>那就<strong>在右边再仔细试试</strong><br>把对的方向长出新花样</div>
+    </div>
+  </div>
+  <div class="footnote" style="text-align:center">👆 这三步循环重复，学徒就越做越准 —— 这就是"进化"。</div>
+</div>
+
+<!-- ========== 第二部分：四个工坊 ========== -->
+<div class="section">
+  <h2><span class="num">3</span> 四个工坊里发生的事</h2>
+  <div class="sub">同一个学徒，同一本笔记本。唯一不同的是手艺。每个工坊画四格：<span style="color:var(--green)">猜什么</span> · <span style="color:var(--red)">一开始多惨</span> · <span style="color:var(--yellow)">怎么打分</span> · <span style="color:var(--accent)">怎么变聪明</span></div>
+
+  <!-- 工坊1: 符号回归 -->
+  <div class="case">
+    <div class="case-vis">
+      <svg viewBox="0 0 160 140">
+        <!-- 目标曲线 -->
+        <path d="M20,120 Q40,110 60,90 T100,40 T140,10" fill="none" stroke="#e6edf3" stroke-width="2.5" stroke-dasharray="5,3" opacity="0.6"/>
+        <!-- 乱七八糟的猜 -->
+        <path d="M20,100 C30,60 40,110 50,70 S70,100 80,50 S100,110 110,40 S130,90 140,60" fill="none" stroke="#58a6ff" stroke-width="2" opacity="0.5"/>
+        <text x="80" y="135" text-anchor="middle" font-size="9" fill="#8b949e">蓝线（乱猜）vs 白虚线（目标）</text>
+      </svg>
+    </div>
+    <div class="case-info">
+      <h3>📐 工坊一：数学工坊（符号回归）</h3>
+      <div class="where">代码：<code>adapters/symreg/</code> · 完整动画 → <code>demo/08</code></div>
+      <div class="four-grid">
+        <div class="cell cell-target"><div class="label">🎯 猜什么</div>猜一个数学公式，让它画出目标曲线的形状</div>
+        <div class="cell cell-start"><div class="label">🏁 一开始</div>画出一条乱七八糟的线，跟目标完全不沾边</div>
+        <div class="cell cell-score"><div class="label">📏 怎么打分</div>画出来的线，跟目标线<strong>重合了多少</strong>
+          <div class="bar"><div class="bar-fill" style="width:37%;background:var(--yellow)"></div></div>
+          <div style="font-size:.7rem;color:var(--muted)">满分是一条线，刚开始只重合 37%</div>
+        </div>
+        <div class="cell cell-evolve"><div class="label">🧬 怎么变聪明</div>记住"x 平方这个形状比较接近" → 在它上面<strong>再加一点</strong>，长出更接近的公式
+          <div class="evolve-row" style="margin-top:6px">
+            <span class="tag tag-meh">x² (37%)</span>→<span class="tag tag-ok">2x² (99.6%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 工坊2: 正则合成 -->
+  <div class="case">
+    <div class="case-vis">
+      <svg viewBox="0 0 160 140">
+        <!-- 框（太大） -->
+        <rect x="15" y="20" width="130" height="100" fill="none" stroke="#f85149" stroke-width="2" stroke-dasharray="4,3" opacity="0.6" rx="6"/>
+        <!-- 正例（该收） -->
+        <text x="30" y="45" font-size="9" fill="#3fb950" font-family="monospace">✓ 2024-01-15</text>
+        <text x="30" y="60" font-size="9" fill="#3fb950" font-family="monospace">✓ 1999-12-31</text>
+        <!-- 反例（不该收但被框住了） -->
+        <text x="30" y="80" font-size="9" fill="#f85149" font-family="monospace">✗ 2024/01/15</text>
+        <text x="30" y="95" font-size="9" fill="#f85149" font-family="monospace">✗ abc</text>
+        <text x="30" y="110" font-size="9" fill="#f85149" font-family="monospace">✗ 24-01-15</text>
+        <text x="80" y="135" text-anchor="middle" font-size="8" fill="#8b949e">框太大，好的坏的全圈进去了</text>
+      </svg>
+    </div>
+    <div class="case-info">
+      <h3>🔤 工坊二：分类工坊（正则合成）</h3>
+      <div class="where">代码：<code>adapters/regex/</code> · 详见 <code>demo/07</code></div>
+      <div class="four-grid">
+        <div class="cell cell-target"><div class="label">🎯 猜什么</div>猜一条"分类规则"——什么样的字符串算"日期"</div>
+        <div class="cell cell-start"><div class="label">🏁 一开始</div>给一条"什么都算"的规则——<strong>好的坏的全圈进来了</strong>（太贪心）</div>
+        <div class="cell cell-score"><div class="label">📏 怎么打分</div>圈对了多少<strong>好的</strong>，又圈错了多少<strong>坏的</strong>
+          <div class="bar"><div class="bar-fill" style="width:53%;background:var(--yellow)"></div></div>
+          <div style="font-size:.7rem;color:var(--muted)">刚开始对错各半，因为框太大</div>
+        </div>
+        <div class="cell cell-evolve"><div class="label">🧬 怎么变聪明</div>记住"框太大会误伤" → <strong>把框收紧一点</strong>，只圈真正像日期的
+          <div class="evolve-row" style="margin-top:6px">
+            <span class="tag tag-meh">什么都收 (53%)</span>→<span class="tag tag-ok">只收日期 (74%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 工坊3: 2048 -->
+  <div class="case">
+    <div class="case-vis">
+      <svg viewBox="0 0 160 140">
+        <!-- 棋盘 -->
+        <g opacity="0.7">
+          <rect x="30" y="20" width="100" height="100" fill="none" stroke="#30363d" stroke-width="1.5" rx="4"/>
+          <line x1="55" y1="20" x2="55" y2="120" stroke="#30363d"/><line x1="80" y1="20" x2="80" y2="120" stroke="#30363d"/><line x1="105" y1="20" x2="105" y2="120" stroke="#30363d"/>
+          <line x1="30" y1="45" x2="130" y2="45" stroke="#30363d"/><line x1="30" y1="70" x2="130" y2="70" stroke="#30363d"/><line x1="30" y1="95" x2="130" y2="95" stroke="#30363d"/>
+          <!-- 数字 -->
+          <text x="42" y="37" font-size="10" fill="#e8873e" font-weight="bold">2</text>
+          <text x="67" y="37" font-size="10" fill="#e8873e" font-weight="bold">4</text>
+          <text x="92" y="62" font-size="10" fill="#e8873e" font-weight="bold">2</text>
+          <text x="42" y="87" font-size="10" fill="#e8873e" font-weight="bold">2</text>
+          <text x="67" y="112" font-size="10" fill="#e8873e" font-weight="bold">8</text>
+        </g>
+        <text x="80" y="135" text-anchor="middle" font-size="8" fill="#8b949e">合并数字，目标是拼出 1024</text>
+      </svg>
+    </div>
+    <div class="case-info">
+      <h3>🎮 工坊三：游戏厅（2048）</h3>
+      <div class="where">代码：<code>adapters/game2048/</code> · 详见 <code>demo/05</code></div>
+      <div class="four-grid">
+        <div class="cell cell-target"><div class="label">🎯 猜什么</div>玩合并数字游戏，目标是拼出大数字（1024）</div>
+        <div class="cell cell-start"><div class="label">🏁 一开始</div>瞎按方向，棋盘很快填满动不了</div>
+        <div class="cell cell-score"><div class="label">📏 怎么打分</div>拼出的<strong>最大数字有多大</strong>
+          <div class="bar"><div class="bar-fill" style="width:30%;background:var(--red)"></div></div>
+          <div style="font-size:.7rem;color:var(--muted)">刚开始只能拼到 256 左右</div>
+        </div>
+        <div class="cell cell-evolve"><div class="label">🧬 怎么变聪明</div>记住"乱按会卡死" → <strong>跳过必死的按法</strong>
+          <div class="evolve-row" style="margin-top:6px">
+            <span class="tag tag-fail">屏蔽 452 次死路</span>
+          </div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:4px">⚠️ 诚实说：屏蔽了死路，但<strong>没能证明分数变高</strong>（对照实验 p=0.079，没达标）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 工坊4: 迷宫 -->
+  <div class="case">
+    <div class="case-vis">
+      <svg viewBox="0 0 160 140">
+        <g opacity="0.7">
+          <!-- 迷宫墙 -->
+          <rect x="30" y="20" width="100" height="100" fill="none" stroke="#30363d" stroke-width="1.5"/>
+          <line x1="55" y1="20" x2="55" y2="70" stroke="#30363d"/><line x1="80" y1="45" x2="80" y2="120" stroke="#30363d"/><line x1="55" y1="45" x2="105" y2="45" stroke="#30363d"/><line x1="30" y1="70" x2="80" y2="70" stroke="#30363d"/><line x1="105" y1="70" x2="105" y2="95" stroke="#30363d"/>
+          <!-- 乱走的路径（红色，到处撞） -->
+          <path d="M42,32 L42,57 L67,57 L67,82 L42,82 L42,57" fill="none" stroke="#f85149" stroke-width="2" opacity="0.6"/>
+          <!-- 起点和终点 -->
+          <circle cx="42" cy="32" r="3" fill="#58a6ff"/><text x="48" y="35" font-size="7" fill="#58a6ff">起</text>
+          <circle cx="117" cy="107" r="3" fill="#3fb950"/><text x="108" y="118" font-size="7" fill="#3fb950">出口</text>
+        </g>
+        <text x="80" y="135" text-anchor="middle" font-size="8" fill="#8b949e">红线到处撞墙（记死路）</text>
+      </svg>
+    </div>
+    <div class="case-info">
+      <h3>🧩 工坊四：迷宫（<strong style="color:var(--yellow)">这个没成功</strong>）</h3>
+      <div class="where">代码：<code>adapters/maze/</code> · 详见 <code>examples/case-study-maze.md</code></div>
+      <div class="four-grid">
+        <div class="cell cell-target"><div class="label">🎯 猜什么</div>找一条从起点到出口的路线</div>
+        <div class="cell cell-start"><div class="label">🏁 一开始</div>到处乱撞，反复走同一条死胡同</div>
+        <div class="cell cell-score"><div class="label">📏 怎么打分</div><strong>多快</strong>走到出口</div>
+        <div class="cell cell-evolve"><div class="label">🧬 结果</div>学徒记住了死路，能绕开 —— <strong>但没能变得更聪明</strong>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:4px">⚠️ 我们试了四种办法都没用。迷宫的难点是"看不见全图"，记死路帮不上忙。我们<strong>如实告诉你这个失败了</strong>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 第三部分：诚实 ========== -->
+<div class="section">
+  <h2><span class="num">4</span> 我们不会吹的</h2>
+  <div class="analogy-box" style="background:rgba(248,81,73,.05);border-color:rgba(248,81,73,.2)">
+    其他做"自进化 AI"的演示，大多给你看一条<strong>一直往上走的学习曲线</strong>，然后说"你看，它变聪明了"。<br><br>
+    但他们回答不了一个问题：<strong>这到底是真变聪明了，还是运气好？</strong> 没有对比实验，你分不清。<br><br>
+    我们的回答：<strong>做了对比实验，结果是"没能证明它变聪明了"（p=0.079，没达标）。</strong><br>
+    我们没藏这个结果 —— 我们把它写在了最显眼的地方。
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
+    @media(max-width:700px){div{grid-template-columns:1fr}}
+    <div style="background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.2);border-radius:8px;padding:14px">
+      <div style="color:var(--green);font-weight:600;margin-bottom:6px">✅ 能说的</div>
+      <div style="font-size:.85rem">学徒<strong>确实在记本子、绕死路</strong>（四个工坊都看到了）。数学工坊和分类工坊里，他<strong>确实画出了更接近的答案</strong>。这本笔记本<strong>换到不同工坊都能用</strong>。</div>
+    </div>
+    <div style="background:rgba(248,81,73,.06);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px">
+      <div style="color:var(--red);font-weight:600;margin-bottom:6px">⚠️ 不能说的</div>
+      <div style="font-size:.85rem">不能说"证明了记本子让他分数提高 X%"。<strong>因为对比实验没达标</strong>（p=0.079）。也不能说"迷宫里变聪明了"——<strong>那失败了</strong>。我们如实区分这两件事。</div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px;padding:20px;border-top:1px solid var(--border)">
+  痕进 · 蒙眼学徒的笔记本 · 失败留痕，凭痕而进<br>
+  技术细节 → <code>README.md</code> · 完整诚实声明 → <code>content/honest-boundary.md</code> · 动画 → <code>demo/08</code>
+</div>
+
+</body>
+</html>

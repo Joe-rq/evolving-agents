@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 · 三场景验证总览 — 痕进</title>
+<style>
+  :root{--bg:#0d1117;--card:#161b22;--border:#30363d;--fg:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--yellow:#d29922;--purple:#bc8cff;--orange:#e8873e}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--fg);font-family:-apple-system,"Segoe UI",Helvetica,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;padding:24px;max-width:1100px;margin:0 auto}
+  h1{font-size:1.4rem;font-weight:600;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:.85rem;margin-bottom:20px}
+  .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.7rem;font-weight:600;margin-left:8px;vertical-align:middle}
+  .badge-done{background:rgba(63,185,80,.15);color:var(--green);border:1px solid rgba(63,185,80,.3)}
+  .panel{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+  .panel h2{font-size:1rem;font-weight:600;margin-bottom:12px;color:var(--accent)}
+  /* 三列对比 */
+  .domains{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+  @media(max-width:800px){.domains{grid-template-columns:1fr}}
+  .domain{border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:8px}
+  .domain-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  .domain-icon{font-size:1.3rem}
+  .domain-name{font-weight:600;font-size:.95rem}
+  .domain-tag{font-size:.68rem;padding:2px 7px;border-radius:8px;margin-left:auto}
+  .tag-verified{background:rgba(63,185,80,.12);color:var(--green);border:1px solid rgba(63,185,80,.25)}
+  /* 进化条 */
+  .evo-bar{display:flex;align-items:center;gap:2px;margin:8px 0}
+  .evo-node{flex:1;text-align:center;padding:6px 2px;border-radius:4px;font-size:.68rem;font-family:monospace;font-weight:600}
+  .evo-start{background:rgba(248,81,73,.12);color:var(--red)}
+  .evo-mid{background:rgba(210,153,34,.12);color:var(--yellow)}
+  .evo-end{background:rgba(63,185,80,.12);color:var(--green)}
+  .evo-arrow{color:var(--muted);font-size:.6rem;flex:0 0 auto}
+  /* graft 列表 */
+  .graft-list{font-size:.72rem;color:var(--muted);line-height:1.7}
+  .graft-list b{color:var(--purple)}
+  .verdict{text-align:center;font-size:.8rem;margin-top:8px;padding:6px;border-radius:4px;background:rgba(63,185,80,.06)}
+  .verdict b{color:var(--green)}
+  /* 总表 */
+  table{width:100%;border-collapse:collapse;font-size:.82rem}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+  th{color:var(--muted);font-weight:500;font-size:.78rem}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .delta{color:var(--green);font-weight:600}
+  .honest{background:rgba(248,81,73,.05);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px 18px;margin-top:12px;font-size:.85rem}
+  code{background:rgba(110,118,129,.2);padding:1px 5px;border-radius:3px;font-family:monospace;font-size:.8rem}
+  .takeaway{background:rgba(88,166,255,.06);border:1px solid rgba(88,166,255,.2);border-radius:8px;padding:14px 18px;margin-top:12px}
+  .takeaway strong{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<h1>三个 Roadmap 场景：全部验证完成 <span class="badge badge-done">SQL · 代码 · RAG</span></h1>
+<div class="sub">同一套引擎，三个生产相关场景。从 Roadmap 变成了已验证——每个都有可观察的进化链。</div>
+
+<!-- 三领域对比 -->
+<div class="panel">
+  <h2>进化链总览：每个领域从"全错"到"最优"</h2>
+  <div class="domains">
+
+    <!-- SQL -->
+    <div class="domain">
+      <div class="domain-head">
+        <span class="domain-icon">🗄️</span>
+        <span class="domain-name">SQL 查询优化</span>
+        <span class="domain-tag tag-verified">已验证</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--muted)">起点：4 个反模式，cost=24</div>
+      <div class="evo-bar">
+        <div class="evo-node evo-start">24</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-mid">8</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-mid">3</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-end">1</div>
+      </div>
+      <div class="graft-list">
+        <div><b>+ON</b> 消除笛卡尔积</div>
+        <div><b>*→id</b> SELECT * 收紧</div>
+        <div><b>+LIMIT</b> 限制结果集</div>
+      </div>
+      <div class="verdict">cost <b>24→1</b> · 3 步</div>
+    </div>
+
+    <!-- 代码生成 -->
+    <div class="domain">
+      <div class="domain-head">
+        <span class="domain-icon">💻</span>
+        <span class="domain-name">代码生成</span>
+        <span class="domain-tag tag-verified">已验证</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--muted)">起点：用错运算符，1/4 测试过</div>
+      <div class="evo-bar">
+        <div class="evo-node evo-start">0.25</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-end">1.0</div>
+      </div>
+      <div class="graft-list">
+        <div><b>x*2→x**2</b> 乘法改幂运算</div>
+        <div><b>+**2</b> 补上缺失的平方</div>
+        <div style="color:var(--muted)">两条路径修复同一个 bug</div>
+      </div>
+      <div class="verdict">score <b>0.25→1.0</b> · 1 步</div>
+    </div>
+
+    <!-- RAG -->
+    <div class="domain">
+      <div class="domain-head">
+        <span class="domain-icon">🔍</span>
+        <span class="domain-name">RAG 检索</span>
+        <span class="domain-tag tag-verified">已验证</span>
+      </div>
+      <div style="font-size:.78rem;color:var(--muted)">起点：全错配置，score=0</div>
+      <div class="evo-bar">
+        <div class="evo-node evo-start">0</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-mid">.6</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-mid">.8</div>
+        <span class="evo-arrow">→</span>
+        <div class="evo-node evo-end">1.0</div>
+      </div>
+      <div class="graft-list">
+        <div><b>chunk→150</b> 分块缩小</div>
+        <div><b>th→0.7</b> 阈值收紧</div>
+        <div><b>k→4</b> 减少召回 · <b>+rerank</b> · <b>+expand</b></div>
+      </div>
+      <div class="verdict">score <b>0→1</b> · 5 步</div>
+    </div>
+
+  </div>
+  <div class="takeaway">
+    <strong>共同模式：三个领域都是"修复链"。</strong> 从一个有问题的版本出发，每一步修掉一个缺陷——SQL 修反模式、代码修 bug、RAG 修配置。进化方向相同（收紧），只是 graft 操作不同。同一套引擎，一行没改。
+  </div>
+</div>
+
+<!-- 详细数据表 -->
+<div class="panel">
+  <h2>验证数据</h2>
+  <table>
+    <tr><th>领域</th><th>评估指标</th><th>起点</th><th class="num">终点</th><th class="num">改善</th><th>进化步数</th><th>代码</th></tr>
+    <tr>
+      <td>SQL 查询优化</td>
+      <td>cost（反模式代价，越低越好）</td>
+      <td><code>24.0</code></td>
+      <td class="num delta"><code>1.0</code></td>
+      <td class="num delta">-23.0</td>
+      <td>3</td>
+      <td><code>adapters/sql/</code></td>
+    </tr>
+    <tr>
+      <td>代码生成</td>
+      <td>score（测试通过率）</td>
+      <td><code>0.25</code></td>
+      <td class="num delta"><code>1.00</code></td>
+      <td class="num delta">+0.75</td>
+      <td>1</td>
+      <td><code>adapters/codegen/</code></td>
+    </tr>
+    <tr>
+      <td>RAG 检索</td>
+      <td>score（策略配置质量）</td>
+      <td><code>0.00</code></td>
+      <td class="num delta"><code>1.00</code></td>
+      <td class="num delta">+1.00</td>
+      <td>5</td>
+      <td><code>adapters/rag/</code></td>
+    </tr>
+  </table>
+</div>
+
+<!-- 诚实 -->
+<div class="panel">
+  <h2>诚实边界</h2>
+  <table>
+    <tr><th style="width:50%">✅ 证明了</th><th style="width:50%">⚠️ 局限</th></tr>
+    <tr>
+      <td>三个生产场景全部跑通；进化链可观察、可复现。同一套引擎（<code>core/</code>一行未改），7 个 adapter 协议接入。</td>
+      <td>评估器是<strong>简化版</strong>：SQL 用规则代价模型（非真实执行计划）；代码用 LeetCode easy 测试（非生产代码库）；RAG 用 best-practice 规则（非真实向量检索）。</td>
+    </tr>
+    <tr>
+      <td>Roadmap 从"规划"变成"已验证"——评委问"能不能做"，答案是做完了三个。</td>
+      <td>三个领域都有<strong>天花板效应</strong>（简单任务太容易达到最优），用单组进化链展示而非 FULL vs BASE 分化曲线。</td>
+    </tr>
+  </table>
+  <div class="honest">
+    <strong>定位：</strong>这三个领域的价值不是"最强进化案例"（那是符号回归），而是"<strong>这套机制能接入你每天用的场景</strong>"的直接证据。生产级集成需对接真实流水线，但 adapter 协议已验证可行。
+  </div>
+</div>
+
+</body>
+</html>

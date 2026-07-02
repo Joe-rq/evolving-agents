@@ -23,7 +23,7 @@
 
 1. **引擎**（`core/`）——领域无关的自进化循环：memory / rules / meta_learner / evolver / novelty，由 `engine.py` 编排。配 mock adapter 可独立跑通。
 2. **一个真实领域**（私有）——一个量化因子挖掘的宿主实现了 5 个 adapter 协议、对接真实数据。机制是在这里**观察到的**，不是构造出来的。脱敏证据 → [案例研究](examples/case-study-pond-switch.md)。
-3. **诚实披露 + 公开对照**——每条 claim 都有边界。我们说机制做了什么，也公开说我们*证明不了*什么；并在公开的 2048 领域跑了一个预注册的失忆组对照——结果 **null（p=0.079）**：机制可观察地工作，但增益未被统计证明。我们如实报告。→ [诚实声明边界](content/honest-boundary.md) · [2048 对照案例](examples/case-study-2048-ablation.md)
+3. **诚实披露 + 公开对照 + 可观察进化**——每条 claim 都有边界。我们说机制做了什么，也公开说我们*证明不了*什么；并在公开的 2048 领域跑了一个预注册的失忆组对照——结果 **null（p=0.079）**：机制可观察地工作，但增益未被统计证明。我们还在符号回归 + 正则合成两个领域展示了**生成器从成功嫁接出新候选的可观察进化**——回答"agent 能不能造出新东西"（能），且跨任务类型（公式发现 vs 程序合成）一致，但同样是种子化轨迹、非统计证明。此外，SQL 查询优化 / 代码生成 / RAG 检索三个 Roadmap 场景也已验证（进化链总览 → [demo/12](demo/12-roadmap-overview.zh.html)）。→ [诚实声明边界](content/honest-boundary.md) · [2048 对照](examples/case-study-2048-ablation.md) · [符号回归进化](examples/case-study-symreg-evolution.md) · [正则合成进化](examples/case-study-regex-evolution.md) · [三场景验证](examples/case-study-roadmap-domains.md)
 
 ## 5 个 Factor
 
@@ -43,12 +43,16 @@
 content/      # 5 篇 factor 文档 + honest-boundary（CC BY-SA 4.0）
 core/         # 领域无关引擎（Apache 2.0）：
               #   protocols · memory · rules · meta_learner · evolver · novelty · engine
-adapters/     # reference adapter：mock（玩具）+ game2048（公开对照领域）；真实量化 adapter 在私有宿主
-experiments/  # 2048 失忆组对照：ablation_runner + stats + 预注册（纯 stdlib）
-examples/     # 脱敏案例研究（换池塘 + 2048 对照）
-demo/         # demo 图（含 05 对照结果）
+adapters/     # reference adapter：mock（玩具）+ game2048（公开对照）+ maze（机制接入，未 claim 进化）+ symreg（可观察进化）+ regex（程序合成进化）+ sql（查询优化）+ codegen（代码生成）+ rag（检索策略）；
+              #   真实量化 adapter 在私有宿主
+experiments/  # 2048 失忆组对照（ablation_runner）+ 符号回归/正则合成进化轨迹；纯 stdlib
+examples/     # 脱敏案例研究（换池塘 + 2048 对照 + 符号回归进化 + 正则合成进化 + 迷宫失败记录）
+demo/         # demo 图（01-05 对照结果 + 06 符号回归进化 + 07 正则合成进化 + 08 公式动画）
+docs/         # 项目接入指南与适用场景（怎么在你的项目里用这个引擎）
 img/          # 图
 ```
+
+**想在自己的项目里用这个引擎？** → [接入指南](docs/接入指南与场景.md)（6 步接入 + 可运行代码 + 多轮循环详解）
 
 ## 定位（以及它*不是*什么）
 
@@ -61,7 +65,7 @@ img/          # 图
 
 ## 状态与诚实边界
 
-在**两个领域**验证过：量化因子挖掘（私有，真实案例）+ 2048（公开，带失忆组对照）。2048 对照结果 null（p=0.079）——机制可观察地工作，但有效性增益未被统计证明。跨领域泛化仍是 roadmap，不是 claim。→ [诚实声明边界](content/honest-boundary.md)
+在**七个领域**验证过：量化因子挖掘（私有，真实案例）+ 2048（公开，带失忆组对照）+ 符号回归（公开，可观察的生成器进化）+ 正则合成（公开，程序合成进化）+ SQL 查询优化（公开，反模式修复进化）+ 代码生成（公开，bug 修复进化）+ RAG 检索（公开，策略配置进化）。后三个从 Roadmap 变成了已验证——SQL 代价从 24→1、代码从部分通过到全通过、RAG 从 0→1。但 7 个领域 ≠ 泛化证明。→ [诚实声明边界](content/honest-boundary.md)
 
 ## License
 

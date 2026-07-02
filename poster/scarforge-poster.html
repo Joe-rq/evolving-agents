@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>痕进 · evolving-agents 海报</title>
+  <style>
+    :root {
+      --ink: #15211d;
+      --muted: #5c6a63;
+      --paper: #f3efe5;
+      --paper-deep: #e5ddcc;
+      --line: rgba(21, 33, 29, 0.18);
+      --green: #1f6a57;
+      --green-deep: #123d35;
+      --gold: #d99f38;
+      --rust: #a95532;
+      --blue: #315e76;
+      --white: #fbfaf5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #d8d1c3;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .poster {
+      position: relative;
+      width: min(92vw, 650px);
+      aspect-ratio: 65 / 110;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(217, 159, 56, 0.18), transparent 20%),
+        radial-gradient(circle at 88% 28%, rgba(49, 94, 118, 0.20), transparent 24%),
+        linear-gradient(155deg, #fbf7ec 0%, #eee5d2 44%, #d9d0bd 100%);
+      border: 1px solid rgba(21, 33, 29, 0.28);
+      box-shadow: 0 24px 80px rgba(24, 28, 24, 0.26);
+      isolation: isolate;
+    }
+
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(21, 33, 29, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 33, 29, 0.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.18));
+      z-index: -2;
+    }
+
+    .poster::after {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      border: 1px solid rgba(21, 33, 29, 0.16);
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    .content {
+      height: 100%;
+      padding: 54px 56px 46px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .topbar {
+      display: block;
+      font-size: 16px;
+      line-height: 1.35;
+      color: var(--green-deep);
+      letter-spacing: 0;
+    }
+
+    .team {
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .maker-line {
+      margin-top: 4px;
+      color: var(--muted);
+    }
+
+    .brand {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      align-items: end;
+      column-gap: 28px;
+      row-gap: 12px;
+      padding-top: 4px;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      background: rgba(251, 250, 245, 0.62);
+      color: var(--rust);
+      font-size: 15px;
+      font-weight: 800;
+      grid-column: 1 / -1;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 72px;
+      line-height: 0.94;
+      letter-spacing: 0;
+      color: var(--green-deep);
+    }
+
+    .latin {
+      display: block;
+      margin-top: 10px;
+      color: var(--blue);
+      font-size: 32px;
+      font-weight: 800;
+    }
+
+    .tagline {
+      margin: 0;
+      max-width: none;
+      padding: 18px 20px;
+      background: rgba(251, 250, 245, 0.58);
+      border-left: 7px solid var(--rust);
+      font-size: 22px;
+      line-height: 1.34;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .tagline span {
+      color: var(--rust);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 270px;
+      display: grid;
+      place-items: center;
+      margin: 4px 0 6px;
+    }
+
+    .hero svg {
+      width: 100%;
+      height: 270px;
+      display: block;
+    }
+
+    .loop-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      height: 96px;
+      display: grid;
+      place-items: center;
+      background: var(--green-deep);
+      color: var(--white);
+      border: 5px solid var(--paper);
+      box-shadow: 10px 10px 0 rgba(21, 33, 29, 0.16);
+      text-align: center;
+      font-size: 29px;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .loop-label small {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(251, 250, 245, 0.72);
+    }
+
+    .thesis {
+      margin: 0;
+      padding: 18px 20px;
+      background: rgba(251, 250, 245, 0.62);
+      border-left: 8px solid var(--gold);
+      font-size: 21px;
+      line-height: 1.48;
+      font-weight: 700;
+    }
+
+    .section-title {
+      margin: 0 0 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--green-deep);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 36px;
+      height: 5px;
+      background: var(--rust);
+    }
+
+    .factors {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .factor {
+      min-height: 86px;
+      padding: 12px 8px 10px;
+      background: rgba(251, 250, 245, 0.68);
+      border: 1px solid var(--line);
+      display: grid;
+      align-content: start;
+      gap: 6px;
+    }
+
+    .factor strong {
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .factor span {
+      font-size: 15px;
+      line-height: 1.22;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      counter-reset: flow;
+    }
+
+    .flow-step {
+      position: relative;
+      min-height: 92px;
+      padding: 12px 9px 10px;
+      background: rgba(251, 250, 245, 0.72);
+      border: 1px solid var(--line);
+      display: grid;
+      align-content: start;
+      gap: 6px;
+    }
+
+    .flow-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -13px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--rust);
+      color: var(--white);
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 900;
+      z-index: 2;
+    }
+
+    .flow-step strong {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .flow-step span {
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .flow-step em {
+      color: var(--muted);
+      font-style: normal;
+      font-size: 11px;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .evidence {
+      display: grid;
+      grid-template-columns: 1fr 52px 1fr;
+      align-items: stretch;
+      gap: 12px;
+    }
+
+    .pond {
+      padding: 18px 16px;
+      min-height: 142px;
+      background: rgba(251, 250, 245, 0.72);
+      border: 1px solid rgba(21, 33, 29, 0.2);
+      display: grid;
+      gap: 8px;
+    }
+
+    .pond .name {
+      font-size: 25px;
+      font-weight: 900;
+      color: var(--green-deep);
+    }
+
+    .pond .status {
+      width: fit-content;
+      padding: 5px 9px;
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .fail .status {
+      background: var(--rust);
+    }
+
+    .pass .status {
+      background: var(--green);
+    }
+
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 16px;
+      color: var(--muted);
+      border-top: 1px solid rgba(21, 33, 29, 0.12);
+      padding-top: 8px;
+    }
+
+    .metric b {
+      color: var(--ink);
+      font-size: 22px;
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      color: var(--rust);
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .evidence-note {
+      margin: 12px 0 0;
+      font-size: 18px;
+      line-height: 1.38;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
+    .boundary {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .boundary-box {
+      padding: 16px 18px;
+      background: rgba(21, 33, 29, 0.88);
+      color: var(--white);
+      min-height: 124px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .boundary-box.light {
+      background: rgba(251, 250, 245, 0.72);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .boundary-box h2 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    .boundary-box p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.45;
+      color: inherit;
+    }
+
+    .footer {
+      display: none;
+      padding-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      border-top: 1px solid rgba(21, 33, 29, 0.16);
+    }
+
+    .footer b {
+      display: block;
+      color: var(--green-deep);
+      font-size: 18px;
+    }
+
+    .footer {
+      display: none;
+    }
+
+    @media (min-width: 1400px) {
+      body {
+        padding: 0;
+      }
+
+      .poster {
+        width: 3900px;
+        height: 6600px;
+        aspect-ratio: auto;
+        box-shadow: none;
+        border: 0;
+      }
+
+      .poster::after {
+        inset: 168px;
+      }
+
+      .content {
+        padding: 324px 336px 276px;
+        gap: 156px;
+      }
+
+      .topbar {
+        font-size: 96px;
+        gap: 144px;
+      }
+
+      .team {
+        font-size: 120px;
+      }
+
+      .brand {
+        gap: 84px;
+        padding-top: 24px;
+      }
+
+      .eyebrow {
+        padding: 48px 84px;
+        font-size: 90px;
+      }
+
+      h1 {
+        font-size: 432px;
+      }
+
+      .latin {
+        margin-top: 60px;
+        font-size: 192px;
+      }
+
+      .tagline {
+        max-width: 3000px;
+        font-size: 162px;
+      }
+
+      .hero {
+        min-height: 1260px;
+        margin: 12px 0 24px;
+      }
+
+      .hero svg {
+        height: 1260px;
+      }
+
+      .loop-label {
+        width: 1320px;
+        height: 492px;
+        border-width: 30px;
+        box-shadow: 60px 60px 0 rgba(21, 33, 29, 0.16);
+        font-size: 144px;
+      }
+
+      .loop-label small {
+        margin-top: 24px;
+        font-size: 72px;
+      }
+
+      .thesis {
+        padding: 108px 120px;
+        border-left-width: 48px;
+        font-size: 126px;
+      }
+
+      .section-title {
+        margin-bottom: 78px;
+        gap: 72px;
+        font-size: 132px;
+      }
+
+      .section-title::before {
+        width: 216px;
+        height: 30px;
+      }
+
+      .factors {
+        gap: 48px;
+      }
+
+      .factor {
+        min-height: 516px;
+        padding: 72px 48px 60px;
+        gap: 36px;
+      }
+
+      .factor strong {
+        width: 144px;
+        height: 144px;
+        font-size: 78px;
+      }
+
+      .factor span {
+        font-size: 90px;
+      }
+
+      .flow {
+        gap: 48px;
+      }
+
+      .flow-step {
+        min-height: 552px;
+        padding: 72px 54px 60px;
+        gap: 36px;
+      }
+
+      .flow-step:not(:last-child)::after {
+        right: -78px;
+        width: 108px;
+        height: 108px;
+        font-size: 72px;
+      }
+
+      .flow-step strong {
+        font-size: 78px;
+      }
+
+      .flow-step span {
+        font-size: 84px;
+      }
+
+      .flow-step em {
+        font-size: 66px;
+      }
+
+      .evidence {
+        grid-template-columns: 1fr 312px 1fr;
+        gap: 72px;
+      }
+
+      .pond {
+        padding: 108px 96px;
+        min-height: 852px;
+        gap: 48px;
+      }
+
+      .pond .name {
+        font-size: 150px;
+      }
+
+      .pond .status {
+        padding: 30px 54px;
+        font-size: 78px;
+      }
+
+      .metric {
+        gap: 72px;
+        font-size: 96px;
+        padding-top: 48px;
+      }
+
+      .metric b {
+        font-size: 132px;
+      }
+
+      .arrow {
+        font-size: 216px;
+      }
+
+      .evidence-note {
+        margin-top: 72px;
+        font-size: 108px;
+      }
+
+      .boundary {
+        gap: 84px;
+      }
+
+      .boundary-box {
+        padding: 96px 108px;
+        min-height: 744px;
+        gap: 48px;
+      }
+
+      .boundary-box h2 {
+        font-size: 114px;
+      }
+
+      .boundary-box p {
+        font-size: 90px;
+      }
+
+      .footer {
+        display: none;
+        padding-top: 48px;
+        gap: 96px;
+        font-size: 78px;
+      }
+
+      .footer b {
+        font-size: 108px;
+      }
+
+      /* Export fit pass: keep the full 65x110cm composition inside 3900x6600. */
+      .content {
+        padding: 264px 324px 204px;
+        gap: 102px;
+      }
+
+      .topbar {
+        font-size: 84px;
+      }
+
+      .team {
+        font-size: 108px;
+      }
+
+      .brand {
+        grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+        align-items: center;
+        column-gap: 132px;
+        row-gap: 72px;
+      }
+
+      .eyebrow {
+        padding: 36px 72px;
+        font-size: 78px;
+      }
+
+      h1 {
+        font-size: 456px;
+        line-height: 0.9;
+      }
+
+      .latin {
+        margin-top: 36px;
+        font-size: 174px;
+      }
+
+      .tagline {
+        padding: 84px 90px;
+        border-left-width: 36px;
+        font-size: 90px;
+        line-height: 1.24;
+      }
+
+      .hero {
+        min-height: 1200px;
+        margin: 24px 0 12px;
+      }
+
+      .hero svg {
+        height: 1200px;
+      }
+
+      .loop-label {
+        width: 1160px;
+        height: 420px;
+        font-size: 126px;
+      }
+
+      .loop-label small {
+        font-size: 60px;
+      }
+
+      .thesis {
+        padding: 78px 96px;
+        font-size: 102px;
+        line-height: 1.38;
+      }
+
+      .section-title {
+        margin-bottom: 48px;
+        font-size: 114px;
+      }
+
+      .factor {
+        min-height: 396px;
+        padding: 48px 42px;
+        gap: 36px;
+      }
+
+      .factor strong {
+        width: 126px;
+        height: 126px;
+        font-size: 72px;
+      }
+
+      .factor span {
+        font-size: 78px;
+      }
+
+      .flow {
+        gap: 48px;
+      }
+
+      .flow-step {
+        min-height: 438px;
+        padding: 54px 42px 48px;
+        gap: 24px;
+      }
+
+      .flow-step:not(:last-child)::after {
+        right: -78px;
+        width: 108px;
+        height: 108px;
+        font-size: 72px;
+      }
+
+      .flow-step strong {
+        font-size: 72px;
+      }
+
+      .flow-step span {
+        font-size: 78px;
+      }
+
+      .flow-step em {
+        font-size: 54px;
+      }
+
+      .evidence {
+        grid-template-columns: 1fr 252px 1fr;
+        gap: 60px;
+      }
+
+      .pond {
+        min-height: 624px;
+        padding: 78px 84px;
+        gap: 30px;
+      }
+
+      .pond .name {
+        font-size: 132px;
+      }
+
+      .pond .status {
+        padding: 24px 48px;
+        font-size: 66px;
+      }
+
+      .metric {
+        font-size: 78px;
+        padding-top: 30px;
+      }
+
+      .metric b {
+        font-size: 108px;
+      }
+
+      .arrow {
+        font-size: 180px;
+      }
+
+      .evidence-note {
+        margin-top: 48px;
+        font-size: 90px;
+        line-height: 1.32;
+      }
+
+      .boundary {
+        gap: 60px;
+      }
+
+      .boundary-box {
+        min-height: 528px;
+        padding: 72px 84px;
+        gap: 30px;
+      }
+
+      .boundary-box h2 {
+        font-size: 96px;
+      }
+
+      .boundary-box p {
+        font-size: 72px;
+        line-height: 1.36;
+      }
+
+      .footer {
+        display: none;
+        padding-top: 30px;
+        font-size: 66px;
+      }
+
+      .footer b {
+        font-size: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster" aria-label="痕进 evolving-agents 项目海报">
+    <div class="content">
+      <header class="topbar" aria-label="项目归属">
+        <div class="team">乔木计划</div>
+        <div class="maker-line">让 agent 记住哪条路走不通</div>
+      </header>
+
+      <section class="brand" aria-label="项目标题">
+        <div class="eyebrow">通用的自进化搜索引擎</div>
+        <h1>
+          痕进
+          <span class="latin">evolving-agents</span>
+        </h1>
+        <p class="tagline">
+          <span>失败留痕，凭痕而进。</span><br>
+          把每次走不通的路记下来，变成下一次少走弯路的判断。
+        </p>
+      </section>
+
+      <section class="hero" aria-label="进化回路示意">
+        <svg viewBox="0 0 1000 380" role="img" aria-label="留痕、评分、规则、换结构构成进化回路">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#a95532"></path>
+            </marker>
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="8" dy="10" stdDeviation="0" flood-color="#15211d" flood-opacity="0.18"></feDropShadow>
+            </filter>
+          </defs>
+          <path d="M130 196 C154 72 340 38 486 98 C606 146 700 72 812 122 C920 170 914 294 794 322 C660 354 598 252 478 284 C286 336 112 300 130 196Z" fill="#fbfaf5" opacity="0.72"></path>
+          <path d="M150 210 C202 94 344 82 470 124 C604 169 672 84 802 142" fill="none" stroke="#1f6a57" stroke-width="16" stroke-linecap="round" marker-end="url(#arrow)"></path>
+          <path d="M822 162 C886 252 774 326 650 286 C538 250 474 270 374 302" fill="none" stroke="#315e76" stroke-width="16" stroke-linecap="round" stroke-dasharray="24 24" marker-end="url(#arrow)"></path>
+          <g filter="url(#shadow)" font-family="Microsoft YaHei, Arial, sans-serif" font-weight="900" font-size="36">
+            <rect x="82" y="190" width="146" height="70" fill="#f3efe5" stroke="#15211d" stroke-opacity="0.22"></rect>
+            <text x="155" y="236" text-anchor="middle" fill="#123d35">留痕</text>
+            <rect x="288" y="60" width="146" height="70" fill="#f3efe5" stroke="#15211d" stroke-opacity="0.22"></rect>
+            <text x="361" y="106" text-anchor="middle" fill="#123d35">评分</text>
+            <rect x="612" y="62" width="146" height="70" fill="#f3efe5" stroke="#15211d" stroke-opacity="0.22"></rect>
+            <text x="685" y="108" text-anchor="middle" fill="#123d35">规则</text>
+            <rect x="764" y="246" width="166" height="70" fill="#f3efe5" stroke="#15211d" stroke-opacity="0.22"></rect>
+            <text x="847" y="292" text-anchor="middle" fill="#123d35">换结构</text>
+          </g>
+        </svg>
+        <div class="loop-label">
+          失败账本
+          <small>auditable memory</small>
+        </div>
+      </section>
+
+      <p class="thesis">
+        它不只服务交易。任何需要反复试错的任务——研究、测试、调参、生成方案——都可以用同一套失败记忆来进化。
+      </p>
+
+      <section aria-label="五个机制">
+        <h2 class="section-title">一次失败，变成下一次选择</h2>
+        <div class="flow">
+          <div class="flow-step"><strong>失败</strong><span>留下记录</span><em>这条路走不通</em></div>
+          <div class="flow-step"><strong>判断</strong><span>看方向收益</span><em>别只盯单个答案</em></div>
+          <div class="flow-step"><strong>归纳</strong><span>识别失败类型</span><em>一坑教会一类坑</em></div>
+          <div class="flow-step"><strong>转向</strong><span>换任务结构</span><em>别在错框架里硬调</em></div>
+          <div class="flow-step"><strong>继续</strong><span>探索新路径</span><em>让搜索越跑越聪明</em></div>
+        </div>
+      </section>
+
+      <section aria-label="项目证据">
+        <h2 class="section-title">一个例子：不是方案坏了，是场景错了</h2>
+        <div class="evidence">
+          <div class="pond fail">
+            <div class="name">旧场景</div>
+            <div class="status">过于拥挤</div>
+            <div class="metric"><span>方案质量</span><b>2.15</b></div>
+            <div class="metric"><span>拥挤度</span><b>0.78</b></div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="pond pass">
+            <div class="name">新场景</div>
+            <div class="status">通过检查</div>
+            <div class="metric"><span>方案质量</span><b>2.15</b></div>
+            <div class="metric"><span>拥挤度</span><b>0.68</b></div>
+          </div>
+        </div>
+        <p class="evidence-note">
+          在真实沙盘里，方案本身没变；agent 发现问题出在搜索场景，于是建议换场景，拥挤度从 0.78 降到 0.68。
+        </p>
+      </section>
+
+      <section class="boundary" aria-label="诚实边界">
+        <div class="boundary-box">
+          <h2>项目想证明什么</h2>
+          <p>失败可以被记录、归纳、变成规则；下一次搜索会因此换方向、避开旧坑、尝试新结构。</p>
+        </div>
+        <div class="boundary-box light">
+          <h2>诚实边界</h2>
+          <p>已经实现核心机制并观察到真实事件；交易只是验证沙盘，跨领域效果仍需继续验证。</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>

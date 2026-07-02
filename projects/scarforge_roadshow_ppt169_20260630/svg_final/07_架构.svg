@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine7" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+    <filter id="cardShadow7" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="3" result="offsetblur" />
+      <feFlood flood-color="#1D4D82" flood-opacity="0.10" result="shadowColor" />
+      <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow" />
+      <feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p07-header">
+    <text x="60" y="72" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">PRODUCT SHAPE</text>
+    <text x="60" y="152" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">它是一个可嵌入的进化层，</text>
+    <text x="60" y="226" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#1D70D6">不是又一个 Agent 平台。</text>
+    <text x="60" y="278" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">你的 Agent 继续负责做事；痕进负责让它从失败中更新搜索方式。换领域时只换 <tspan font-weight="700" fill="#7F5AF0">adapter</tspan>，进化循环留在 <tspan font-weight="700" fill="#1D70D6">core</tspan>。</text>
+  </g>
+
+  
+  <g id="layer-core">
+    <path fill="#1D70D6" d="M68,318 H108 A8,8 0 0 1 116,326 V460 A8,8 0 0 1 108,468 H68 A8,8 0 0 1 60,460 V326 A8,8 0 0 1 68,318 Z" />
+    <text x="88" y="402" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="24" font-weight="800" fill="#FFFFFF">01</text>
+    <path fill="#EAF3FF" fill-opacity="0.6" stroke="#1D70D6" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="6 4" d="M144,318 H1208 A12,12 0 0 1 1220,330 V456 A12,12 0 0 1 1208,468 H144 A12,12 0 0 1 132,456 V330 A12,12 0 0 1 144,318 Z" />
+    
+  <g transform="translate(156, 338) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M12 4l-8 4l8 4l8 -4l-8 -4" />
+    <path d="M4 12l8 4l8 -4" />
+    <path d="M4 16l8 4l8 -4" />
+  </g>
+    <text x="214" y="360" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="30" font-weight="800" fill="#1D70D6">core / universal loop</text>
+    <text x="214" y="396" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="20" fill="#52657D">通用进化逻辑：记录失败、学习模式、更新规则、奖励新颖探索。</text>
+    
+    <path fill="#FFFFFF" stroke="#1D70D6" stroke-opacity="0.20" stroke-width="1" d="M164,418 H448 A8,8 0 0 1 456,426 V448 A8,8 0 0 1 448,456 H164 A8,8 0 0 1 156,448 V426 A8,8 0 0 1 164,418 Z" />
+    <text x="306" y="443" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">memory.py</text>
+    <path fill="#FFFFFF" stroke="#1D70D6" stroke-opacity="0.20" stroke-width="1" d="M484,418 H768 A8,8 0 0 1 776,426 V448 A8,8 0 0 1 768,456 H484 A8,8 0 0 1 476,448 V426 A8,8 0 0 1 484,418 Z" />
+    <text x="626" y="443" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">meta_learner.py</text>
+    <path fill="#FFFFFF" stroke="#1D70D6" stroke-opacity="0.20" stroke-width="1" d="M804,418 H1088 A8,8 0 0 1 1096,426 V448 A8,8 0 0 1 1088,456 H804 A8,8 0 0 1 796,448 V426 A8,8 0 0 1 804,418 Z" />
+    <text x="946" y="443" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">rules.py</text>
+  </g>
+
+  
+  <g id="layer-adapter">
+    <path fill="#7F5AF0" d="M68,490 H108 A8,8 0 0 1 116,498 V632 A8,8 0 0 1 108,640 H68 A8,8 0 0 1 60,632 V498 A8,8 0 0 1 68,490 Z" />
+    <text x="88" y="574" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="24" font-weight="800" fill="#FFFFFF">02</text>
+    <path fill="#F4F0FF" fill-opacity="0.6" stroke="#7F5AF0" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="6 4" d="M144,490 H1208 A12,12 0 0 1 1220,502 V628 A12,12 0 0 1 1208,640 H144 A12,12 0 0 1 132,628 V502 A12,12 0 0 1 144,490 Z" />
+    
+  <g transform="translate(156, 510) scale(1.83333)" fill="none" stroke="#7F5AF0" stroke-width="2">
+    <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
+  </g>
+    <text x="214" y="532" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="30" font-weight="800" fill="#7F5AF0">adapter / domain knowledge</text>
+    <text x="214" y="568" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="20" fill="#52657D">领域知识薄层：解释什么叫失败、什么叫好结果、什么动作能执行。</text>
+    <path fill="#FFFFFF" stroke="#7F5AF0" stroke-opacity="0.20" stroke-width="1" d="M164,590 H448 A8,8 0 0 1 456,598 V620 A8,8 0 0 1 448,628 H164 A8,8 0 0 1 156,620 V598 A8,8 0 0 1 164,590 Z" />
+    <text x="306" y="615" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">classify</text>
+    <path fill="#FFFFFF" stroke="#7F5AF0" stroke-opacity="0.20" stroke-width="1" d="M484,590 H768 A8,8 0 0 1 776,598 V620 A8,8 0 0 1 768,628 H484 A8,8 0 0 1 476,620 V598 A8,8 0 0 1 484,590 Z" />
+    <text x="626" y="615" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">motif_of</text>
+    <path fill="#FFFFFF" stroke="#7F5AF0" stroke-opacity="0.20" stroke-width="1" d="M804,590 H1088 A8,8 0 0 1 1096,598 V620 A8,8 0 0 1 1088,628 H804 A8,8 0 0 1 796,620 V598 A8,8 0 0 1 804,590 Z" />
+    <text x="946" y="615" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#52657D">execute</text>
+  </g>
+
+  <g id="p07-footer">
+    <rect x="60" y="660" width="1160" height="2" fill="url(#scarLine7)" />
+    <text x="60" y="700" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · evolution layer, not platform</text>
+    <text x="1220" y="700" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">07 / 10</text>
+  </g>
+</svg>

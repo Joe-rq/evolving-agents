@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="scarLine8" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#31B67A" stop-opacity="0" />
+      <stop offset="35%" stop-color="#31B67A" />
+      <stop offset="65%" stop-color="#1D70D6" />
+      <stop offset="90%" stop-color="#E47B2C" />
+      <stop offset="100%" stop-color="#E47B2C" stop-opacity="0" />
+    </linearGradient>
+    <filter id="cardShadow8" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="0" dy="3" result="offsetblur" />
+      <feFlood flood-color="#1D4D82" flood-opacity="0.10" result="shadowColor" />
+      <feComposite in="shadowColor" in2="offsetblur" operator="in" result="shadow" />
+      <feMerge><feMergeNode in="shadow" /><feMergeNode in="SourceGraphic" /></feMerge>
+    </filter>
+  </defs>
+
+  <g id="background">
+    <rect width="1280" height="720" fill="#F4F9FF" />
+  </g>
+
+  <g id="p08-header">
+    <text x="60" y="72" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="600" fill="#1D70D6" letter-spacing="3">WHERE IT APPLIES</text>
+    <text x="60" y="152" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#122033">凡是会试错的 Agent，</text>
+    <text x="60" y="226" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="56" font-weight="900" fill="#1D70D6">都需要一套失败进化机制。</text>
+    <text x="60" y="278" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="24" fill="#52657D">量化交易只是第一个沙盘。痕进真正服务的是"可重复试错"的工作流：失败能被定义，反馈能被记录，下一次行动能被改变。</text>
+  </g>
+
+  
+  <g id="card-case-code">
+    <g filter="url(#cardShadow8)">
+      <path fill="#FFFFFF" d="M76,330 H260 A16,16 0 0 1 276,346 V594 A16,16 0 0 1 260,610 H76 A16,16 0 0 1 60,594 V346 A16,16 0 0 1 76,330 Z" />
+    </g>
+    <path fill="#15956B" fill-opacity="0.12" stroke="#15956B" stroke-opacity="0.24" stroke-width="1" d="M90,354 H146 A6,6 0 0 1 152,360 V380 A6,6 0 0 1 146,386 H90 A6,6 0 0 1 84,380 V360 A6,6 0 0 1 90,354 Z" />
+    <text x="118" y="376" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#15956B">code</text>
+    
+  <g transform="translate(84, 406) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M7 8l-4 4l4 4" />
+    <path d="M17 8l4 4l-4 4" />
+    <path d="M14 4l-4 16" />
+  </g>
+    <text x="84" y="490" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">代码 Agent</text>
+    <text x="84" y="528" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">编译错误、测试</text>
+    <text x="84" y="556" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">失败被归成模式，</text>
+    <text x="84" y="584" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">调整代码结构而非</text>
+    <text x="84" y="612" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">重复补丁。</text>
+  </g>
+
+  <g id="card-case-ops">
+    <g filter="url(#cardShadow8)">
+      <path fill="#FFFFFF" d="M312,330 H496 A16,16 0 0 1 512,346 V594 A16,16 0 0 1 496,610 H312 A16,16 0 0 1 296,594 V346 A16,16 0 0 1 312,330 Z" />
+    </g>
+    <path fill="#15956B" fill-opacity="0.12" stroke="#15956B" stroke-opacity="0.24" stroke-width="1" d="M326,354 H374 A6,6 0 0 1 380,360 V380 A6,6 0 0 1 374,386 H326 A6,6 0 0 1 320,380 V360 A6,6 0 0 1 326,354 Z" />
+    <text x="350" y="376" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#15956B">ops</text>
+    
+  <g transform="translate(320, 406) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M6 6a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v4a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2l0 -4" />
+    <path d="M12 2v2" />
+    <path d="M9 12v9" />
+    <path d="M15 12v9" />
+    <path d="M5 16l4 -2" />
+    <path d="M15 14l4 2" />
+    <path d="M9 18h6" />
+    <path d="M10 8v.01" />
+    <path d="M14 8v.01" />
+  </g>
+    <text x="320" y="490" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">自动化 Agent</text>
+    <text x="320" y="528" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">表格、API、浏览</text>
+    <text x="320" y="556" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">器操作失败后，记</text>
+    <text x="320" y="584" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">住哪类输入容易</text>
+    <text x="320" y="612" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">触发问题。</text>
+  </g>
+
+  <g id="card-case-search">
+    <g filter="url(#cardShadow8)">
+      <path fill="#FFFFFF" d="M548,330 H732 A16,16 0 0 1 748,346 V594 A16,16 0 0 1 732,610 H548 A16,16 0 0 1 532,594 V346 A16,16 0 0 1 548,330 Z" />
+    </g>
+    <path fill="#15956B" fill-opacity="0.12" stroke="#15956B" stroke-opacity="0.24" stroke-width="1" d="M562,354 H634 A6,6 0 0 1 640,360 V380 A6,6 0 0 1 634,386 H562 A6,6 0 0 1 556,380 V360 A6,6 0 0 1 562,354 Z" />
+    <text x="598" y="376" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#15956B">search</text>
+    
+  <g transform="translate(556, 406) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+    <path d="M21 21l-6 -6" />
+  </g>
+    <text x="556" y="490" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">检索 Agent</text>
+    <text x="556" y="528" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">搜索结果差时，</text>
+    <text x="556" y="556" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">进化查询路径，</text>
+    <text x="556" y="584" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">而不是只换几个</text>
+    <text x="556" y="612" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">关键词。</text>
+  </g>
+
+  <g id="card-case-tutor">
+    <g filter="url(#cardShadow8)">
+      <path fill="#FFFFFF" d="M784,330 H968 A16,16 0 0 1 984,346 V594 A16,16 0 0 1 968,610 H784 A16,16 0 0 1 768,594 V346 A16,16 0 0 1 784,330 Z" />
+    </g>
+    <path fill="#15956B" fill-opacity="0.12" stroke="#15956B" stroke-opacity="0.24" stroke-width="1" d="M798,354 H862 A6,6 0 0 1 868,360 V380 A6,6 0 0 1 862,386 H798 A6,6 0 0 1 792,380 V360 A6,6 0 0 1 798,354 Z" />
+    <text x="830" y="376" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#15956B">tutor</text>
+    
+  <g transform="translate(792, 406) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" />
+    <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />
+  </g>
+    <text x="792" y="490" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">教育 Agent</text>
+    <text x="792" y="528" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">学生反复出错</text>
+    <text x="792" y="556" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">时，识别错误类</text>
+    <text x="792" y="584" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">型，调整讲解顺</text>
+    <text x="792" y="612" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">序和例题。</text>
+  </g>
+
+  <g id="card-case-sim">
+    <g filter="url(#cardShadow8)">
+      <path fill="#FFFFFF" d="M1020,330 H1204 A16,16 0 0 1 1220,346 V594 A16,16 0 0 1 1204,610 H1020 A16,16 0 0 1 1004,594 V346 A16,16 0 0 1 1020,330 Z" />
+    </g>
+    <path fill="#15956B" fill-opacity="0.12" stroke="#15956B" stroke-opacity="0.24" stroke-width="1" d="M1034,354 H1082 A6,6 0 0 1 1088,360 V380 A6,6 0 0 1 1082,386 H1034 A6,6 0 0 1 1028,380 V360 A6,6 0 0 1 1034,354 Z" />
+    <text x="1058" y="376" text-anchor="middle" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="20" font-weight="700" fill="#15956B">sim</text>
+    
+  <g transform="translate(1028, 406) scale(1.83333)" fill="none" stroke="#1D70D6" stroke-width="2">
+    <path d="M6 21l6 -5l6 5" />
+    <path d="M12 13v8" />
+    <path d="M3.294 13.678l.166 .281c.52 .88 1.624 1.265 2.605 .91l14.242 -5.165a1.023 1.023 0 0 0 .565 -1.456l-2.62 -4.705a1.087 1.087 0 0 0 -1.447 -.42l-.056 .032l-12.694 7.618c-1.02 .613 -1.357 1.897 -.76 2.905l-.001 0" />
+    <path d="M14 5l3 5.5" />
+  </g>
+    <text x="1028" y="490" font-family="SimHei, &quot;Microsoft YaHei&quot;, sans-serif" font-size="28" font-weight="800" fill="#122033">模拟 Agent</text>
+    <text x="1028" y="528" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">在游戏、仿真、</text>
+    <text x="1028" y="556" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">策略环境里积累</text>
+    <text x="1028" y="584" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">试错痕迹，更新</text>
+    <text x="1028" y="612" font-family="&quot;Microsoft YaHei&quot;, &quot;PingFang SC&quot;, Arial, sans-serif" font-size="19" fill="#52657D">下一轮策略。</text>
+  </g>
+
+  <g id="p08-footer">
+    <rect x="60" y="660" width="1160" height="2" fill="url(#scarLine8)" />
+    <text x="60" y="700" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">乔木计划 · transferable failure evolution</text>
+    <text x="1220" y="700" text-anchor="end" font-family="Consolas, &quot;Courier New&quot;, monospace" font-size="16" fill="#7B8DA3">08 / 10</text>
+  </g>
+</svg>

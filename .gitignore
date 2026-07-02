@@ -32,6 +32,14 @@ experiments/_*.log
 *.db
 *.jsonl
 
+# === PPT workspace — machine-generated run artifacts ===
+# (源文件 notes/ sources/ design_spec.md spec_lock.md icons/ svg_final/ 仍入库)
+projects/**/svg_output/
+projects/**/backup/
+projects/**/live_preview/
+projects/**/confirm_ui/
+projects/**/exports/
+
 # OS / IDE
 .DS_Store
 .idea/
