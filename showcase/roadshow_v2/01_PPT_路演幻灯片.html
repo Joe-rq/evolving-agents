@@ -850,7 +850,7 @@
           <span>/</span>
           <span>Evolving Agents</span>
         </div>
-        <p class="project-definition">一个给 Agent 装上的进化层：<span>把失败变成下一次行动的约束。</span></p>
+        <p class="project-definition">一个让 Agent 试错过程<span>可记忆、可审计、可复用</span>的搜索进化引擎。</p>
       </div>
       <div>
         <div class="scar-line"></div>
@@ -953,8 +953,8 @@
     <div class="slide-inner">
       <div>
         <div class="kicker">OBSERVABLE EVOLUTION · PUBLIC DOMAIN</div>
-        <h2>同一套引擎，<br>四种任务，进化肉眼可见。</h2>
-        <p class="lead">搜索问题没有解析解——第一步只能广撒网，进化体现在后续轮次如何从失败里收敛。四个公开可复现的领域，生成器从成功线索嫁接出新候选，每一轮的结构变化可观察、可追溯。</p>
+        <h2>公开领域里，<br>进化轨迹可观察。</h2>
+        <p class="lead">这页不证明“统计显著提升”，只回答一个更具体的问题：Agent 能不能从成功线索里造出新候选？在符号回归和正则合成里，每一轮结构变化都可观察、可追溯。</p>
         <div class="evolution-cases">
           <div class="evo-case">
             <div class="case-tag">symreg</div>
@@ -1016,8 +1016,8 @@
     <div class="slide-inner">
       <div>
         <div class="kicker">PRODUCT SHAPE</div>
-        <h2>它是一个可嵌入的进化层，<br>不是又一个 Agent 平台。</h2>
-        <p class="lead">你的 Agent 继续负责做事；痕进负责让它从失败中更新搜索方式。换领域时只换 adapter，进化循环留在 core——已经接了 4 个领域。</p>
+        <h2>它是搜索记忆引擎，<br>不是又一个 Agent 平台。</h2>
+        <p class="lead">你的宿主系统负责生成候选、执行候选、评估结果；痕进负责管理“试过什么、失败模式是什么、下一轮该避开什么、什么时候该换搜索空间”。</p>
         <div class="architecture">
           <div class="layer">
             <h3>core / universal loop</h3>
@@ -1080,9 +1080,9 @@
   <section class="slide" id="s7c">
     <div class="slide-inner">
       <div>
-        <div class="kicker">ROADMAP VERIFIED · SQL / CODE / RAG</div>
-        <h2>三个生产场景，<br>从 Roadmap 变成已验证。</h2>
-        <p class="lead">同一套引擎接入三个最常见的生产场景。每个都跑出了可观察的进化链——从全错到最优，每一步修掉一个缺陷。</p>
+        <div class="kicker">MORE ADAPTERS · SQL / CODE / RAG</div>
+        <h2>更多场景能接入，<br>但别把跑通说成泛化证明。</h2>
+        <p class="lead">SQL、代码生成、RAG 都跑出了可观察的修复链，说明 adapter 边界能迁移到不同任务。它们是接入证据，不是“普遍有效”的统计证明。</p>
         <div class="roadmap-cases">
           <div class="rm-case">
             <div class="rm-head"><b>🗄️ SQL 查询优化</b></div>
@@ -1100,11 +1100,11 @@
             <div class="rm-detail">chunk→150 → th→0.7 → k→4 → +rerank → +expand · 5 步</div>
           </div>
         </div>
-        <div class="bridge-note"><b>共同模式</b><span>三个都是"修复链"——从有问题的版本出发，每步修一个缺陷。评估器是简化版（规则估算），但 graft 操作是真实的优化手段。</span></div>
+        <div class="bridge-note"><b>共同模式</b><span>三个都是"修复链"——从有问题的版本出发，每步修一个缺陷。评估器是简化版（规则估算），所以只 claim 接入与机制可观察，不 claim 生产收益。</span></div>
       </div>
       <div>
         <div class="scar-line"></div>
-        <div class="footer"><span>乔木计划 · roadmap verified, not just promised</span><span>10 / 14</span></div>
+        <div class="footer"><span>乔木计划 · adapter evidence, not generalization proof</span><span>10 / 14</span></div>
       </div>
     </div>
   </section>
@@ -1114,13 +1114,13 @@
       <div>
         <div class="kicker">WHERE IT APPLIES · HOW TO INTEGRATE</div>
         <h2>接入只写一个 adapter，<br>引擎一行不改。</h2>
-        <p class="lead">适用条件：Agent 反复试错、失败能被客观定义、同类错误会重复出现。满足这三条，写一个 adapter（5 个方法，约 50-150 行）即可接入。</p>
+        <p class="lead">适用条件：Agent 反复试错、失败能被客观定义、同类错误会重复出现。满足这三条，写一个 adapter 即可接入；真正难点不是 core，而是把领域失败翻译成可靠 motif。</p>
         <div class="use-cases">
           <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已验证</div><h3>量化因子挖掘</h3><p>提因子→回测→看 Sharpe。记住"这类信号族在这个市场失效"，换方向不调参。</p></div>
           <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已验证</div><h3>符号回归</h3><p>猜公式→拟合→看 R²。记住"三角函数族拟合不了多项式"，换结构。</p></div>
           <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已验证</div><h3>规则合成</h3><p>猜规则→分类→看 F1。记住"过宽的规则会误伤"，收紧。</p></div>
-          <div class="use-case"><div class="case-tag">Roadmap</div><h3>代码生成</h3><p>写代码→编译测试→修。记住"这类 API 调用容易触发异常"，换写法。</p></div>
-          <div class="use-case"><div class="case-tag">Roadmap</div><h3>SQL / RAG</h3><p>写查询/检索→执行→看性能。记住"这类 JOIN 必慢""这类查询召回差"，进化路径。</p></div>
+          <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已接入</div><h3>代码生成</h3><p>写代码→编译测试→修。记住"这类 API 调用容易触发异常"，换写法。</p></div>
+          <div class="use-case"><div class="case-tag" style="color:var(--green);border-color:rgba(21,149,107,.3);background:rgba(21,149,107,.08)">已接入</div><h3>SQL / RAG</h3><p>写查询/检索→执行→看性能。记住"这类 JOIN 必慢""这类查询召回差"，进化路径。</p></div>
         </div>
       </div>
       <div>
@@ -1182,15 +1182,16 @@
               <li>5 个机制都已实现。</li>
               <li>观察到一次真实换结构事件。</li>
               <li>部分学习来自账本投影，不是手写规则。</li>
-              <li>符号回归 + 正则合成：可观察的生成器进化，公开可复现。</li>
+              <li>符号回归 + 正则合成：公开可复现的生成器进化轨迹。</li>
+              <li>SQL / 代码 / RAG：已接入并跑出可观察修复链。</li>
             </ul>
           </div>
           <div class="boundary-card">
             <h3 class="accent-orange">我们不 claim</h3>
             <ul>
-              <li>没有有效性的统计证明（2048 对照已跑，结果 null）。</li>
+              <li>没有普遍有效性的统计证明（2048 对照已跑，结果 null）。</li>
               <li>没有量化收益曲线。</li>
-              <li>4 个领域 ≠ 泛化证明（进化是种子化轨迹，非 M-复制对照）。</li>
+              <li>7 个领域 ≠ 泛化证明；接入跑通不等于性能显著提升。</li>
             </ul>
           </div>
         </div>
