@@ -1,7 +1,7 @@
 # 案例研究：三个 Roadmap 场景的验证 — SQL / 代码生成 / RAG
 
 > 评委问"Roadmap 的场景能不能做？"——我们做完了三个。从规划变成了已验证。
-> 配图：[demo/09](../demo/09-sql-evolution.zh.html)（SQL）· [demo/10](../demo/10-codegen-evolution.zh.html)（代码）· [demo/11](../demo/11-rag-evolution.zh.html)（RAG）
+> 配图：[demo/09](../showcase/demo/09-sql-evolution.zh.html)（SQL）· [demo/10](../showcase/demo/10-codegen-evolution.zh.html)（代码）· [demo/11](../showcase/demo/11-rag-evolution.zh.html)（RAG）
 
 ## 为什么做这三个
 

@@ -1,7 +1,7 @@
 # 案例研究：2048 失忆组对照 — 公开、可复现的有效性测试
 
 > 本框架诚实边界的最大软肋是「有效性未对照」。这个案例在一个公开领域补上它。
-> 配图：[demo/05](../demo/05-ablation-result.zh.html)。完整协议：[experiments/pre_registration.md](../experiments/pre_registration.md)。
+> 配图：[demo/05](../showcase/demo/05-ablation-result.zh.html)。完整协议：[experiments/pre_registration.md](../experiments/pre_registration.md)。
 
 ## 为什么需要这个案例
 

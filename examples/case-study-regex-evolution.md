@@ -1,7 +1,7 @@
 # 案例研究：正则合成 — 程序合成任务里的可观察进化
 
 > 符号回归证明了"agent 能造新公式"。这个案例换一个**完全不同的任务类型**——程序合成（从样本归纳规则）——验证同一套进化机制是否泛化。
-> 配图：[demo/07](../demo/07-regex-evolution.zh.html)。实验脚本：[experiments/regex_evolution.py](../experiments/regex_evolution.py)。
+> 配图：[demo/07](../showcase/demo/07-regex-evolution.zh.html)。实验脚本：[experiments/regex_evolution.py](../experiments/regex_evolution.py)。
 
 ## 为什么需要这个案例
 

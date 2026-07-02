@@ -1,7 +1,7 @@
 # 案例研究：符号回归 — 从随机公式到 2x²+1 的可观察进化
 
 > 2048 的对照证明不了"有效性"（结果 null），迷宫的天花板太低看不出进化。这个案例换了一条路：让**生成器本身**从成功里学习，在一个有连续 R² 梯度的领域里，观察进化的真实轨迹。
-> 配图：[demo/06](../demo/06-symreg-evolution.zh.html)。实验脚本：[experiments/symreg_evolution.py](../experiments/symreg_evolution.py)。
+> 配图：[demo/06](../showcase/demo/06-symreg-evolution.zh.html)。实验脚本：[experiments/symreg_evolution.py](../experiments/symreg_evolution.py)。
 
 ## 为什么需要这个案例
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>12 · 三场景验证总览 — 痕进</title>
+<title>三场景接入证据 — 痕进</title>
 <style>
   :root{--bg:#0d1117;--card:#161b22;--border:#30363d;--fg:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--green:#3fb950;--red:#f85149;--yellow:#d29922;--purple:#bc8cff;--orange:#e8873e}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -49,12 +49,12 @@
 </head>
 <body>
 
-<h1>三个 Roadmap 场景：全部验证完成 <span class="badge badge-done">SQL · 代码 · RAG</span></h1>
-<div class="sub">同一套引擎，三个生产相关场景。从 Roadmap 变成了已验证——每个都有可观察的进化链。</div>
+<h1>三个生产相关场景：接入证据 <span class="badge badge-done">SQL · 代码 · RAG</span></h1>
+<div class="sub">同一套引擎接入三个常见场景，每个都有可观察修复链；这是 adapter 可迁移证据，不是普遍有效性的统计证明。</div>
 
 <!-- 三领域对比 -->
 <div class="panel">
-  <h2>进化链总览：每个领域从"全错"到"最优"</h2>
+  <h2>修复链总览：每个领域从有缺陷版本逐步变好</h2>
   <div class="domains">
 
     <!-- SQL -->
@@ -62,7 +62,7 @@
       <div class="domain-head">
         <span class="domain-icon">🗄️</span>
         <span class="domain-name">SQL 查询优化</span>
-        <span class="domain-tag tag-verified">已验证</span>
+        <span class="domain-tag tag-verified">已接入</span>
       </div>
       <div style="font-size:.78rem;color:var(--muted)">起点：4 个反模式，cost=24</div>
       <div class="evo-bar">
@@ -87,7 +87,7 @@
       <div class="domain-head">
         <span class="domain-icon">💻</span>
         <span class="domain-name">代码生成</span>
-        <span class="domain-tag tag-verified">已验证</span>
+        <span class="domain-tag tag-verified">已接入</span>
       </div>
       <div style="font-size:.78rem;color:var(--muted)">起点：用错运算符，1/4 测试过</div>
       <div class="evo-bar">
@@ -108,7 +108,7 @@
       <div class="domain-head">
         <span class="domain-icon">🔍</span>
         <span class="domain-name">RAG 检索</span>
-        <span class="domain-tag tag-verified">已验证</span>
+        <span class="domain-tag tag-verified">已接入</span>
       </div>
       <div style="font-size:.78rem;color:var(--muted)">起点：全错配置，score=0</div>
       <div class="evo-bar">
@@ -130,7 +130,7 @@
 
   </div>
   <div class="takeaway">
-    <strong>共同模式：三个领域都是"修复链"。</strong> 从一个有问题的版本出发，每一步修掉一个缺陷——SQL 修反模式、代码修 bug、RAG 修配置。进化方向相同（收紧），只是 graft 操作不同。同一套引擎，一行没改。
+    <strong>共同模式：三个领域都是"修复链"。</strong> 从一个有问题的版本出发，每一步修掉一个缺陷——SQL 修反模式、代码修 bug、RAG 修配置。进化方向相同（收紧），只是 graft 操作不同。同一套引擎，一行没改；但这里不 claim 生产收益。
   </div>
 </div>
 
@@ -175,16 +175,16 @@
   <table>
     <tr><th style="width:50%">✅ 证明了</th><th style="width:50%">⚠️ 局限</th></tr>
     <tr>
-      <td>三个生产场景全部跑通；进化链可观察、可复现。同一套引擎（<code>core/</code>一行未改），7 个 adapter 协议接入。</td>
+      <td>三个生产相关场景跑通；修复链可观察、可复现。同一套引擎（<code>core/</code>一行未改），adapter 边界能迁移。</td>
       <td>评估器是<strong>简化版</strong>：SQL 用规则代价模型（非真实执行计划）；代码用 LeetCode easy 测试（非生产代码库）；RAG 用 best-practice 规则（非真实向量检索）。</td>
     </tr>
     <tr>
-      <td>Roadmap 从"规划"变成"已验证"——评委问"能不能做"，答案是做完了三个。</td>
+      <td>评委问"能不能接入生产相关任务"，答案是已做完三个接入样例。</td>
       <td>三个领域都有<strong>天花板效应</strong>（简单任务太容易达到最优），用单组进化链展示而非 FULL vs BASE 分化曲线。</td>
     </tr>
   </table>
   <div class="honest">
-    <strong>定位：</strong>这三个领域的价值不是"最强进化案例"（那是符号回归），而是"<strong>这套机制能接入你每天用的场景</strong>"的直接证据。生产级集成需对接真实流水线，但 adapter 协议已验证可行。
+    <strong>定位：</strong>这三个领域的价值不是"最强进化案例"（那是符号回归），而是"<strong>这套机制能接入你每天用的场景</strong>"的直接证据。生产级集成需对接真实流水线；不要把接入样例讲成泛化证明。
   </div>
 </div>
 

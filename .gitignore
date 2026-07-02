@@ -34,11 +34,11 @@ experiments/_*.log
 
 # === PPT workspace — machine-generated run artifacts ===
 # (源文件 notes/ sources/ design_spec.md spec_lock.md icons/ svg_final/ 仍入库)
-projects/**/svg_output/
-projects/**/backup/
-projects/**/live_preview/
-projects/**/confirm_ui/
-projects/**/exports/
+showcase/projects/**/svg_output/
+showcase/projects/**/backup/
+showcase/projects/**/live_preview/
+showcase/projects/**/confirm_ui/
+showcase/projects/**/exports/
 
 # OS / IDE
 .DS_Store
