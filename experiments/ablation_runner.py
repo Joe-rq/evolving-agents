@@ -157,7 +157,7 @@ def main(M: int = 30, R: int = 8, K: int = 20, size: int = 4, out_path=None) -> 
     return result
 
 
-if __name__ == "__main__":
+def cli() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("-M", type=int, default=30, help="replicates")
     ap.add_argument("-R", type=int, default=8, help="rounds per replicate")
@@ -166,3 +166,7 @@ if __name__ == "__main__":
     ap.add_argument("--out", type=str, default="experiments/_ablation_result.json")
     a = ap.parse_args()
     main(M=a.M, R=a.R, K=a.K, size=a.size, out_path=a.out)
+
+
+if __name__ == "__main__":
+    cli()

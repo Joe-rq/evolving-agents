@@ -1,0 +1,32 @@
+[project]
+name = "evolving-agents"
+version = "0.1.0"
+description = "Auditable search-memory engine for agents that learn from repeated failures."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "evolving-agents contributors" },
+]
+dependencies = []
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+evolving-agents-ablation = "experiments.ablation_runner:cli"
+evolving-agents-smoke = "experiments.smoke:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["core*", "adapters*", "experiments*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"

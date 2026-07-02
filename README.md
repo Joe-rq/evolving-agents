@@ -1,5 +1,7 @@
 # 痕进 · evolving-agents
 
+> 快速复现：见 [10 分钟复现路径](docs/ten-minute-reproduction.md)，从 clone 到 `uv run pytest` 和 2048 smoke 结果。
+
 > **失败留痕，凭痕而进。**
 > 造能**从自己的失败里学习**的 agent 的一组原则。
 > *致敬 [12-factor agents](https://github.com/humanlayer/12-factor-agents)。*
